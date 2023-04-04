@@ -1,0 +1,16 @@
+---
+title: "Tyler D. Wiederich"
+image: images/Profile_Wiederich.jpg
+about:
+  template: jolla
+  links:
+    - icon: github
+      text: GitHub
+      href: https://github.com/TWiedRW
+    # (additional links excluded for brevity)
+---
+
+## Welcome!
+
+Hello! My name is Tyler and I am a current masters student at University of Nebraska-Lincoln. This webpage currently serves as a requirement of STAT 892, but I will likely transform it into my full professional page sometime soon.
+

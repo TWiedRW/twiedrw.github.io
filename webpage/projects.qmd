@@ -1,0 +1,18 @@
+---
+title: "Projects"
+---
+
+
+
+## Evaluating Perceptual Judgements on 3D Printed Bar Charts
+
+Studies show that people make less accurate judgements when comparing values in a 3D graph than its corresponding 2D graph. However, these studies almost entirely consist of projecting the 3D graphs onto paper or on screens (which are 2D surfaces). The goal of this study is to bring 3D graphs into a 3-dimensional environment via 3D printing.
+
+This project is currently ongoing with my advisor, Susan VanderPlas. Preliminary results will be presented at SDSS in 2023, with future integration into experiential learning for an introductory statistics course at UNL.
+
+
+## Photopal
+
+As part of the requirement of STAT 892, we are tasked with creating an R package. My group and I are designing a package that creates and optimizes color palettes. The main feature is creating a palette from an image input, but we plan to add functionality to optimize palettes to address issues such as similar colors and colorblindness. 
+
+

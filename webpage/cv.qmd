@@ -1,0 +1,22 @@
+---
+title: "CV"
+---
+
+As a current graduate student with a few more years left in my educational journey, my CV is not as up to date as it should be. The current version, last updated on 12/02/2021, can be found [here](CV_latex.pdf).
+
+Since not much has changed, I have included updates to my teaching experience below.
+
+## Teaching Experience
+
+**STAT 218:** Facilitated a learning environment as the instructor of record for two sections. Tasks included preparing lesson plans, prepping assessments, holding office hours, and evaluating student understanding of course content.
+
+- Fall 2021 (assistant instructor), Spring 2022, Summer 2022
+
+**STAT 380:** Similar duties as STAT 218, but for an introduction to probability / mathematical statistics course for one section.
+
+- Spring 2023
+
+**STAT 801A:** Served as the lab instructor for two sections. Tasks included holding weekly lab sessions to reinforce course material, grading projects/exams, and preparing a lab to introduce material in the next statistics course that students may take.
+
+- Fall 2022
+
