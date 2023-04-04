@@ -4,7 +4,7 @@ title: "About"
 
 If you are on this webpage, you are probably wondering who I am. I am currently a statistics masters student at UNL, and I plan on getting a PhD in statistics. My primary professional interest is coding with R to tackle data challenges.
 
-The book that got me into R is [R for Data Science](https://r4ds.had.co.nz) by Hadley Wickham and Garrett Grolemund. 
+The book that got me into R is [R for Data Science](https://r4ds.had.co.nz) by Hadley Wickham and Garrett Grolemund. I highly recommend checking it out!
 
 ## Useful R packages
 
@@ -14,7 +14,7 @@ My coding journey started during Spring semester of 2019 at Winona State. Since 
 
 `rayshader` creates 3D visualizations for both terrain and for ggplot graphics. Rendered plots can then be saved as stl files for printing (the subject of my research!)
 
-`broom` can transform model output into a dataframe, which I find helpful when writing reports when paired with `knitr::kable`
+`broom` can transform model output into a dataframe with the `tidy` function, which I find helpful when writing reports when paired with `knitr::kable`
 
 `GGally` has a useful function, `ggpairs`. When several variables are of interest during the data exploration stage, `ggpairs` allows for the comparisons for variable combinations
 

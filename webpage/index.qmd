@@ -7,6 +7,9 @@ about:
     - icon: github
       text: GitHub
       href: https://github.com/TWiedRW
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/tyler-wiederich/
     # (additional links excluded for brevity)
 ---
 
