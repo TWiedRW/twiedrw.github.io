@@ -15,8 +15,5 @@ about:
 
 ## Welcome!
 
-Hello! My name is Tyler and I am a current masters student at University of Nebraska-Lincoln. This webpage currently serves as a requirement of STAT 892, but I will likely transform it into my full professional page sometime soon.
-
-
-
-
+Hello! My name is Tyler and I am a recent Masters graduate from University of Nebraska-Lincoln. 
+The purpose of this page is to provide a space for my professional skill set in the field of statistics. This will include my own personal collection of projects, as well as CV/Resumes for potential employers. 

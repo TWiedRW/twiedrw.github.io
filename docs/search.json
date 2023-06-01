@@ -11,14 +11,14 @@
     "href": "projects.html#photopal",
     "title": "Projects",
     "section": "Photopal",
-    "text": "Photopal\nAs part of the requirement of STAT 892, we are tasked with creating an R package. My group and I are designing a package that creates and optimizes color palettes. The main feature is creating a palette from an image input, but we plan to add functionality to optimize palettes to address issues such as similar colors and colorblindness."
+    "text": "Photopal\nAs part of the requirement of STAT 892, we were tasked with creating an R package. My group and I designed a package that creates color palettes from images. The main feature is creating a palette from an image input, but it also includes the functionality of creating a colorblind-safe palette. You can try it out here!\n\ndevtools::install_github('Hiiiua/Photopal')"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Tyler D. Wiederich",
     "section": "",
-    "text": "Hello! My name is Tyler and I am a current masters student at University of Nebraska-Lincoln. This webpage currently serves as a requirement of STAT 892, but I will likely transform it into my full professional page sometime soon."
+    "text": "Hello! My name is Tyler and I am a recent Masters graduate from University of Nebraska-Lincoln. The purpose of this page is to provide a space for my professional skill set in the field of statistics. This will include my own personal collection of projects, as well as CV/Resumes for potential employers."
   },
   {
     "objectID": "about.html",
