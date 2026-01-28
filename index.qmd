@@ -1,0 +1,22 @@
+---
+title: "About"
+image: images/Profile_Wiederich.jpg
+background-image: images/Profile_Wiederich.jpg
+about:
+  template: trestles
+  links:
+    - icon: github
+      text: Github
+      href: https://github.com/TWiedRW
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/tyler-wiederich/
+---
+
+
+:::{#hero-heading}
+
+Hello! My name is Tyler Wiederich and I am a Ph.D. candidate in the Department of Statistics at the University of Nebraska-Lincoln. I created this page to ...
+
+:::
+

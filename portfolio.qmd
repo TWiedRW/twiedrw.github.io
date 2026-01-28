@@ -1,0 +1,69 @@
+---
+title: "Portfolio"
+---
+
+My passion for working with data started during the summer break after my first year of my undergraduate degree. At the time, I was double majoring in mathematics and statistics, but I had just taken the introductory data science course. I instantly found a spark for working with data in R and read through R for Data Science by Hadley Wickham (<https://r4ds.hadley.nz>). Since then, I have worked on numerous projects for personal development and my own curiosity. 
+
+On this page, I selected a few of my open-ended coursework and personal projects that I feel proud of. 
+
+# Personal Projects
+
+
+
+## Overlap of Majors and Minors at Winona State University
+
+One of my very first projects in R was jokingly given to me by a friend by discussing which minors at Winona State would be the easiest to get depending on the major. He never intended for me to figure out an "answer", but I decided to use the opportunity to learn about web scraping and data cleaning. Unfortunately, this was before I was using GitHub for my projects and I lost the project when migrating my campus-provided laptop (a lesson I have since learned). Below are the steps I used for accomplishing 
+
+1. For all pages for majors and minor, extract all courses listed into a single data frame with columns for course and program.
+2. Separate the data frame into a majors data frame and a minors data frame.
+3. Full join majors and minors on a dummy variable to get all combinations courses for each combination of majors and minors.
+4. For each combination, compute the number of overlapping courses.
+5. Divide the number of overlapping courses by the number of courses listed for the minor.
+
+At the time, there were 110 majors and 77 minors available at Winona State. Below is an early iteration of my graphic, which was designed to be printed on a poster.
+
+![](images/first-project.jpg){fig-align='center' fig-width='100%'}
+
+## March Madness Competition
+
+My statistics department at UNL hosts an annual March Madness competition where we select teams in the bracket and compete based off the number of wins from their chosen teams. For fairness, we each have 100 points that can be used to purchase teams, where teams with higher seeds cost more points. Rather than letting personal bias select my teams, I decided to 
+
+## Crime in Lincoln?
+
+
+
+## This website!
+
+
+
+# Dissertation
+
+
+
+
+# Coursework
+
+I was initially hesitant to include any coursework in my portfolio. However, my courses often had opportunities for creative freedom and complexity. Everything here meets the following criteria: (1) the data set was freely chosen, (2) evaluation was on the skills used rather than the content, and (3) I am proud of the effort that went into it and it is something that I would do on my own. 
+
+
+## Frequentist, Bayesian, and Visual Inference
+
+Many statisticians find themselves somewhere in the paradigm of Frequentist and Bayesian methodologies. These methods often use data visualizations in various stages of analysis, but the formalization of using graphics for inference is a relatively newer development. 
+
+In this paper, Frequentist, Bayesian, and visual inference methods are compared and contrasted. I took this assignment a step further by incorporating an example using data from the Minnesota Wild hockey club. As a hockey fan, I was curious if there were any game statistics other than goals (e.g., shots on goal) that contributed to the probability of winning a game. I web scraped data for the 2023-24 and 2024-25 seasons and used Frequentist and Bayesian methods to assess location (home/away), shots on goal, penalty minutes, power play goals, and power play opportunities. In the end, I was surprised that only power play goals contributed to the probability of winning. 
+
+::: {.center text-align=center}
+
+[Paper](https://TWiedRW.github.io/stat-992/paper-vis-inference/paper.pdf) | [GitHub](https://github.com/TWiedRW/stat-992/tree/main/paper-vis-inference)
+
+:::
+
+## Advanced Consulting Report
+
+In my advanced consulting course, students functioned as a statistical consultant at the Statistical Cross-Disciplinary Collaboration & Consulting Lab in the Department of Statistics at UNL. At the end of the course, we had to put together a portfolio of projects that we worked on over the semester. One of my clients was working on a project where hilling, a process of covering crops, was effective or not in mitigating the damage of the soybean gall midge. My client had several responses that required fitting generalized linear mixed models using PROC GLIMMIX in SAS 9.4. 
+
+This project was also my first time using a pdf template with Quarto documents, which I think ended up looking decent for a report. 
+
+[Paper](https://twiedrw.github.io/stat930_presentation/report.pdf) | [Presentation](https://twiedrw.github.io/stat930_presentation/stat930-presentation.html)
+
+## Color palette generation from images

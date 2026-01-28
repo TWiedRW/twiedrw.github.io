@@ -1,0 +1,14 @@
+---
+title: "Presentations"
+---
+
+On this page, I selected several of the presentations that highlight my work and research. Each one is created using R and Quarto, with a focus on reproducibility as new data is included. 
+
+| Date | Title | Type | Description | Slides |
+|-----|-----|---|-----|---|
+| Nov 2025 | Heat to Height | Research Project | Students who participated in a graphics study are given the details and results of their experiment. | [link](https://twiedrw.github.io/ch3-heat3d/writeups/6-218-presentation/index.html#/title-slide)
+| Sept 2025 | Beyond the Surface | PhD Comprehensive Exam | Presentation on my dissertation progress and direction. | [link](https://twiedrw.github.io/comprehensive-exam/index.html) | 
+| Oct 2025 | Visualization in R | SC3L Workshop | Interactive workshop for creating visualizations in R with `ggplot2` | [link](https://twiedrw.github.io/R-data-visualizations/slides.html#/title-slide) |
+| Apr 2025 | Design of Experiments | SC3L Workshop | Interactive workshop on Two-Way ANOVA in R | [link](https://twiedrw.github.io/R-two-way-anova/slides.html#/title-slide) |
+| Nov 2023 | Experiential Learning with 3D Graphics | Graphics Group Presentation | Discussion of design and results of pilot study on 3D graphics | [link](https://twiedrw.github.io/2023-graphics-group-nov30/presentation.html)|
+| May 2023 | Evaluating Perceptual Judgements on 3D Printed Bar Charts | Conference Presentation | Refereed talk at Symposium on Data Science and Statistics | [link](https://twiedrw.github.io/3d_graphical_perception/SDSS_presentation/index.html#/title-slide) |
