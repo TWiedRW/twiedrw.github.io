@@ -60,10 +60,20 @@ In this paper, Frequentist, Bayesian, and visual inference methods are compared 
 
 ## Advanced Consulting Report
 
-In my advanced consulting course, students functioned as a statistical consultant at the Statistical Cross-Disciplinary Collaboration & Consulting Lab in the Department of Statistics at UNL. At the end of the course, we had to put together a portfolio of projects that we worked on over the semester. One of my clients was working on a project where hilling, a process of covering crops, was effective or not in mitigating the damage of the soybean gall midge. My client had several responses that required fitting generalized linear mixed models using PROC GLIMMIX in SAS 9.4. 
+In my advanced consulting course, students functioned as a statistical consultant at the Statistical Cross-Disciplinary Collaboration & Consulting Lab in the Department of Statistics at UNL. At the end of the course, we had to put together a portfolio of projects that we worked on over the semester. One of my clients was working on a project to determine if hilling, a process of covering crops, was effective or not in mitigating the damage of the soybean gall midge. My client had several responses that required fitting generalized linear mixed models using PROC GLIMMIX in SAS 9.4. 
 
 This project was also my first time using a pdf template with Quarto documents, which I think ended up looking decent for a report. 
 
 [Paper](https://twiedrw.github.io/stat930_presentation/report.pdf) | [Presentation](https://twiedrw.github.io/stat930_presentation/stat930-presentation.html)
 
 ## Color palette generation from images
+
+In collaboration with Muxin Hua, we developed an R package focused on creating color palettes from images. The overall theory was to identify each color in the image and use clustering to find "average" colors for the desired number of ...
+
+You can check out the GitHub page [here](https://github.com/Hiiiua/Photopal), or try it for yourself!
+
+```{r, eval=FALSE, echo=TRUE}
+# install.packages("devtools")
+devtools::install_github("Hiiiua/Photopal")
+```
+
