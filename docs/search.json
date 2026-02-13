@@ -1,0 +1,93 @@
+[
+  {
+    "objectID": "presentations.html",
+    "href": "presentations.html",
+    "title": "Presentations",
+    "section": "",
+    "text": "On this page, I selected several of the presentations that highlight my work and research. Each one is created using R and Quarto, with a focus on reproducibility as new data is included.\n\n\n\nDate\nTitle\nType\nDescription\nSlides\n\n\n\n\nNov 2025\nHeat to Height\nResearch Project\nStudents who participated in a graphics study are given the details and results of their experiment.\nlink\n\n\nSept 2025\nBeyond the Surface\nPhD Comprehensive Exam\nPresentation on my dissertation progress and direction.\nlink\n\n\nOct 2025\nVisualization in R\nSC3L Workshop\nInteractive workshop for creating visualizations in R with ggplot2\nlink\n\n\nApr 2025\nDesign of Experiments\nSC3L Workshop\nInteractive workshop on Two-Way ANOVA in R\nlink\n\n\nNov 2023\nExperiential Learning with 3D Graphics\nGraphics Group Presentation\nDiscussion of design and results of pilot study on 3D graphics\nlink\n\n\nMay 2023\nEvaluating Perceptual Judgements on 3D Printed Bar Charts\nConference Presentation\nRefereed talk at Symposium on Data Science and Statistics\nlink"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "University of Nebraska | Lincoln, NE PhD in Statistics | Aug 2023 – May 2026\nUniversity of Nebraska | Lincoln, NE MS in Statistics | Aug 2021 – May 2023\nWinona State University | Winona, MN BS in Mathematics, Statistics | Aug 2018 – May 2021"
+  },
+  {
+    "objectID": "about.html#education",
+    "href": "about.html#education",
+    "title": "About",
+    "section": "",
+    "text": "University of Nebraska | Lincoln, NE PhD in Statistics | Aug 2023 – May 2026\nUniversity of Nebraska | Lincoln, NE MS in Statistics | Aug 2021 – May 2023\nWinona State University | Winona, MN BS in Mathematics, Statistics | Aug 2018 – May 2021"
+  },
+  {
+    "objectID": "about.html#experience",
+    "href": "about.html#experience",
+    "title": "About",
+    "section": "Experience",
+    "text": "Experience\nStatistical Consultant |\nGeoScynce | Chief Analyst | Sept 2012 - April 2018"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "About",
+    "section": "",
+    "text": "Hello! My name is Tyler Wiederich and I am a Ph.D. candidate in the Department of Statistics at the University of Nebraska-Lincoln. On this site, you can find a showcase of projects and presentations."
+  },
+  {
+    "objectID": "portfolio.html",
+    "href": "portfolio.html",
+    "title": "Portfolio",
+    "section": "",
+    "text": "My passion for working with data started during the summer break after my first year of my undergraduate degree. At the time, I was double majoring in mathematics and statistics, but I had just taken the introductory data science course. I instantly found a spark for working with data in R and read through R for Data Science by Hadley Wickham (https://r4ds.hadley.nz). Since then, I have worked on numerous projects for personal development and my own curiosity.\nOn this page, I selected a few of my open-ended coursework and personal projects that I feel proud of."
+  },
+  {
+    "objectID": "portfolio.html#overlap-of-majors-and-minors-at-winona-state-university",
+    "href": "portfolio.html#overlap-of-majors-and-minors-at-winona-state-university",
+    "title": "Portfolio",
+    "section": "Overlap of Majors and Minors at Winona State University",
+    "text": "Overlap of Majors and Minors at Winona State University\nOne of my very first projects in R was jokingly given to me by a friend by discussing which minors at Winona State would be the easiest to get depending on the major. He never intended for me to figure out an “answer”, but I decided to use the opportunity to learn about web scraping and data cleaning. Unfortunately, this was before I was using GitHub for my projects and I lost the project when migrating my campus-provided laptop (a lesson I have since learned). Below are the steps I used for accomplishing\n\nFor all pages for majors and minor, extract all courses listed into a single data frame with columns for course and program.\nSeparate the data frame into a majors data frame and a minors data frame.\nFull join majors and minors on a dummy variable to get all combinations courses for each combination of majors and minors.\nFor each combination, compute the number of overlapping courses.\nDivide the number of overlapping courses by the number of courses listed for the minor.\n\nAt the time, there were 110 majors and 77 minors available at Winona State. Below is an early iteration of my graphic, which was designed to be printed on a poster."
+  },
+  {
+    "objectID": "portfolio.html#march-madness-competition",
+    "href": "portfolio.html#march-madness-competition",
+    "title": "Portfolio",
+    "section": "March Madness Competition",
+    "text": "March Madness Competition\nMy statistics department at UNL hosts an annual March Madness competition where we select teams in the bracket and compete based off the number of wins from their chosen teams. For fairness, we each have 100 points that can be used to purchase teams, where teams with higher seeds cost more points. Rather than letting personal bias select my teams, I decided to"
+  },
+  {
+    "objectID": "portfolio.html#crime-in-lincoln",
+    "href": "portfolio.html#crime-in-lincoln",
+    "title": "Portfolio",
+    "section": "Crime in Lincoln?",
+    "text": "Crime in Lincoln?"
+  },
+  {
+    "objectID": "portfolio.html#this-website",
+    "href": "portfolio.html#this-website",
+    "title": "Portfolio",
+    "section": "This website!",
+    "text": "This website!"
+  },
+  {
+    "objectID": "portfolio.html#frequentist-bayesian-and-visual-inference",
+    "href": "portfolio.html#frequentist-bayesian-and-visual-inference",
+    "title": "Portfolio",
+    "section": "Frequentist, Bayesian, and Visual Inference",
+    "text": "Frequentist, Bayesian, and Visual Inference\nMany statisticians find themselves somewhere in the paradigm of Frequentist and Bayesian methodologies. These methods often use data visualizations in various stages of analysis, but the formalization of using graphics for inference is a relatively newer development.\nIn this paper, Frequentist, Bayesian, and visual inference methods are compared and contrasted. I took this assignment a step further by incorporating an example using data from the Minnesota Wild hockey club. As a hockey fan, I was curious if there were any game statistics other than goals (e.g., shots on goal) that contributed to the probability of winning a game. I web scraped data for the 2023-24 and 2024-25 seasons and used Frequentist and Bayesian methods to assess location (home/away), shots on goal, penalty minutes, power play goals, and power play opportunities. In the end, I was surprised that only power play goals contributed to the probability of winning.\n\nPaper | GitHub"
+  },
+  {
+    "objectID": "portfolio.html#advanced-consulting-report",
+    "href": "portfolio.html#advanced-consulting-report",
+    "title": "Portfolio",
+    "section": "Advanced Consulting Report",
+    "text": "Advanced Consulting Report\nIn my advanced consulting course, students functioned as a statistical consultant at the Statistical Cross-Disciplinary Collaboration & Consulting Lab in the Department of Statistics at UNL. At the end of the course, we had to put together a portfolio of projects that we worked on over the semester. One of my clients was working on a project to determine if hilling, a process of covering crops, was effective or not in mitigating the damage of the soybean gall midge. My client had several responses that required fitting generalized linear mixed models using PROC GLIMMIX in SAS 9.4.\nThis project was also my first time using a pdf template with Quarto documents, which I think ended up looking decent for a report.\nPaper | Presentation"
+  },
+  {
+    "objectID": "portfolio.html#color-palette-generation-from-images",
+    "href": "portfolio.html#color-palette-generation-from-images",
+    "title": "Portfolio",
+    "section": "Color palette generation from images",
+    "text": "Color palette generation from images\nIn collaboration with Muxin Hua, we developed an R package focused on creating color palettes from images. The overall theory was to identify the colors in the image and use clustering to generate distinct separated colors. We also included a color-blind mode that initially put images through color filters before clustering.\nYou can check out the GitHub page here, or try it for yourself!\n\n# install.packages(\"devtools\")\ndevtools::install_github(\"Hiiiua/Photopal\")"
+  }
+]
