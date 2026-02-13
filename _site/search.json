@@ -81,13 +81,13 @@
     "href": "portfolio.html#advanced-consulting-report",
     "title": "Portfolio",
     "section": "Advanced Consulting Report",
-    "text": "Advanced Consulting Report\nIn my advanced consulting course, students functioned as a statistical consultant at the Statistical Cross-Disciplinary Collaboration & Consulting Lab in the Department of Statistics at UNL. At the end of the course, we had to put together a portfolio of projects that we worked on over the semester. One of my clients was working on a project where hilling, a process of covering crops, was effective or not in mitigating the damage of the soybean gall midge. My client had several responses that required fitting generalized linear mixed models using PROC GLIMMIX in SAS 9.4.\nThis project was also my first time using a pdf template with Quarto documents, which I think ended up looking decent for a report.\nPaper | Presentation"
+    "text": "Advanced Consulting Report\nIn my advanced consulting course, students functioned as a statistical consultant at the Statistical Cross-Disciplinary Collaboration & Consulting Lab in the Department of Statistics at UNL. At the end of the course, we had to put together a portfolio of projects that we worked on over the semester. One of my clients was working on a project to determine if hilling, a process of covering crops, was effective or not in mitigating the damage of the soybean gall midge. My client had several responses that required fitting generalized linear mixed models using PROC GLIMMIX in SAS 9.4.\nThis project was also my first time using a pdf template with Quarto documents, which I think ended up looking decent for a report.\nPaper | Presentation"
   },
   {
     "objectID": "portfolio.html#color-palette-generation-from-images",
     "href": "portfolio.html#color-palette-generation-from-images",
     "title": "Portfolio",
     "section": "Color palette generation from images",
-    "text": "Color palette generation from images"
+    "text": "Color palette generation from images\nIn collaboration with Muxin Hua, we developed an R package focused on creating color palettes from images. The overall theory was to identify the colors in the image and use clustering to generate distinct separated colors. We also included a color-blind mode that initially put images through color filters before clustering.\nYou can check out the GitHub page here, or try it for yourself!\n\n# install.packages(\"devtools\")\ndevtools::install_github(\"Hiiiua/Photopal\")"
   }
 ]

@@ -68,7 +68,7 @@ This project was also my first time using a pdf template with Quarto documents, 
 
 ## Color palette generation from images
 
-In collaboration with Muxin Hua, we developed an R package focused on creating color palettes from images. The overall theory was to identify each color in the image and use clustering to find "average" colors for the desired number of ...
+In collaboration with Muxin Hua, we developed an R package focused on creating color palettes from images. The overall theory was to identify the colors in the image and use clustering to generate distinct separated colors. We also included a color-blind mode that initially put images through color filters before clustering. 
 
 You can check out the GitHub page [here](https://github.com/Hiiiua/Photopal), or try it for yourself!
 
