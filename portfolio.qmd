@@ -8,8 +8,6 @@ On this page, I selected a few of my open-ended coursework and personal projects
 
 # Personal Projects
 
-
-
 ## Overlap of Majors and Minors at Winona State University
 
 One of my very first projects in R was jokingly given to me by a friend by discussing which minors at Winona State would be the easiest to get depending on the major. He never intended for me to figure out an "answer", but I decided to use the opportunity to learn about web scraping and data cleaning. Unfortunately, this was before I was using GitHub for my projects and I lost the project when migrating my campus-provided laptop (a lesson I have since learned). Below are the steps I used for accomplishing 
@@ -22,24 +20,23 @@ One of my very first projects in R was jokingly given to me by a friend by discu
 
 At the time, there were 110 majors and 77 minors available at Winona State. Below is an early iteration of my graphic, which was designed to be printed on a poster.
 
-![](images/first-project.jpg){fig-align='center' fig-width='100%'}
+![Early figure](images/first-project.jpg){fig-align='center' fig-width='100%'}
 
+I recently decided to replicate this analysis and have the code available on [GitHub](https://github.com/TWiedRW/wsu-programs). The main improvement was limiting the number of majors to Bachelor of Science degrees and removing minors with low overlap. 
+
+![Final figure](https://github.com/TWiedRW/wsu-programs/blob/master/major-minor-overlap.png?raw=true)
+
+<!---
+ 
 ## March Madness Competition
 
-My statistics department at UNL hosts an annual March Madness competition where we select teams in the bracket and compete based off the number of wins from their chosen teams. For fairness, we each have 100 points that can be used to purchase teams, where teams with higher seeds cost more points. Rather than letting personal bias select my teams, I decided to 
+My statistics department at UNL usually hosts an annual March Madness competition where we select teams in the bracket and compete based off the number of wins from their chosen teams. For fairness, we each have 100 points that can be used to purchase teams, where teams with higher seeds cost more points. In 2023, I got second place by selecting teams based off the distribution of points scored in regular season games. Rather than providing two web scraping projects in R here, I decided to replicate the analysis in Python. 
 
-## Crime in Lincoln?
-
-
+--->
 
 ## This website!
 
-
-
-# Dissertation
-
-
-
+Quarto offers many incredible features and I decided to use it to make this website. The code for this site can be found on [GitHub](https://github.com/TWiedRW/twiedrw.github.io). 
 
 # Coursework
 

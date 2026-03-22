@@ -2,21 +2,75 @@
 title: "About"
 ---
 
+I am a Ph.D. candidate in Statistics at the University of Nebraska-Lincoln (expected May 2026) with experience in consulting, teaching, and applied analytics. I focus on translating complex research and operational questions into rigorous analysis and clear, decision-ready communication.
 
 
 ## Education
 
-University of Nebraska | Lincoln, NE
-PhD in Statistics | Aug 2023 -- May 2026
+- **University of Nebraska-Lincoln** (Lincoln, NE)  
+  Ph.D. in Statistics, expected May 2026
+- **University of Nebraska-Lincoln** (Lincoln, NE)  
+  M.S. in Statistics, 2021-2023
+- **Winona State University** (Winona, MN)  
+  B.S. in Mathematics and Statistics, Minor in Data Science, 2018-2021
+  
 
-University of Nebraska | Lincoln, NE
-MS in Statistics | Aug 2021 -- May 2023
 
-Winona State University | Winona, MN
-BS in Mathematics, Statistics | Aug 2018 -- May 2021
 
 ## Experience
 
-Statistical Consultant | 
+### University of Nebraska-Lincoln (Lincoln, NE)
+**Statistical Consultant** | June 2023-Present
 
-GeoScynce | Chief Analyst | Sept 2012 - April 2018
+- Assisted 67 clients across all stages of research, including experimental design, statistical analysis, and interpretation.
+- Authored and reviewed technical reports to align results with applied research questions.
+- Co-developed and presented workshops and instructional resources in R, including data visualization and two-way ANOVA.
+
+### University of Nebraska-Lincoln (Lincoln, NE)
+**Graduate Teaching Assistant** | August 2021-May 2023
+
+- Served as instructor of record for undergraduate and graduate statistics courses.
+- Designed syllabi and lesson plans, assessed learning outcomes, and supported student success through office hours.
+- Led graduate lab instruction in statistical methods and research design.
+
+### Fastenal (Winona, MN)
+**IT Data Support Analyst** | June 2020-August 2021
+
+- Responded to internal reporting requests and data questions from business stakeholders.
+- Investigated source-code and reporting discrepancies using Oracle SQL.
+
+## Technical Skills
+
+- **Programming and Tools:** R, Shiny, Quarto, SAS, SQL, Git/GitHub, Python
+- **Additional Tools:** LaTeX, Tableau, HTML, CSS
+- **Statistical Strengths:** Experimental design, Frequentist and Bayesian modeling, statistical learning, data visualization, forecasting, data cleaning, web scraping
+
+## Honors and Awards
+
+- Statistics Graduate Student Fellowship (University of Nebraska-Lincoln, 2025)
+- David H. and Annie E. Larrick Graduate Student Travel Award (University of Nebraska-Lincoln, 2023)
+- Othmer Fellowship (University of Nebraska-Lincoln, 2021)
+
+## Workshops
+
+### SC3L Workshops, University of Nebraska-Lincoln (Spring 2025)
+
+- Developed and taught one-hour workshops for students and faculty.
+- Topics included Data Visualization with R and Design of Experiments with R.
+
+### R Workshops, University of Nebraska-Lincoln (Spring 2022, Spring 2023)
+
+- Co-taught multi-day workshops for students and faculty.
+- Topics included Introduction to R, Graphics with ggplot2, Data Wrangling, and Statistical Modeling with R.
+
+
+## Service
+
+- **Iowa State University Graphics Group** - Seminar Coordinator (Spring 2025)
+- **Department Search Committee** - Student Representative (Spring 2024)
+- **Statistics Graduate Student Association** - President (2022-2023)
+
+## Publications
+
+- Vanderplas, S., Blankenship, E., and **Wiederich, T.** (2024). *Escaping Flatland: Graphics, Dimensionality, and Human Perception*. Lecture Notes in Computer Science, 140-156. Springer Nature Switzerland.
+- **Wiederich, T.**, and VanderPlas, S. (2024). *Evaluating Perceptual Judgements on 3D Printed Bar Charts*. Journal of Data Science, 22(2), 176-190. doi:10.6339/24-JDS1131

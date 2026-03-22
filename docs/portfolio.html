@@ -138,6 +138,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link active" href="./portfolio.html" aria-current="page"> 
 <span class="menu-text">Portfolio</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./blog/index.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -157,11 +161,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#personal-projects" id="toc-personal-projects" class="nav-link active" data-scroll-target="#personal-projects">Personal Projects</a>
   <ul class="collapse">
   <li><a href="#overlap-of-majors-and-minors-at-winona-state-university" id="toc-overlap-of-majors-and-minors-at-winona-state-university" class="nav-link" data-scroll-target="#overlap-of-majors-and-minors-at-winona-state-university">Overlap of Majors and Minors at Winona State University</a></li>
-  <li><a href="#march-madness-competition" id="toc-march-madness-competition" class="nav-link" data-scroll-target="#march-madness-competition">March Madness Competition</a></li>
-  <li><a href="#crime-in-lincoln" id="toc-crime-in-lincoln" class="nav-link" data-scroll-target="#crime-in-lincoln">Crime in Lincoln?</a></li>
   <li><a href="#this-website" id="toc-this-website" class="nav-link" data-scroll-target="#this-website">This website!</a></li>
   </ul></li>
-  <li><a href="#dissertation" id="toc-dissertation" class="nav-link" data-scroll-target="#dissertation">Dissertation</a></li>
   <li><a href="#coursework" id="toc-coursework" class="nav-link" data-scroll-target="#coursework">Coursework</a>
   <ul class="collapse">
   <li><a href="#frequentist-bayesian-and-visual-inference" id="toc-frequentist-bayesian-and-visual-inference" class="nav-link" data-scroll-target="#frequentist-bayesian-and-visual-inference">Frequentist, Bayesian, and Visual Inference</a></li>
@@ -210,23 +211,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>At the time, there were 110 majors and 77 minors available at Winona State. Below is an early iteration of my graphic, which was designed to be printed on a poster.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/first-project.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" data-fig-width="100%"></p>
+<p><img src="images/first-project.jpg" class="img-fluid figure-img"></p>
+<figcaption>Early figure</figcaption>
 </figure>
 </div>
-</section>
-<section id="march-madness-competition" class="level2">
-<h2 class="anchored" data-anchor-id="march-madness-competition">March Madness Competition</h2>
-<p>My statistics department at UNL hosts an annual March Madness competition where we select teams in the bracket and compete based off the number of wins from their chosen teams. For fairness, we each have 100 points that can be used to purchase teams, where teams with higher seeds cost more points. Rather than letting personal bias select my teams, I decided to</p>
-</section>
-<section id="crime-in-lincoln" class="level2">
-<h2 class="anchored" data-anchor-id="crime-in-lincoln">Crime in Lincoln?</h2>
+<p>I recently decided to replicate this analysis and have the code available on <a href="https://github.com/TWiedRW/wsu-programs">GitHub</a>. The main improvement was limiting the number of majors to Bachelor of Science degrees and removing minors with low overlap.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://github.com/TWiedRW/wsu-programs/blob/master/major-minor-overlap.png?raw=true" class="img-fluid figure-img"></p>
+<figcaption>Final figure</figcaption>
+</figure>
+</div>
+<!---
+ 
+## March Madness Competition
+
+My statistics department at UNL usually hosts an annual March Madness competition where we select teams in the bracket and compete based off the number of wins from their chosen teams. For fairness, we each have 100 points that can be used to purchase teams, where teams with higher seeds cost more points. In 2023, I got second place by selecting teams based off the distribution of points scored in regular season games. Rather than providing two web scraping projects in R here, I decided to replicate the analysis in Python. 
+
+--->
 </section>
 <section id="this-website" class="level2">
 <h2 class="anchored" data-anchor-id="this-website">This website!</h2>
+<p>Quarto offers many incredible features and I decided to use it to make this website. The code for this site can be found on <a href="https://github.com/TWiedRW/twiedrw.github.io">GitHub</a>.</p>
 </section>
-</section>
-<section id="dissertation" class="level1">
-<h1>Dissertation</h1>
 </section>
 <section id="coursework" class="level1">
 <h1>Coursework</h1>

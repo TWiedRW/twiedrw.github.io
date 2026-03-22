@@ -1,0 +1,183 @@
+---
+title: "Salmonid Mortality Data"
+categories:
+  - tidytuesday
+date: "2026-03-20"
+execute:
+  echo: true
+  message: false
+  warning: false
+format: 
+  html:
+    code-fold: true
+---
+
+This #tidytuesday comes from March 17th, 2026 and explores farmed fish mortality in Norway. The GitHub page can be found [here](https://github.com/rfordatascience/tidytuesday/tree/main/data/2026/2026-03-17) and provides the following description: 
+
+> The Fish Health Report is the Norwegian Veterinary Institute's annual status report on the health and welfare situation for Norwegian farmed fish and is based on official statistics, data from the Norwegian Veterinary Institute and private laboratories. The report also contains results from a survey among fish health personnel and inspectors from the Norwegian Food Safety Authority, as well as assessments of the situation, trends and risks.
+
+My goal with these datasets is as follows: 
+
+1. Create a media-quality graphic showing which counties had the largest salmon losses between 2020 and 2025. 
+2. Create a statistical graphic of salmon mortality rates and their variability over time. 
+3. Create a bad graphic (and better alternative) showing the composition of losses for farmed salmon in Norway over time.
+
+
+## Data
+
+```{r}
+# Packages
+library(tidyverse)
+
+# Load data
+tuesdata <- tidytuesdayR::tt_load('2026-03-17')
+
+# Extract data
+monthly_losses_data <- tuesdata$monthly_losses_data
+monthly_mortality_data <- tuesdata$monthly_mortality_data
+```
+
+## Media Graphic
+
+To show which counties had the most losses over the 2020-2025 period, I decided on a horizontal bar chart. Although my goal was to show this for the entire time frame, using stacked bars for years provides additional transparency for year-to-year variability.
+
+```{r}
+#| fig-width: 6
+#| fig-height: 4
+#| fig-dpi: 1200
+monthly_losses_data %>% 
+  filter(geo_group == 'county' & species == 'salmon') %>% 
+  group_by(region, year = factor(year(date))) %>% 
+  summarise(losses = sum(losses)) %>% 
+  ggplot(mapping = aes(y = reorder(region, losses, sum), 
+                       x = losses/1e6, fill = year)) + 
+  geom_col(width = 1/2) + 
+  geom_col(aes(x = total_losses/1e6, y = reorder(region, total_losses), fill = NULL),
+           data = monthly_losses_data %>% 
+            filter(geo_group == 'county' & species == 'salmon') %>% 
+             group_by(region) %>% 
+            summarise(total_losses = sum(losses)),
+           fill = NA, color = 'black', width = 1/2) + 
+  geom_text(aes(x = total_losses/1e6 + 3.1, y = reorder(region, total_losses), fill = NULL, label = round(total_losses/1e6, 2)),
+            size = 2,
+           data = monthly_losses_data %>% 
+            filter(geo_group == 'county' & species == 'salmon') %>% 
+             group_by(region) %>% 
+            summarise(total_losses = sum(losses))) + 
+  scale_fill_brewer(palette = 'Reds') +
+  labs(x = 'Total losses\n(in millions)', fill = 'Year', y = '',
+       title = 'Salmon Losses in Norwegian Counties',
+       subtitle = '2020 - 2025') + 
+  scale_x_continuous(limits = c(0, 100)) + 
+  theme_minimal() + 
+  theme(aspect.ratio = 1/2, panel.grid.major.y = element_blank(),
+        legend.title = element_text(hjust = 0.5, size = 10, face = 'bold'),
+        legend.text = element_text(size = 7, hjust = 0),
+        plot.title = element_text(face = 'bold', hjust = 0.5, size = 14),
+        plot.subtitle = element_text(hjust = 0.5, size = 10),
+        axis.text.y = element_text(hjust = 1, size = 7))
+```
+
+## Statistical Graphic
+
+The mortality dataset provided median mortality rates along with the first and third quartiles. This interquartile range provides a good opportunity to display variability. In this chart, the top 3 counties with the highest salmon losses are considered. 
+
+```{r}
+#| fig-width: 6
+#| fig-height: 4
+#| fig-dpi: 1200
+monthly_mortality_data %>% 
+  filter(geo_group == 'county' & species == 'salmon' & region %in% c('Vestland', 'Trøndelag', 'Nordland')) %>%
+  ggplot(mapping = aes(x = date, y = median)) + 
+  geom_ribbon(aes(ymin = q1, ymax = q3), alpha = 0.2) + 
+  geom_line() + 
+  facet_wrap(~region, nrow = 1) + 
+  labs(y = 'Mortality Rate', title = 'Mortality Rate of Salmon',
+       subtitle = "Median with interquartile range (Q1–Q3)",
+       x = '') + 
+  theme_bw() + 
+  theme(aspect.ratio = 0.6, 
+        plot.title = element_text(hjust = 0.5, face = 'bold', size = 14),
+        plot.subtitle = element_text(hjust = 0.5, size = 10),
+        strip.text = element_text(size = 8),
+        panel.spacing = unit(1.5, "lines"),
+        panel.grid.minor = element_blank(),
+        panel.grid.major.x = element_blank(),
+        axis.text = element_text(size = 6),
+        axis.title = element_text(size = 8),
+        axis.text.x = element_text(hjust = 1, angle = 30))
+```
+
+## A bad graph
+
+Lastly, I wanted to create a bad graph just to have some fun. A century of research suggests that pie charts are bad for extracting numerical information when compared to bar charts. 
+
+```{r}
+#| fig-width: 4
+#| fig-height: 4
+#| fig-dpi: 1200
+
+monthly_losses_data %>% 
+  filter(geo_group == 'country' & species == 'salmon') %>% 
+  pivot_longer(dead:other, values_to = 'count', names_to = 'type_of_loss') %>% 
+  group_by(year = year(date), type_of_loss) %>% 
+  summarise(count = sum(count)) %>% 
+  mutate(year_lab = ifelse(type_of_loss == 'dead', year, NA),
+         year_pos = sum(count)+10500000) %>%
+  ggplot(mapping = aes(x = year, y = count, fill = type_of_loss)) + 
+  geom_col(width = 1, color = 'black') + 
+  geom_text(aes(label = year_lab, y = year_pos)) +
+  scale_fill_brewer(palette = 3) + 
+  labs(title = 'How are salmon lost in Norge?',
+       fill = 'Type of loss') + 
+  coord_polar() + 
+  theme_void() + 
+  theme(plot.title = element_text(size = 16, face = 'bold', hjust = 0.5),
+        aspect.ratio = 1,
+        legend.position = 'bottom')
+```
+
+This chart is bad for several reasons. First, the polar coordinates are forced into a context where it does not make a lot of sense. Time is linear, but polar coordinates are designed for seasonal effects or nominal categories. Additionally, it is nearly impossible to make comparisons across the categories. For example, how much larger is the count of dead fish in 2020 than the count for discarded fish? This chart is also a gross misuse of pie charts, where angles are used to separate equally represented categories. 
+
+
+To fix this chart, I made the following changes: 
+
+- Combined the escaped and other categories since escaped always has small values. This reduces visual clutter in the legend. 
+- Converted the stacked layout into a line chart. Values are now comparable on an equal scale. 
+
+```{r}
+#| fig-width: 4
+#| fig-height: 4
+#| fig-dpi: 1200
+
+my_cols <- c('dead'='#5e4c5f',
+             'discarded'='#ffbb6f',
+             'other'='#999999')
+
+bg_df <- monthly_losses_data %>% 
+  filter(geo_group == 'country' & species == 'salmon') %>% 
+  mutate(other = other + escaped, .keep = 'unused') %>% 
+  pivot_longer(dead:other, values_to = 'count', names_to = 'type_of_loss') %>% 
+  group_by(year = year(date), type_of_loss) %>% 
+  summarise(count = sum(count)/1e6) 
+
+bg_df %>% 
+  ggplot(mapping = aes(x = year, y = count, color = type_of_loss)) + 
+  geom_line() + 
+  geom_point() + 
+  scale_x_continuous(breaks = 2020:2025) +
+  scale_color_manual(values = my_cols) + 
+  labs(x = 'Year', y = 'Count\n(in millions)', title = 'How are salmon lost in Norge?', color = 'Type of Loss') + 
+  theme_bw() + 
+  theme(plot.title = element_text(size = 16, face = 'bold', hjust = 0.5),
+        axis.text = element_text(size = 8),
+        axis.title = element_text(size = 10),
+        strip.text = element_text(size = 8),
+        panel.grid = element_blank(),
+        aspect.ratio = 1/2,
+        legend.position = 'bottom') 
+
+```
+
+
+With the refined chart, it is clear that dead salmon peaked in 2023 and declined over the following two years. While there was not much change in discarded fish, the "other" category had an increase in 2024 and 2025. The data dictionary did not specify what is included as "other", but this could be a concern worth further exploration.

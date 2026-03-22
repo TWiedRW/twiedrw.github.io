@@ -11,12 +11,16 @@ website:
       - about.qmd
       - presentations.qmd
       - portfolio.qmd
+      - href: blog/index.qmd
+        text: Blog
 
 format:
   html:
     theme: cosmo
     css: styles.css
     toc: true
+    respect-user-color-scheme: true
+    
 
 
 

@@ -11,28 +11,105 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "University of Nebraska | Lincoln, NE PhD in Statistics | Aug 2023 – May 2026\nUniversity of Nebraska | Lincoln, NE MS in Statistics | Aug 2021 – May 2023\nWinona State University | Winona, MN BS in Mathematics, Statistics | Aug 2018 – May 2021"
+    "text": "I am a Ph.D. candidate in Statistics at the University of Nebraska-Lincoln (expected May 2026) with experience in consulting, teaching, and applied analytics. I focus on translating complex research and operational questions into rigorous analysis and clear, decision-ready communication."
   },
   {
     "objectID": "about.html#education",
     "href": "about.html#education",
     "title": "About",
-    "section": "",
-    "text": "University of Nebraska | Lincoln, NE PhD in Statistics | Aug 2023 – May 2026\nUniversity of Nebraska | Lincoln, NE MS in Statistics | Aug 2021 – May 2023\nWinona State University | Winona, MN BS in Mathematics, Statistics | Aug 2018 – May 2021"
+    "section": "Education",
+    "text": "Education\n\nUniversity of Nebraska-Lincoln (Lincoln, NE)\nPh.D. in Statistics, expected May 2026\nUniversity of Nebraska-Lincoln (Lincoln, NE)\nM.S. in Statistics, 2021-2023\nWinona State University (Winona, MN)\nB.S. in Mathematics and Statistics, Minor in Data Science, 2018-2021"
   },
   {
     "objectID": "about.html#experience",
     "href": "about.html#experience",
     "title": "About",
     "section": "Experience",
-    "text": "Experience\nStatistical Consultant |\nGeoScynce | Chief Analyst | Sept 2012 - April 2018"
+    "text": "Experience\n\nUniversity of Nebraska-Lincoln (Lincoln, NE)\nStatistical Consultant | June 2023-Present\n\nAssisted 67 clients across all stages of research, including experimental design, statistical analysis, and interpretation.\nAuthored and reviewed technical reports to align results with applied research questions.\nCo-developed and presented workshops and instructional resources in R, including data visualization and two-way ANOVA.\n\n\n\nUniversity of Nebraska-Lincoln (Lincoln, NE)\nGraduate Teaching Assistant | August 2021-May 2023\n\nServed as instructor of record for undergraduate and graduate statistics courses.\nDesigned syllabi and lesson plans, assessed learning outcomes, and supported student success through office hours.\nLed graduate lab instruction in statistical methods and research design.\n\n\n\nFastenal (Winona, MN)\nIT Data Support Analyst | June 2020-August 2021\n\nResponded to internal reporting requests and data questions from business stakeholders.\nInvestigated source-code and reporting discrepancies using Oracle SQL."
+  },
+  {
+    "objectID": "about.html#technical-skills",
+    "href": "about.html#technical-skills",
+    "title": "About",
+    "section": "Technical Skills",
+    "text": "Technical Skills\n\nProgramming and Tools: R, Shiny, Quarto, SAS, SQL, Git/GitHub, Python\nAdditional Tools: LaTeX, Tableau, HTML, CSS\nStatistical Strengths: Experimental design, Frequentist and Bayesian modeling, statistical learning, data visualization, forecasting, data cleaning, web scraping"
+  },
+  {
+    "objectID": "about.html#honors-and-awards",
+    "href": "about.html#honors-and-awards",
+    "title": "About",
+    "section": "Honors and Awards",
+    "text": "Honors and Awards\n\nStatistics Graduate Student Fellowship (University of Nebraska-Lincoln, 2025)\nDavid H. and Annie E. Larrick Graduate Student Travel Award (University of Nebraska-Lincoln, 2023)\nOthmer Fellowship (University of Nebraska-Lincoln, 2021)"
+  },
+  {
+    "objectID": "about.html#workshops",
+    "href": "about.html#workshops",
+    "title": "About",
+    "section": "Workshops",
+    "text": "Workshops\n\nSC3L Workshops, University of Nebraska-Lincoln (Spring 2025)\n\nDeveloped and taught one-hour workshops for students and faculty.\nTopics included Data Visualization with R and Design of Experiments with R.\n\n\n\nR Workshops, University of Nebraska-Lincoln (Spring 2022, Spring 2023)\n\nCo-taught multi-day workshops for students and faculty.\nTopics included Introduction to R, Graphics with ggplot2, Data Wrangling, and Statistical Modeling with R."
+  },
+  {
+    "objectID": "about.html#service",
+    "href": "about.html#service",
+    "title": "About",
+    "section": "Service",
+    "text": "Service\n\nIowa State University Graphics Group - Seminar Coordinator (Spring 2025)\nDepartment Search Committee - Student Representative (Spring 2024)\nStatistics Graduate Student Association - President (2022-2023)"
+  },
+  {
+    "objectID": "about.html#publications",
+    "href": "about.html#publications",
+    "title": "About",
+    "section": "Publications",
+    "text": "Publications\n\nVanderplas, S., Blankenship, E., and Wiederich, T. (2024). Escaping Flatland: Graphics, Dimensionality, and Human Perception. Lecture Notes in Computer Science, 140-156. Springer Nature Switzerland.\nWiederich, T., and VanderPlas, S. (2024). Evaluating Perceptual Judgements on 3D Printed Bar Charts. Journal of Data Science, 22(2), 176-190. doi:10.6339/24-JDS1131"
+  },
+  {
+    "objectID": "blog/posts/tidytuesday-2026-03-17.html",
+    "href": "blog/posts/tidytuesday-2026-03-17.html",
+    "title": "Salmonid Mortality Data",
+    "section": "",
+    "text": "This #tidytuesday comes from March 17th, 2026 and explores farmed fish mortality in Norway. The GitHub page can be found here and provides the following description:\nMy goal with these datasets is as follows:"
+  },
+  {
+    "objectID": "blog/posts/tidytuesday-2026-03-17.html#data",
+    "href": "blog/posts/tidytuesday-2026-03-17.html#data",
+    "title": "Salmonid Mortality Data",
+    "section": "Data",
+    "text": "Data\n\n\nCode\n# Packages\nlibrary(tidyverse)\n\n# Load data\ntuesdata &lt;- tidytuesdayR::tt_load('2026-03-17')\n\n# Extract data\nmonthly_losses_data &lt;- tuesdata$monthly_losses_data\nmonthly_mortality_data &lt;- tuesdata$monthly_mortality_data"
+  },
+  {
+    "objectID": "blog/posts/tidytuesday-2026-03-17.html#media-graphic",
+    "href": "blog/posts/tidytuesday-2026-03-17.html#media-graphic",
+    "title": "Salmonid Mortality Data",
+    "section": "Media Graphic",
+    "text": "Media Graphic\nTo show which counties had the most losses over the 2020-2025 period, I decided on a horizontal bar chart. Although my goal was to show this for the entire time frame, using stacked bars for years provides additional transparency for year-to-year variability.\n\n\nCode\nmonthly_losses_data %&gt;% \n  filter(geo_group == 'county' & species == 'salmon') %&gt;% \n  group_by(region, year = factor(year(date))) %&gt;% \n  summarise(losses = sum(losses)) %&gt;% \n  ggplot(mapping = aes(y = reorder(region, losses, sum), \n                       x = losses/1e6, fill = year)) + \n  geom_col(width = 1/2) + \n  geom_col(aes(x = total_losses/1e6, y = reorder(region, total_losses), fill = NULL),\n           data = monthly_losses_data %&gt;% \n            filter(geo_group == 'county' & species == 'salmon') %&gt;% \n             group_by(region) %&gt;% \n            summarise(total_losses = sum(losses)),\n           fill = NA, color = 'black', width = 1/2) + \n  geom_text(aes(x = total_losses/1e6 + 3.1, y = reorder(region, total_losses), fill = NULL, label = round(total_losses/1e6, 2)),\n            size = 2,\n           data = monthly_losses_data %&gt;% \n            filter(geo_group == 'county' & species == 'salmon') %&gt;% \n             group_by(region) %&gt;% \n            summarise(total_losses = sum(losses))) + \n  scale_fill_brewer(palette = 'Reds') +\n  labs(x = 'Total losses\\n(in millions)', fill = 'Year', y = '',\n       title = 'Salmon Losses in Norwegian Counties',\n       subtitle = '2020 - 2025') + \n  scale_x_continuous(limits = c(0, 100)) + \n  theme_minimal() + \n  theme(aspect.ratio = 1/2, panel.grid.major.y = element_blank(),\n        legend.title = element_text(hjust = 0.5, size = 10, face = 'bold'),\n        legend.text = element_text(size = 7, hjust = 0),\n        plot.title = element_text(face = 'bold', hjust = 0.5, size = 14),\n        plot.subtitle = element_text(hjust = 0.5, size = 10),\n        axis.text.y = element_text(hjust = 1, size = 7))"
+  },
+  {
+    "objectID": "blog/posts/tidytuesday-2026-03-17.html#statistical-graphic",
+    "href": "blog/posts/tidytuesday-2026-03-17.html#statistical-graphic",
+    "title": "Salmonid Mortality Data",
+    "section": "Statistical Graphic",
+    "text": "Statistical Graphic\nThe mortality dataset provided median mortality rates along with the first and third quartiles. This interquartile range provides a good opportunity to display variability. In this chart, the top 3 counties with the highest salmon losses are considered.\n\n\nCode\nmonthly_mortality_data %&gt;% \n  filter(geo_group == 'county' & species == 'salmon' & region %in% c('Vestland', 'Trøndelag', 'Nordland')) %&gt;%\n  ggplot(mapping = aes(x = date, y = median)) + \n  geom_ribbon(aes(ymin = q1, ymax = q3), alpha = 0.2) + \n  geom_line() + \n  facet_wrap(~region, nrow = 1) + \n  labs(y = 'Mortality Rate', title = 'Mortality Rate of Salmon',\n       subtitle = \"Median with interquartile range (Q1–Q3)\",\n       x = '') + \n  theme_bw() + \n  theme(aspect.ratio = 0.6, \n        plot.title = element_text(hjust = 0.5, face = 'bold', size = 14),\n        plot.subtitle = element_text(hjust = 0.5, size = 10),\n        strip.text = element_text(size = 8),\n        panel.spacing = unit(1.5, \"lines\"),\n        panel.grid.minor = element_blank(),\n        panel.grid.major.x = element_blank(),\n        axis.text = element_text(size = 6),\n        axis.title = element_text(size = 8),\n        axis.text.x = element_text(hjust = 1, angle = 30))"
+  },
+  {
+    "objectID": "blog/posts/tidytuesday-2026-03-17.html#a-bad-graph",
+    "href": "blog/posts/tidytuesday-2026-03-17.html#a-bad-graph",
+    "title": "Salmonid Mortality Data",
+    "section": "A bad graph",
+    "text": "A bad graph\nLastly, I wanted to create a bad graph just to have some fun. A century of research suggests that pie charts are bad for extracting numerical information when compared to bar charts.\n\n\nCode\nmonthly_losses_data %&gt;% \n  filter(geo_group == 'country' & species == 'salmon') %&gt;% \n  pivot_longer(dead:other, values_to = 'count', names_to = 'type_of_loss') %&gt;% \n  group_by(year = year(date), type_of_loss) %&gt;% \n  summarise(count = sum(count)) %&gt;% \n  mutate(year_lab = ifelse(type_of_loss == 'dead', year, NA),\n         year_pos = sum(count)+10500000) %&gt;%\n  ggplot(mapping = aes(x = year, y = count, fill = type_of_loss)) + \n  geom_col(width = 1, color = 'black') + \n  geom_text(aes(label = year_lab, y = year_pos)) +\n  scale_fill_brewer(palette = 3) + \n  labs(title = 'How are salmon lost in Norge?',\n       fill = 'Type of loss') + \n  coord_polar() + \n  theme_void() + \n  theme(plot.title = element_text(size = 16, face = 'bold', hjust = 0.5),\n        aspect.ratio = 1,\n        legend.position = 'bottom')\n\n\n\n\n\n\n\n\n\nThis chart is bad for several reasons. First, the polar coordinates are forced into a context where it does not make a lot of sense. Time is linear, but polar coordinates are designed for seasonal effects or nominal categories. Additionally, it is nearly impossible to make comparisons across the categories. For example, how much larger is the count of dead fish in 2020 than the count for discarded fish? This chart is also a gross misuse of pie charts, where angles are used to separate equally represented categories.\nTo fix this chart, I made the following changes:\n\nCombined the escaped and other categories since escaped always has small values. This reduces visual clutter in the legend.\nConverted the stacked layout into a line chart. Values are now comparable on an equal scale.\n\n\n\nCode\nmy_cols &lt;- c('dead'='#5e4c5f',\n             'discarded'='#ffbb6f',\n             'other'='#999999')\n\nbg_df &lt;- monthly_losses_data %&gt;% \n  filter(geo_group == 'country' & species == 'salmon') %&gt;% \n  mutate(other = other + escaped, .keep = 'unused') %&gt;% \n  pivot_longer(dead:other, values_to = 'count', names_to = 'type_of_loss') %&gt;% \n  group_by(year = year(date), type_of_loss) %&gt;% \n  summarise(count = sum(count)/1e6) \n\nbg_df %&gt;% \n  ggplot(mapping = aes(x = year, y = count, color = type_of_loss)) + \n  geom_line() + \n  geom_point() + \n  scale_x_continuous(breaks = 2020:2025) +\n  scale_color_manual(values = my_cols) + \n  labs(x = 'Year', y = 'Count\\n(in millions)', title = 'How are salmon lost in Norge?', color = 'Type of Loss') + \n  theme_bw() + \n  theme(plot.title = element_text(size = 16, face = 'bold', hjust = 0.5),\n        axis.text = element_text(size = 8),\n        axis.title = element_text(size = 10),\n        strip.text = element_text(size = 8),\n        panel.grid = element_blank(),\n        aspect.ratio = 1/2,\n        legend.position = 'bottom') \n\n\n\n\n\n\n\n\n\nWith the refined chart, it is clear that dead salmon peaked in 2023 and declined over the following two years. While there was not much change in discarded fish, the “other” category had an increase in 2024 and 2025. The data dictionary did not specify what is included as “other”, but this could be a concern worth further exploration."
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "About",
     "section": "",
-    "text": "Hello! My name is Tyler Wiederich and I am a Ph.D. candidate in the Department of Statistics at the University of Nebraska-Lincoln. On this site, you can find a showcase of projects and presentations."
+    "text": "Hello! My name is Tyler Wiederich and I am a Ph.D. candidate in the Department of Statistics at the University of Nebraska-Lincoln. I am expecting to graduate in May and am currently looking for employment opportunities. On this site, you can find several of my portfolio projects and presentations."
+  },
+  {
+    "objectID": "blog/index.html",
+    "href": "blog/index.html",
+    "title": "Blog",
+    "section": "",
+    "text": "When I started getting involved in data science, the most captivating aspect was the ability to take data and tell a story. On this page, I am taking inspiration from TidyTuesday to keep my skills sharp.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSalmonid Mortality Data\n\n\n\n\n\n\ntidytuesday\n\n\n\n\n\n\n\n\n\nMar 20, 2026\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "portfolio.html",
@@ -46,28 +123,14 @@
     "href": "portfolio.html#overlap-of-majors-and-minors-at-winona-state-university",
     "title": "Portfolio",
     "section": "Overlap of Majors and Minors at Winona State University",
-    "text": "Overlap of Majors and Minors at Winona State University\nOne of my very first projects in R was jokingly given to me by a friend by discussing which minors at Winona State would be the easiest to get depending on the major. He never intended for me to figure out an “answer”, but I decided to use the opportunity to learn about web scraping and data cleaning. Unfortunately, this was before I was using GitHub for my projects and I lost the project when migrating my campus-provided laptop (a lesson I have since learned). Below are the steps I used for accomplishing\n\nFor all pages for majors and minor, extract all courses listed into a single data frame with columns for course and program.\nSeparate the data frame into a majors data frame and a minors data frame.\nFull join majors and minors on a dummy variable to get all combinations courses for each combination of majors and minors.\nFor each combination, compute the number of overlapping courses.\nDivide the number of overlapping courses by the number of courses listed for the minor.\n\nAt the time, there were 110 majors and 77 minors available at Winona State. Below is an early iteration of my graphic, which was designed to be printed on a poster."
-  },
-  {
-    "objectID": "portfolio.html#march-madness-competition",
-    "href": "portfolio.html#march-madness-competition",
-    "title": "Portfolio",
-    "section": "March Madness Competition",
-    "text": "March Madness Competition\nMy statistics department at UNL hosts an annual March Madness competition where we select teams in the bracket and compete based off the number of wins from their chosen teams. For fairness, we each have 100 points that can be used to purchase teams, where teams with higher seeds cost more points. Rather than letting personal bias select my teams, I decided to"
-  },
-  {
-    "objectID": "portfolio.html#crime-in-lincoln",
-    "href": "portfolio.html#crime-in-lincoln",
-    "title": "Portfolio",
-    "section": "Crime in Lincoln?",
-    "text": "Crime in Lincoln?"
+    "text": "Overlap of Majors and Minors at Winona State University\nOne of my very first projects in R was jokingly given to me by a friend by discussing which minors at Winona State would be the easiest to get depending on the major. He never intended for me to figure out an “answer”, but I decided to use the opportunity to learn about web scraping and data cleaning. Unfortunately, this was before I was using GitHub for my projects and I lost the project when migrating my campus-provided laptop (a lesson I have since learned). Below are the steps I used for accomplishing\n\nFor all pages for majors and minor, extract all courses listed into a single data frame with columns for course and program.\nSeparate the data frame into a majors data frame and a minors data frame.\nFull join majors and minors on a dummy variable to get all combinations courses for each combination of majors and minors.\nFor each combination, compute the number of overlapping courses.\nDivide the number of overlapping courses by the number of courses listed for the minor.\n\nAt the time, there were 110 majors and 77 minors available at Winona State. Below is an early iteration of my graphic, which was designed to be printed on a poster.\n\n\n\nEarly figure\n\n\nI recently decided to replicate this analysis and have the code available on GitHub. The main improvement was limiting the number of majors to Bachelor of Science degrees and removing minors with low overlap.\n\n\n\nFinal figure"
   },
   {
     "objectID": "portfolio.html#this-website",
     "href": "portfolio.html#this-website",
     "title": "Portfolio",
     "section": "This website!",
-    "text": "This website!"
+    "text": "This website!\nQuarto offers many incredible features and I decided to use it to make this website. The code for this site can be found on GitHub."
   },
   {
     "objectID": "portfolio.html#frequentist-bayesian-and-visual-inference",

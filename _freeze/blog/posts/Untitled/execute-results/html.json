@@ -1,0 +1,17 @@
+{
+  "hash": "1fc8c0ff5ca479a12ed2ce86cdc48197",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Test post\"\ndescription: \"This is a test post. You should ignore it :)\"\ndate: \"5/22/2021\"\nimage: preview.png\ncategories:\n  - test\n  - quarto\nexecute:\n  freeze: auto\n---\n\n\n\nThis is a test post. Ignore for now.\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(ggplot2)\n```\n\n::: {.cell-output .cell-output-stderr}\n\n```\nWarning: package 'ggplot2' was built under R version 4.5.2\n```\n\n\n:::\n\n```{.r .cell-code}\nset.seed(213)\np <- ggplot(mapping = aes(x = 1:10, y = runif(10, 0, 10))) + \n  geom_line()\np\n```\n\n::: {.cell-output-display}\n![](Untitled_files/figure-html/unnamed-chunk-1-1.png){width=672}\n:::\n\n```{.r .cell-code}\nggsave('preview.png', width = 6, height = 6)\n```\n:::\n",
+    "supporting": [
+      "Untitled_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

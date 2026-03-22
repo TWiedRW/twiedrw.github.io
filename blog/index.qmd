@@ -1,0 +1,11 @@
+---
+title: "Blog"
+listing:
+  contents: posts
+  categories: true
+  sort: "date desc"
+  type: default
+---
+
+When I started getting involved in data science, the most captivating aspect was the ability to take data and tell a story. On this page, I am taking inspiration from [TidyTuesday](https://github.com/rfordatascience/tidytuesday) to keep my skills sharp. 
+

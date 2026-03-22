@@ -3,7 +3,7 @@ title: "About"
 image: images/Profile_Wiederich.jpg
 background-image: images/Profile_Wiederich.jpg
 about:
-  template: trestles
+  template: jolla
   links:
     - icon: github
       text: Github
@@ -16,7 +16,7 @@ about:
 
 :::{#hero-heading}
 
-Hello! My name is Tyler Wiederich and I am a Ph.D. candidate in the Department of Statistics at the University of Nebraska-Lincoln. On this site, you can find a showcase of projects and presentations.
+Hello! My name is Tyler Wiederich and I am a Ph.D. candidate in the Department of Statistics at the University of Nebraska-Lincoln. I am expecting to graduate in May and am currently looking for employment opportunities. On this site, you can find several of my portfolio projects and presentations. 
 
 :::
 
