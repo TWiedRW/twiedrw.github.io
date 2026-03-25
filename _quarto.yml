@@ -15,7 +15,7 @@ website:
       - presentations.qmd
       - portfolio.qmd
       - href: blog/index.qmd
-        text: tidytuesday
+        text: "#TidyTuesday"
 
 format:
   html:
