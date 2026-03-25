@@ -67,35 +67,77 @@
     "href": "blog/posts/tidytuesday-2026-03-17.html",
     "title": "Salmonid Mortality Data",
     "section": "",
-    "text": "This #tidytuesday comes from March 17th, 2026 and explores farmed fish mortality in Norway. The GitHub page can be found here and provides the following description:\nMy goal with these datasets is as follows:"
+    "text": "This week’s dataset explores farmed salmon mortality in Norway. The TidyTuesday GitHub repository provides this background:\n\nThe Fish Health Report is the Norwegian Veterinary Institute’s annual status report on the health and welfare situation for Norwegian farmed fish and is based on official statistics, data from the Norwegian Veterinary Institute and private laboratories. The report also contains results from a survey among fish health personnel and inspectors from the Norwegian Food Safety Authority, as well as assessments of the situation, trends and risks.\n\nWith monthly loss and mortality data across Norwegian counties, I wanted to explore three angles: identify which counties experienced the largest salmon losses, show how mortality rates varied over time, and create both a misleading visualization and its corrected version to demonstrate data visualization best practices.\n\n\nCode\n# Packages\nlibrary(tidyverse)\n\n# Load data\ntuesdata &lt;- tidytuesdayR::tt_load('2026-03-17')\n\n# Extract data\nmonthly_losses_data &lt;- tuesdata$monthly_losses_data\nmonthly_mortality_data &lt;- tuesdata$monthly_mortality_data"
   },
   {
-    "objectID": "blog/posts/tidytuesday-2026-03-17.html#data",
-    "href": "blog/posts/tidytuesday-2026-03-17.html#data",
+    "objectID": "blog/posts/tidytuesday-2026-03-17.html#the-data",
+    "href": "blog/posts/tidytuesday-2026-03-17.html#the-data",
     "title": "Salmonid Mortality Data",
-    "section": "Data",
-    "text": "Data\n\n\nCode\n# Packages\nlibrary(tidyverse)\n\n# Load data\ntuesdata &lt;- tidytuesdayR::tt_load('2026-03-17')\n\n# Extract data\nmonthly_losses_data &lt;- tuesdata$monthly_losses_data\nmonthly_mortality_data &lt;- tuesdata$monthly_mortality_data"
+    "section": "",
+    "text": "This week’s dataset explores farmed salmon mortality in Norway. The TidyTuesday GitHub repository provides this background:\n\nThe Fish Health Report is the Norwegian Veterinary Institute’s annual status report on the health and welfare situation for Norwegian farmed fish and is based on official statistics, data from the Norwegian Veterinary Institute and private laboratories. The report also contains results from a survey among fish health personnel and inspectors from the Norwegian Food Safety Authority, as well as assessments of the situation, trends and risks.\n\nWith monthly loss and mortality data across Norwegian counties, I wanted to explore three angles: identify which counties experienced the largest salmon losses, show how mortality rates varied over time, and create both a misleading visualization and its corrected version to demonstrate data visualization best practices.\n\n\nCode\n# Packages\nlibrary(tidyverse)\n\n# Load data\ntuesdata &lt;- tidytuesdayR::tt_load('2026-03-17')\n\n# Extract data\nmonthly_losses_data &lt;- tuesdata$monthly_losses_data\nmonthly_mortality_data &lt;- tuesdata$monthly_mortality_data"
   },
   {
-    "objectID": "blog/posts/tidytuesday-2026-03-17.html#media-graphic",
-    "href": "blog/posts/tidytuesday-2026-03-17.html#media-graphic",
+    "objectID": "blog/posts/tidytuesday-2026-03-17.html#county-level-salmon-losses-20202025",
+    "href": "blog/posts/tidytuesday-2026-03-17.html#county-level-salmon-losses-20202025",
     "title": "Salmonid Mortality Data",
-    "section": "Media Graphic",
-    "text": "Media Graphic\nTo show which counties had the most losses over the 2020-2025 period, I decided on a horizontal bar chart. Although my goal was to show this for the entire time frame, using stacked bars for years provides additional transparency for year-to-year variability.\n\n\nCode\nmonthly_losses_data %&gt;% \n  filter(geo_group == 'county' & species == 'salmon') %&gt;% \n  group_by(region, year = factor(year(date))) %&gt;% \n  summarise(losses = sum(losses)) %&gt;% \n  ggplot(mapping = aes(y = reorder(region, losses, sum), \n                       x = losses/1e6, fill = year)) + \n  geom_col(width = 1/2) + \n  geom_col(aes(x = total_losses/1e6, y = reorder(region, total_losses), fill = NULL),\n           data = monthly_losses_data %&gt;% \n            filter(geo_group == 'county' & species == 'salmon') %&gt;% \n             group_by(region) %&gt;% \n            summarise(total_losses = sum(losses)),\n           fill = NA, color = 'black', width = 1/2) + \n  geom_text(aes(x = total_losses/1e6 + 3.1, y = reorder(region, total_losses), fill = NULL, label = round(total_losses/1e6, 2)),\n            size = 2,\n           data = monthly_losses_data %&gt;% \n            filter(geo_group == 'county' & species == 'salmon') %&gt;% \n             group_by(region) %&gt;% \n            summarise(total_losses = sum(losses))) + \n  scale_fill_brewer(palette = 'Reds') +\n  labs(x = 'Total losses\\n(in millions)', fill = 'Year', y = '',\n       title = 'Salmon Losses in Norwegian Counties',\n       subtitle = '2020 - 2025') + \n  scale_x_continuous(limits = c(0, 100)) + \n  theme_minimal() + \n  theme(aspect.ratio = 1/2, panel.grid.major.y = element_blank(),\n        legend.title = element_text(hjust = 0.5, size = 10, face = 'bold'),\n        legend.text = element_text(size = 7, hjust = 0),\n        plot.title = element_text(face = 'bold', hjust = 0.5, size = 14),\n        plot.subtitle = element_text(hjust = 0.5, size = 10),\n        axis.text.y = element_text(hjust = 1, size = 7))"
+    "section": "County-Level Salmon Losses (2020–2025)",
+    "text": "County-Level Salmon Losses (2020–2025)\nTo identify which counties had the largest losses, I created a horizontal stacked bar chart. Using stacked bars by year provides both geographic comparison and transparency about year-to-year trends:\n\n\nCode\nmonthly_losses_data %&gt;% \n  filter(geo_group == 'county' & species == 'salmon') %&gt;% \n  group_by(region, year = factor(year(date))) %&gt;% \n  summarise(losses = sum(losses)) %&gt;% \n  ggplot(mapping = aes(y = reorder(region, losses, sum), \n                       x = losses/1e6, fill = year)) + \n  geom_col(width = 1/2) + \n  geom_col(aes(x = total_losses/1e6, y = reorder(region, total_losses), fill = NULL),\n           data = monthly_losses_data %&gt;% \n            filter(geo_group == 'county' & species == 'salmon') %&gt;% \n             group_by(region) %&gt;% \n            summarise(total_losses = sum(losses)),\n           fill = NA, color = 'black', width = 1/2) + \n  geom_text(aes(x = total_losses/1e6 + 3.1, y = reorder(region, total_losses), fill = NULL, label = round(total_losses/1e6, 2)),\n            size = 2,\n           data = monthly_losses_data %&gt;% \n            filter(geo_group == 'county' & species == 'salmon') %&gt;% \n             group_by(region) %&gt;% \n            summarise(total_losses = sum(losses))) + \n  scale_fill_brewer(palette = 'Reds') +\n  labs(x = 'Total losses\\n(in millions)', fill = 'Year', y = '',\n       title = 'Salmon Losses in Norwegian Counties',\n       subtitle = '2020 - 2025') + \n  scale_x_continuous(limits = c(0, 100)) + \n  theme_minimal() + \n  theme(aspect.ratio = 1/2, panel.grid.major.y = element_blank(),\n        legend.title = element_text(hjust = 0.5, size = 10, face = 'bold'),\n        legend.text = element_text(size = 7, hjust = 0),\n        plot.title = element_text(face = 'bold', hjust = 0.5, size = 14),\n        plot.subtitle = element_text(hjust = 0.5, size = 10),\n        axis.text.y = element_text(hjust = 1, size = 7))"
   },
   {
-    "objectID": "blog/posts/tidytuesday-2026-03-17.html#statistical-graphic",
-    "href": "blog/posts/tidytuesday-2026-03-17.html#statistical-graphic",
+    "objectID": "blog/posts/tidytuesday-2026-03-17.html#mortality-rates-over-time",
+    "href": "blog/posts/tidytuesday-2026-03-17.html#mortality-rates-over-time",
     "title": "Salmonid Mortality Data",
-    "section": "Statistical Graphic",
-    "text": "Statistical Graphic\nThe mortality dataset provided median mortality rates along with the first and third quartiles. This interquartile range provides a good opportunity to display variability. In this chart, the top 3 counties with the highest salmon losses are considered.\n\n\nCode\nmonthly_mortality_data %&gt;% \n  filter(geo_group == 'county' & species == 'salmon' & region %in% c('Vestland', 'Trøndelag', 'Nordland')) %&gt;%\n  ggplot(mapping = aes(x = date, y = median)) + \n  geom_ribbon(aes(ymin = q1, ymax = q3), alpha = 0.2) + \n  geom_line() + \n  facet_wrap(~region, nrow = 1) + \n  labs(y = 'Mortality Rate', title = 'Mortality Rate of Salmon',\n       subtitle = \"Median with interquartile range (Q1–Q3)\",\n       x = '') + \n  theme_bw() + \n  theme(aspect.ratio = 0.6, \n        plot.title = element_text(hjust = 0.5, face = 'bold', size = 14),\n        plot.subtitle = element_text(hjust = 0.5, size = 10),\n        strip.text = element_text(size = 8),\n        panel.spacing = unit(1.5, \"lines\"),\n        panel.grid.minor = element_blank(),\n        panel.grid.major.x = element_blank(),\n        axis.text = element_text(size = 6),\n        axis.title = element_text(size = 8),\n        axis.text.x = element_text(hjust = 1, angle = 30))"
+    "section": "Mortality Rates Over Time",
+    "text": "Mortality Rates Over Time\nNext, I’ll examine how salmon mortality rates changed across the top three counties (those with the highest total losses). The dataset includes median mortality rates plus first and third quartiles, which I can use to show variability:\n\n\nCode\nmonthly_mortality_data %&gt;% \n  filter(geo_group == 'county' & species == 'salmon' & region %in% c('Vestland', 'Trøndelag', 'Nordland')) %&gt;%\n  ggplot(mapping = aes(x = date, y = median)) + \n  geom_ribbon(aes(ymin = q1, ymax = q3), alpha = 0.2) + \n  geom_line() + \n  facet_wrap(~region, nrow = 1) + \n  labs(y = 'Mortality Rate', title = 'Mortality Rate of Salmon',\n       subtitle = \"Median with interquartile range (Q1–Q3)\",\n       x = '') + \n  theme_bw() + \n  theme(aspect.ratio = 0.6, \n        plot.title = element_text(hjust = 0.5, face = 'bold', size = 14),\n        plot.subtitle = element_text(hjust = 0.5, size = 10),\n        strip.text = element_text(size = 8),\n        panel.spacing = unit(1.5, \"lines\"),\n        panel.grid.minor = element_blank(),\n        panel.grid.major.x = element_blank(),\n        axis.text = element_text(size = 6),\n        axis.title = element_text(size = 8),\n        axis.text.x = element_text(hjust = 1, angle = 30))"
   },
   {
-    "objectID": "blog/posts/tidytuesday-2026-03-17.html#a-bad-graph",
-    "href": "blog/posts/tidytuesday-2026-03-17.html#a-bad-graph",
+    "objectID": "blog/posts/tidytuesday-2026-03-17.html#visualizing-loss-composition-a-cautionary-tale",
+    "href": "blog/posts/tidytuesday-2026-03-17.html#visualizing-loss-composition-a-cautionary-tale",
     "title": "Salmonid Mortality Data",
-    "section": "A bad graph",
-    "text": "A bad graph\nLastly, I wanted to create a bad graph just to have some fun. A century of research suggests that pie charts are bad for extracting numerical information when compared to bar charts.\n\n\nCode\nmonthly_losses_data %&gt;% \n  filter(geo_group == 'country' & species == 'salmon') %&gt;% \n  pivot_longer(dead:other, values_to = 'count', names_to = 'type_of_loss') %&gt;% \n  group_by(year = year(date), type_of_loss) %&gt;% \n  summarise(count = sum(count)) %&gt;% \n  mutate(year_lab = ifelse(type_of_loss == 'dead', year, NA),\n         year_pos = sum(count)+10500000) %&gt;%\n  ggplot(mapping = aes(x = year, y = count, fill = type_of_loss)) + \n  geom_col(width = 1, color = 'black') + \n  geom_text(aes(label = year_lab, y = year_pos)) +\n  scale_fill_brewer(palette = 3) + \n  labs(title = 'How are salmon lost in Norge?',\n       fill = 'Type of loss') + \n  coord_polar() + \n  theme_void() + \n  theme(plot.title = element_text(size = 16, face = 'bold', hjust = 0.5),\n        aspect.ratio = 1,\n        legend.position = 'bottom')\n\n\n\n\n\n\n\n\n\nThis chart is bad for several reasons. First, the polar coordinates are forced into a context where it does not make a lot of sense. Time is linear, but polar coordinates are designed for seasonal effects or nominal categories. Additionally, it is nearly impossible to make comparisons across the categories. For example, how much larger is the count of dead fish in 2020 than the count for discarded fish? This chart is also a gross misuse of pie charts, where angles are used to separate equally represented categories.\nTo fix this chart, I made the following changes:\n\nCombined the escaped and other categories since escaped always has small values. This reduces visual clutter in the legend.\nConverted the stacked layout into a line chart. Values are now comparable on an equal scale.\n\n\n\nCode\nmy_cols &lt;- c('dead'='#5e4c5f',\n             'discarded'='#ffbb6f',\n             'other'='#999999')\n\nbg_df &lt;- monthly_losses_data %&gt;% \n  filter(geo_group == 'country' & species == 'salmon') %&gt;% \n  mutate(other = other + escaped, .keep = 'unused') %&gt;% \n  pivot_longer(dead:other, values_to = 'count', names_to = 'type_of_loss') %&gt;% \n  group_by(year = year(date), type_of_loss) %&gt;% \n  summarise(count = sum(count)/1e6) \n\nbg_df %&gt;% \n  ggplot(mapping = aes(x = year, y = count, color = type_of_loss)) + \n  geom_line() + \n  geom_point() + \n  scale_x_continuous(breaks = 2020:2025) +\n  scale_color_manual(values = my_cols) + \n  labs(x = 'Year', y = 'Count\\n(in millions)', title = 'How are salmon lost in Norge?', color = 'Type of Loss') + \n  theme_bw() + \n  theme(plot.title = element_text(size = 16, face = 'bold', hjust = 0.5),\n        axis.text = element_text(size = 8),\n        axis.title = element_text(size = 10),\n        strip.text = element_text(size = 8),\n        panel.grid = element_blank(),\n        aspect.ratio = 1/2,\n        legend.position = 'bottom') \n\n\n\n\n\n\n\n\n\nWith the refined chart, it is clear that dead salmon peaked in 2023 and declined over the following two years. While there was not much change in discarded fish, the “other” category had an increase in 2024 and 2025. The data dictionary did not specify what is included as “other”, but this could be a concern worth further exploration."
+    "section": "Visualizing Loss Composition: A Cautionary Tale",
+    "text": "Visualizing Loss Composition: A Cautionary Tale\nFor the final visualization, I want to explore the composition of salmon losses over time. But first, let me create an intentionally bad version to illustrate common data visualization mistakes. Decades of visualization research shows that pie charts struggle with numerical comparisons, and using polar coordinates for time series is equally problematic:\n\n\nCode\nmonthly_losses_data %&gt;% \n  filter(geo_group == 'country' & species == 'salmon') %&gt;% \n  pivot_longer(dead:other, values_to = 'count', names_to = 'type_of_loss') %&gt;% \n  group_by(year = year(date), type_of_loss) %&gt;% \n  summarise(count = sum(count)) %&gt;% \n  mutate(year_lab = ifelse(type_of_loss == 'dead', year, NA),\n         year_pos = sum(count)+10500000) %&gt;%\n  ggplot(mapping = aes(x = year, y = count, fill = type_of_loss)) + \n  geom_col(width = 1, color = 'black') + \n  geom_text(aes(label = year_lab, y = year_pos)) +\n  scale_fill_brewer(palette = 3) + \n  labs(title = 'How are salmon lost in Norge?',\n       fill = 'Type of loss') + \n  coord_polar() + \n  theme_void() + \n  theme(plot.title = element_text(size = 16, face = 'bold', hjust = 0.5),\n        aspect.ratio = 1,\n        legend.position = 'bottom')\n\n\n\n\n\n\n\n\n\nThis problematic visualization fails in several ways:\n\nWrong coordinate system: Polar coordinates are designed for cyclical data (seasons) or categorical data, not time series with inherent directionality.\nImpossible comparisons: Try estimating how much larger the dead fish count in 2020 is compared to discarded fish—the chart makes this nearly impossible.\nMisused aggregation: Pie charts work best for parts of a whole with equal importance, yet here they obscure the story entirely."
+  },
+  {
+    "objectID": "blog/posts/tidytuesday-2026-03-17.html#fixed-version",
+    "href": "blog/posts/tidytuesday-2026-03-17.html#fixed-version",
+    "title": "Salmonid Mortality Data",
+    "section": "Fixed Version",
+    "text": "Fixed Version\nA better approach combines two key improvements: simplifying the legend by merging the small “escaped” and “other” categories, and switching to a line chart that uses a common y-axis scale for easy comparison:\n\n\nCode\nmy_cols &lt;- c('dead'='#5e4c5f',\n             'discarded'='#ffbb6f',\n             'other'='#999999')\n\nbg_df &lt;- monthly_losses_data %&gt;% \n  filter(geo_group == 'country' & species == 'salmon') %&gt;% \n  mutate(other = other + escaped, .keep = 'unused') %&gt;% \n  pivot_longer(dead:other, values_to = 'count', names_to = 'type_of_loss') %&gt;% \n  group_by(year = year(date), type_of_loss) %&gt;% \n  summarise(count = sum(count)/1e6) \n\nbg_df %&gt;% \n  ggplot(mapping = aes(x = year, y = count, color = type_of_loss)) + \n  geom_line() + \n  geom_point() + \n  scale_x_continuous(breaks = 2020:2025) +\n  scale_color_manual(values = my_cols) + \n  labs(x = 'Year', y = 'Count\\n(in millions)', title = 'How are salmon lost in Norge?', color = 'Type of Loss') + \n  theme_bw() + \n  theme(plot.title = element_text(size = 16, face = 'bold', hjust = 0.5),\n        axis.text = element_text(size = 8),\n        axis.title = element_text(size = 10),\n        strip.text = element_text(size = 8),\n        panel.grid = element_blank(),\n        aspect.ratio = 1/2,\n        legend.position = 'bottom') \n\n\n\n\n\n\n\n\n\nThis revised chart tells a much clearer story: dead salmon peaked in 2023 before declining through 2025, while discarded fish remained relatively stable. Notably, the “other” category spiked in 2024–2025. Although the data dictionary doesn’t specify what falls under “other,” this increase warrants further investigation."
+  },
+  {
+    "objectID": "blog/posts/tidytuesday-2026-03-24.html",
+    "href": "blog/posts/tidytuesday-2026-03-24.html",
+    "title": "One Million Digits of Pi",
+    "section": "",
+    "text": "This week’s dataset comes from the TidyTuesday repository and contains the digits of pi. As Eve Andersson notes:\n\n“Pi is an irrational number, meaning its decimal representation never ends and never settles into a permanent repeating pattern.”\n\nSince pi’s digits are essentially random, I thought it would be fun to treat them as directions on a compass and create a visualization showing the “walking path” that pi traces out. I saw a great post by Steven Ponce on Bluesky where he created a random walk using digits as compass directions, and I wanted to recreate his visualization for myself."
+  },
+  {
+    "objectID": "blog/posts/tidytuesday-2026-03-24.html#the-data",
+    "href": "blog/posts/tidytuesday-2026-03-24.html#the-data",
+    "title": "One Million Digits of Pi",
+    "section": "",
+    "text": "This week’s dataset comes from the TidyTuesday repository and contains the digits of pi. As Eve Andersson notes:\n\n“Pi is an irrational number, meaning its decimal representation never ends and never settles into a permanent repeating pattern.”\n\nSince pi’s digits are essentially random, I thought it would be fun to treat them as directions on a compass and create a visualization showing the “walking path” that pi traces out. I saw a great post by Steven Ponce on Bluesky where he created a random walk using digits as compass directions, and I wanted to recreate his visualization for myself."
+  },
+  {
+    "objectID": "blog/posts/tidytuesday-2026-03-24.html#loading-the-data",
+    "href": "blog/posts/tidytuesday-2026-03-24.html#loading-the-data",
+    "title": "One Million Digits of Pi",
+    "section": "Loading the Data",
+    "text": "Loading the Data\n\n\nCode\n# Packages\nlibrary(tidyverse)\n\n# Load data\ntuesdata &lt;- tidytuesdayR::tt_load('2026-03-24')\n\n# Extract data\npi_digits &lt;- tuesdata$pi_digits\n\n# Show the first few values\nhead(pi_digits)\n\n\n# A tibble: 6 × 2\n  digit_position digit\n           &lt;dbl&gt; &lt;dbl&gt;\n1              1     3\n2              2     1\n3              3     4\n4              4     1\n5              5     5\n6              6     9"
+  },
+  {
+    "objectID": "blog/posts/tidytuesday-2026-03-24.html#creating-the-visualization",
+    "href": "blog/posts/tidytuesday-2026-03-24.html#creating-the-visualization",
+    "title": "One Million Digits of Pi",
+    "section": "Creating the Visualization",
+    "text": "Creating the Visualization\nHere’s the concept: A compass has 360 degrees, so we can divide it into 10 equal sections—one for each digit 0-9. Each digit gets 36 degrees (digit 0 = 0°, digit 1 = 36°, and so on).\nUsing basic trigonometry, for a unit circle centered at (0,0), moving one unit at angle \\(\\theta\\) gives us the coordinates \\((\\cos(\\theta), \\sin(\\theta))\\). By taking the cumulative sum of all these displacements in the x and y directions, we can plot the path that pi traces out:\n\n\nCode\n# Define the direction in degrees and radians\nstep_directions &lt;- data.frame(\n  digit = 0:9,\n  degree = seq(0, 360-36, l = 10)\n) %&gt;% \n  mutate(\n    radian = degree*pi/180\n  )\n\n# Set end point to set the number of digits\nend_spot &lt;- 10000\n\n# Create the walking path\np_walk &lt;- pi_digits %&gt;% \n  left_join(step_directions, by = 'digit') %&gt;% \n  mutate(displacement_x = cos(radian),\n         displacement_y = sin(radian),\n         pos_x = cumsum(displacement_x),\n         pos_y = cumsum(displacement_y)) %&gt;% \n  filter(digit_position &lt;= end_spot) %&gt;%\n  ggplot(mapping = aes(x = pos_x, y = pos_y)) + \n  geom_path(alpha = 1/3, color = '#63B3ED') + \n  labs(title = \"Where did my π go?\",\n       subtitle = 'The walking path of π. Digit values are used to\\nmark the direction of travel (0=0°, 1=36°, ..., 9=324°)',\n       caption = '') + \n  theme_void() + \n  theme(aspect.ratio = 1,\n        plot.background =  element_rect(fill = '#151D28', color = 'black'),\n        plot.margin = margin(1/2, 1, 0, 1/2, \"cm\"),\n        plot.title = element_text(color = 'grey99', face = 'bold', size = 24),\n        plot.subtitle = element_text(color = 'grey99', size = 10))\np_walk"
+  },
+  {
+    "objectID": "blog/posts/tidytuesday-2026-03-24.html#adding-animation",
+    "href": "blog/posts/tidytuesday-2026-03-24.html#adding-animation",
+    "title": "One Million Digits of Pi",
+    "section": "Adding Animation",
+    "text": "Adding Animation\nThe static chart above shows the complete path, but we can make it more engaging by animating it with the gganimate package. I also included a point to clearly show the current position of the walking path:\n\n\nCode\nlibrary(gganimate)\np_animate &lt;- p_walk + \n  geom_point(color = 'gold', size = 2) + \n  transition_reveal(digit_position) +\n  ease_aes('linear')\n\nanimate(p_animate, nframes = 100, end_pause = 10, rewind = TRUE)"
   },
   {
     "objectID": "index.html",
@@ -109,7 +151,7 @@
     "href": "blog/index.html",
     "title": "Blog",
     "section": "",
-    "text": "When I started getting involved in data science, the most captivating aspect was the ability to take data and tell a story. On this page, I am taking inspiration from TidyTuesday to keep my skills sharp.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ntidytuesday-2026-03-24\n\n\n\n\n\n\ntidytuesday\n\n\n\n\n\n\n\n\n\nMar 31, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nNovia Scotia Ocean Temperatures\n\n\n\n\n\n\ntidytuesday\n\n\n\n\n\n\n\n\n\nMar 31, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nSalmonid Mortality Data\n\n\n\n\n\n\ntidytuesday\n\n\n\n\n\n\n\n\n\nMar 20, 2026\n\n\n\n\n\n\nNo matching items"
+    "text": "When I started getting involved in data science, the most captivating aspect was the ability to take data and tell a story. On this page, I am taking inspiration from TidyTuesday to keep my skills sharp.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOne Million Digits of Pi\n\n\n\n\n\n\ntidytuesday\n\n\n\n\n\n\n\n\n\nMar 24, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nSalmonid Mortality Data\n\n\n\n\n\n\ntidytuesday\n\n\n\n\n\n\n\n\n\nMar 20, 2026\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "portfolio.html",
@@ -152,82 +194,5 @@
     "title": "Portfolio",
     "section": "Color palette generation from images",
     "text": "Color palette generation from images\nIn collaboration with Muxin Hua, we developed an R package focused on creating color palettes from images. The overall theory was to identify the colors in the image and use clustering to generate distinct separated colors. We also included a color-blind mode that initially put images through color filters before clustering.\nYou can check out the GitHub page here, or try it for yourself!\n\n# install.packages(\"devtools\")\ndevtools::install_github(\"Hiiiua/Photopal\")"
-  },
-  {
-    "objectID": "blog/posts/tidytuesday-2026-03-24.html",
-    "href": "blog/posts/tidytuesday-2026-03-24.html",
-    "title": "tidytuesday-2026-03-24",
-    "section": "",
-    "text": "This week’s dataset comes from the TidyTuesday repository and contains the digits of pi. As Eve Andersson notes:\n\n“Pi is an irrational number, meaning its decimal representation never ends and never settles into a permanent repeating pattern.”\n\nSince pi’s digits are essentially random, I thought it would be fun to treat them as directions on a compass and create a visualization showing the “walking path” that pi traces out. I saw a great post by Steven Ponce on Bluesky where he created a random walk using digits as compass directions, and I wanted to recreate his visualization for myself."
-  },
-  {
-    "objectID": "blog/posts/tidytuesday-2026-03-24.html#data",
-    "href": "blog/posts/tidytuesday-2026-03-24.html#data",
-    "title": "tidytuesday-2026-03-24",
-    "section": "Data",
-    "text": "Data\n\n\nCode\n# Packages\nlibrary(tidyverse)\n\n# Load data\ntuesdata &lt;- tidytuesdayR::tt_load('2026-03-24')\n\n# Extract data\npi_digits &lt;- tuesdata$pi_digits"
-  },
-  {
-    "objectID": "blog/posts/tidytuesday-2026-03-31.html",
-    "href": "blog/posts/tidytuesday-2026-03-31.html",
-    "title": "Novia Scotia Ocean Temperatures",
-    "section": "",
-    "text": "This #tidytuesday comes from March 31st, 2026 and explores ocean temperature in Nova Scotia. The GitHub page can be found here and provides the following description:\nMy goal with these datasets is as follows:"
-  },
-  {
-    "objectID": "blog/posts/tidytuesday-2026-03-31.html#data",
-    "href": "blog/posts/tidytuesday-2026-03-31.html#data",
-    "title": "Novia Scotia Ocean Temperatures",
-    "section": "Data",
-    "text": "Data\n\n\nCode\n# Packages\nlibrary(tidyverse)\n\n# Load data\ntuesdata &lt;- tidytuesdayR::tt_load('2026-03-31')\n\n# Extract data\nocean_temperature &lt;- tuesdata$ocean_temperature\nocean_temperature_deployments &lt;- tuesdata$ocean_temperature_deployments"
-  },
-  {
-    "objectID": "blog/posts/tidytuesday-2026-03-31.html#media-graphic",
-    "href": "blog/posts/tidytuesday-2026-03-31.html#media-graphic",
-    "title": "Novia Scotia Ocean Temperatures",
-    "section": "Media Graphic",
-    "text": "Media Graphic\nTo show which counties had the most losses over the 2020-2025 period, I decided on a horizontal bar chart. Although my goal was to show this for the entire time frame, using stacked bars for years provides additional transparency for year-to-year variability.\n\n\nCode\nlibrary(leaflet)\n\ncanada &lt;- map_data('world', 'canada')\n\ncanada %&gt;% \n  # filter(subregion %in% c('Cape Breton Island', 'Sable Island')) %&gt;% \n  ggplot(mapping = aes(x = long, y = lat, group = group)) + \n  geom_polygon() +\n  geom_point(aes(x = longitude, y = latitude, group = NULL), data = ocean_temperature_deployments,\n             color = 'red') + \n  theme_void() +\n  coord_map()"
-  },
-  {
-    "objectID": "blog/posts/tidytuesday-2026-03-31.html#statistical-graphic",
-    "href": "blog/posts/tidytuesday-2026-03-31.html#statistical-graphic",
-    "title": "Novia Scotia Ocean Temperatures",
-    "section": "Statistical Graphic",
-    "text": "Statistical Graphic\nThe mortality dataset provided median mortality rates along with the first and third quartiles. This interquartile range provides a good opportunity to display variability. In this chart, the top 3 counties with the highest salmon losses are considered.\n\n\nCode\nocean_temperature %&gt;% \n  ggplot(mapping = aes(x = date, y = mean_temperature_degree_c)) + \n  geom_line() + \n  facet_wrap(~sensor_depth_at_low_tide_m)"
-  },
-  {
-    "objectID": "blog/posts/tidytuesday-2026-03-24.html#chart",
-    "href": "blog/posts/tidytuesday-2026-03-24.html#chart",
-    "title": "tidytuesday-2026-03-24",
-    "section": "Chart",
-    "text": "Chart\nPi is an irrational number is its digits are seemingly random. I saw this post by Steven Ponce on Bluesky where a random walk using the digits as directions and decided to try and replicate his figure.\nFirst, we need to define the directions and steps. A compass consists of 360 degrees, meaning that each from 0 to 9 can be separated by 36 degrees. Let the digit 0 be 0 degrees, 1 be 36 degrees, and so forth. For a unit circle centered at \\((0,0)\\), the coordinate for movement of one unit at degree \\(\\theta\\) becomes \\((\\cos (\\theta),\\sin(\\theta))\\). To find the position for the current digit placement, we can take the cumulative summation of displacements in the x and y axis directions. Finally, placing these as a path shows the direction that the digits of pi walk.\n\n\nCode\n# Load packages\nlibrary(tidyverse)\n\n# Define the direction in degrees and radians\nstep_directions &lt;- data.frame(\n  digit = 0:9,\n  degree = seq(0, 360-36, l = 10)\n) %&gt;% \n  mutate(\n    radian = degree*pi/180\n  )\n\n# Set end point to set the number of digits\nend_spot &lt;- 10000\n\n# Create the walking path\np_walk &lt;- pi_digits %&gt;% \n  left_join(step_directions, by = 'digit') %&gt;% \n  mutate(displacement_x = cos(radian),\n         displacement_y = sin(radian),\n         pos_x = cumsum(displacement_x),\n         pos_y = cumsum(displacement_y)) %&gt;% \n  filter(digit_position &lt;= end_spot) %&gt;%\n  ggplot(mapping = aes(x = pos_x, y = pos_y)) + \n  geom_path(alpha = 1/3, color = '#63B3ED') + \n  labs(title = \"Where did my π go?\",\n       subtitle = 'The walking path of π. Digit values are used to\\nmark the direction of travel (0=0°, 1=36°, ..., 9=324°)') + \n  theme_void() + \n  theme(aspect.ratio = 1,\n        plot.background =  element_rect(fill = '#151D28', color = 'black'),\n        plot.margin = margin(1/2, 1, 0, 1/2, \"cm\"),\n        plot.title = element_text(color = 'grey99', face = 'bold', size = 24),\n        plot.subtitle = element_text(color = 'grey99', size = 10))\np_walk\n\n\n\n\n\n\n\n\n\nWhile a static chart shows the path that the digits of pi took, we can make this a little more fun by animating the path with the gganimate package. I also included a point to clearly show the current position of the walking path.\n\n\nCode\nlibrary(gganimate)\np_animate &lt;- p_walk + \n  geom_point(color = 'gold', size = 2) + \n  transition_reveal(digit_position) +\n  ease_aes('linear')\n\nanimate(p_animate, nframes = 100, end_pause = 10, rewind = TRUE)"
-  },
-  {
-    "objectID": "blog/posts/tidytuesday-2026-03-24.html#the-data",
-    "href": "blog/posts/tidytuesday-2026-03-24.html#the-data",
-    "title": "tidytuesday-2026-03-24",
-    "section": "",
-    "text": "This week’s dataset comes from the TidyTuesday repository and contains the digits of pi. As Eve Andersson notes:\n\n“Pi is an irrational number, meaning its decimal representation never ends and never settles into a permanent repeating pattern.”\n\nSince pi’s digits are essentially random, I thought it would be fun to treat them as directions on a compass and create a visualization showing the “walking path” that pi traces out. I saw a great post by Steven Ponce on Bluesky where he created a random walk using digits as compass directions, and I wanted to recreate his visualization for myself."
-  },
-  {
-    "objectID": "blog/posts/tidytuesday-2026-03-24.html#loading-the-data",
-    "href": "blog/posts/tidytuesday-2026-03-24.html#loading-the-data",
-    "title": "tidytuesday-2026-03-24",
-    "section": "Loading the Data",
-    "text": "Loading the Data\n\n\nCode\n# Packages\nlibrary(tidyverse)\n\n# Load data\ntuesdata &lt;- tidytuesdayR::tt_load('2026-03-24')\n\n# Extract data\npi_digits &lt;- tuesdata$pi_digits\n\n# Show the first few values\nhead(pi_digits)\n\n\n# A tibble: 6 × 2\n  digit_position digit\n           &lt;dbl&gt; &lt;dbl&gt;\n1              1     3\n2              2     1\n3              3     4\n4              4     1\n5              5     5\n6              6     9"
-  },
-  {
-    "objectID": "blog/posts/tidytuesday-2026-03-24.html#creating-the-visualization",
-    "href": "blog/posts/tidytuesday-2026-03-24.html#creating-the-visualization",
-    "title": "tidytuesday-2026-03-24",
-    "section": "Creating the Visualization",
-    "text": "Creating the Visualization\nHere’s the concept: A compass has 360 degrees, so we can divide it into 10 equal sections—one for each digit 0-9. Each digit gets 36 degrees (digit 0 = 0°, digit 1 = 36°, and so on).\nUsing basic trigonometry, for a unit circle centered at (0,0), moving one unit at angle \\(\\theta\\) gives us the coordinates \\((\\cos(\\theta), \\sin(\\theta))\\). By taking the cumulative sum of all these displacements in the x and y directions, we can plot the path that pi traces out:\n\n\nCode\n# Define the direction in degrees and radians\nstep_directions &lt;- data.frame(\n  digit = 0:9,\n  degree = seq(0, 360-36, l = 10)\n) %&gt;% \n  mutate(\n    radian = degree*pi/180\n  )\n\n# Set end point to set the number of digits\nend_spot &lt;- 10000\n\n# Create the walking path\np_walk &lt;- pi_digits %&gt;% \n  left_join(step_directions, by = 'digit') %&gt;% \n  mutate(displacement_x = cos(radian),\n         displacement_y = sin(radian),\n         pos_x = cumsum(displacement_x),\n         pos_y = cumsum(displacement_y)) %&gt;% \n  filter(digit_position &lt;= end_spot) %&gt;%\n  ggplot(mapping = aes(x = pos_x, y = pos_y)) + \n  geom_path(alpha = 1/3, color = '#63B3ED') + \n  labs(title = \"Where did my π go?\",\n       subtitle = 'The walking path of π. Digit values are used to\\nmark the direction of travel (0=0°, 1=36°, ..., 9=324°)',\n       caption = '') + \n  theme_void() + \n  theme(aspect.ratio = 1,\n        plot.background =  element_rect(fill = '#151D28', color = 'black'),\n        plot.margin = margin(1/2, 1, 0, 1/2, \"cm\"),\n        plot.title = element_text(color = 'grey99', face = 'bold', size = 24),\n        plot.subtitle = element_text(color = 'grey99', size = 10))\np_walk"
-  },
-  {
-    "objectID": "blog/posts/tidytuesday-2026-03-24.html#adding-animation",
-    "href": "blog/posts/tidytuesday-2026-03-24.html#adding-animation",
-    "title": "tidytuesday-2026-03-24",
-    "section": "Adding Animation",
-    "text": "Adding Animation\nThe static chart above shows the complete path, but we can make it more engaging by animating it with the gganimate package. I also included a point to clearly show the current position of the walking path:\n\n\nCode\nlibrary(gganimate)\np_animate &lt;- p_walk + \n  geom_point(color = 'gold', size = 2) + \n  transition_reveal(digit_position) +\n  ease_aes('linear')\n\nanimate(p_animate, nframes = 100, end_pause = 10, rewind = TRUE)"
   }
 ]

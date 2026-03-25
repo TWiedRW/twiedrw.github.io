@@ -132,16 +132,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../presentations.html"> 
-<span class="menu-text">Presentations</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link" href="../../portfolio.html"> 
 <span class="menu-text">Portfolio</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../../presentations.html"> 
+<span class="menu-text">Presentations</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../../blog/index.html"> 
-<span class="menu-text">Blog</span></a>
+<span class="menu-text">#TidyTuesday</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -159,10 +159,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#data" id="toc-data" class="nav-link active" data-scroll-target="#data">Data</a></li>
-  <li><a href="#media-graphic" id="toc-media-graphic" class="nav-link" data-scroll-target="#media-graphic">Media Graphic</a></li>
-  <li><a href="#statistical-graphic" id="toc-statistical-graphic" class="nav-link" data-scroll-target="#statistical-graphic">Statistical Graphic</a></li>
-  <li><a href="#a-bad-graph" id="toc-a-bad-graph" class="nav-link" data-scroll-target="#a-bad-graph">A bad graph</a></li>
+  <li><a href="#the-data" id="toc-the-data" class="nav-link active" data-scroll-target="#the-data">The Data</a></li>
+  <li><a href="#county-level-salmon-losses-20202025" id="toc-county-level-salmon-losses-20202025" class="nav-link" data-scroll-target="#county-level-salmon-losses-20202025">County-Level Salmon Losses (2020–2025)</a></li>
+  <li><a href="#mortality-rates-over-time" id="toc-mortality-rates-over-time" class="nav-link" data-scroll-target="#mortality-rates-over-time">Mortality Rates Over Time</a></li>
+  <li><a href="#visualizing-loss-composition-a-cautionary-tale" id="toc-visualizing-loss-composition-a-cautionary-tale" class="nav-link" data-scroll-target="#visualizing-loss-composition-a-cautionary-tale">Visualizing Loss Composition: A Cautionary Tale</a></li>
+  <li><a href="#fixed-version" id="toc-fixed-version" class="nav-link" data-scroll-target="#fixed-version">Fixed Version</a></li>
   </ul>
 </nav>
     </div>
@@ -197,18 +198,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>This #tidytuesday comes from March 17th, 2026 and explores farmed fish mortality in Norway. The GitHub page can be found <a href="https://github.com/rfordatascience/tidytuesday/tree/main/data/2026/2026-03-17">here</a> and provides the following description:</p>
+<section id="the-data" class="level2">
+<h2 class="anchored" data-anchor-id="the-data">The Data</h2>
+<p>This week’s dataset explores farmed salmon mortality in Norway. The <a href="https://github.com/rfordatascience/tidytuesday/tree/main/data/2026/2026-03-17">TidyTuesday GitHub repository</a> provides this background:</p>
 <blockquote class="blockquote">
 <p>The Fish Health Report is the Norwegian Veterinary Institute’s annual status report on the health and welfare situation for Norwegian farmed fish and is based on official statistics, data from the Norwegian Veterinary Institute and private laboratories. The report also contains results from a survey among fish health personnel and inspectors from the Norwegian Food Safety Authority, as well as assessments of the situation, trends and risks.</p>
 </blockquote>
-<p>My goal with these datasets is as follows:</p>
-<ol type="1">
-<li>Create a media-quality graphic showing which counties had the largest salmon losses between 2020 and 2025.</li>
-<li>Create a statistical graphic of salmon mortality rates and their variability over time.</li>
-<li>Create a bad graphic (and better alternative) showing the composition of losses for farmed salmon in Norway over time.</li>
-</ol>
-<section id="data" class="level2">
-<h2 class="anchored" data-anchor-id="data">Data</h2>
+<p>With monthly loss and mortality data across Norwegian counties, I wanted to explore three angles: identify which counties experienced the largest salmon losses, show how mortality rates varied over time, and create both a misleading visualization and its corrected version to demonstrate data visualization best practices.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -224,9 +220,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 </section>
-<section id="media-graphic" class="level2">
-<h2 class="anchored" data-anchor-id="media-graphic">Media Graphic</h2>
-<p>To show which counties had the most losses over the 2020-2025 period, I decided on a horizontal bar chart. Although my goal was to show this for the entire time frame, using stacked bars for years provides additional transparency for year-to-year variability.</p>
+<section id="county-level-salmon-losses-20202025" class="level2">
+<h2 class="anchored" data-anchor-id="county-level-salmon-losses-20202025">County-Level Salmon Losses (2020–2025)</h2>
+<p>To identify which counties had the largest losses, I created a horizontal stacked bar chart. Using stacked bars by year provides both geographic comparison and transparency about year-to-year trends:</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -271,9 +267,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="statistical-graphic" class="level2">
-<h2 class="anchored" data-anchor-id="statistical-graphic">Statistical Graphic</h2>
-<p>The mortality dataset provided median mortality rates along with the first and third quartiles. This interquartile range provides a good opportunity to display variability. In this chart, the top 3 counties with the highest salmon losses are considered.</p>
+<section id="mortality-rates-over-time" class="level2">
+<h2 class="anchored" data-anchor-id="mortality-rates-over-time">Mortality Rates Over Time</h2>
+<p>Next, I’ll examine how salmon mortality rates changed across the top three counties (those with the highest total losses). The dataset includes median mortality rates plus first and third quartiles, which I can use to show variability:</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -307,9 +303,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="a-bad-graph" class="level2">
-<h2 class="anchored" data-anchor-id="a-bad-graph">A bad graph</h2>
-<p>Lastly, I wanted to create a bad graph just to have some fun. A century of research suggests that pie charts are bad for extracting numerical information when compared to bar charts.</p>
+<section id="visualizing-loss-composition-a-cautionary-tale" class="level2">
+<h2 class="anchored" data-anchor-id="visualizing-loss-composition-a-cautionary-tale">Visualizing Loss Composition: A Cautionary Tale</h2>
+<p>For the final visualization, I want to explore the composition of salmon losses over time. But first, let me create an intentionally bad version to illustrate common data visualization mistakes. Decades of visualization research shows that pie charts struggle with numerical comparisons, and using polar coordinates for time series is equally problematic:</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -340,12 +336,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>This chart is bad for several reasons. First, the polar coordinates are forced into a context where it does not make a lot of sense. Time is linear, but polar coordinates are designed for seasonal effects or nominal categories. Additionally, it is nearly impossible to make comparisons across the categories. For example, how much larger is the count of dead fish in 2020 than the count for discarded fish? This chart is also a gross misuse of pie charts, where angles are used to separate equally represented categories.</p>
-<p>To fix this chart, I made the following changes:</p>
+<p>This problematic visualization fails in several ways:</p>
 <ul>
-<li>Combined the escaped and other categories since escaped always has small values. This reduces visual clutter in the legend.</li>
-<li>Converted the stacked layout into a line chart. Values are now comparable on an equal scale.</li>
+<li><strong>Wrong coordinate system:</strong> Polar coordinates are designed for cyclical data (seasons) or categorical data, not time series with inherent directionality.</li>
+<li><strong>Impossible comparisons:</strong> Try estimating how much larger the dead fish count in 2020 is compared to discarded fish—the chart makes this nearly impossible.</li>
+<li><strong>Misused aggregation:</strong> Pie charts work best for parts of a whole with equal importance, yet here they obscure the story entirely.</li>
 </ul>
+</section>
+<section id="fixed-version" class="level2">
+<h2 class="anchored" data-anchor-id="fixed-version">Fixed Version</h2>
+<p>A better approach combines two key improvements: simplifying the legend by merging the small “escaped” and “other” categories, and switching to a line chart that uses a common y-axis scale for easy comparison:</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -384,7 +384,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>With the refined chart, it is clear that dead salmon peaked in 2023 and declined over the following two years. While there was not much change in discarded fish, the “other” category had an increase in 2024 and 2025. The data dictionary did not specify what is included as “other”, but this could be a concern worth further exploration.</p>
+<p>This revised chart tells a much clearer story: dead salmon peaked in 2023 before declining through 2025, while discarded fish remained relatively stable. Notably, the “other” category spiked in 2024–2025. Although the data dictionary doesn’t specify what falls under “other,” this increase warrants further investigation.</p>
 
 
 </section>

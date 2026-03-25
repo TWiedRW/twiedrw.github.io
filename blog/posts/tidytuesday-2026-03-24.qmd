@@ -1,8 +1,8 @@
 ---
-title: "tidytuesday-2026-03-24"
+title: "One Million Digits of Pi"
 categories:
   - tidytuesday
-date: "2026-03-31"
+date: "2026-03-24"
 execute:
   echo: true
   message: false

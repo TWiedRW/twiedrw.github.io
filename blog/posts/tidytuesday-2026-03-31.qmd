@@ -1,0 +1,84 @@
+---
+title: "Novia Scotia Ocean Temperatures"
+categories:
+  - tidytuesday
+date: "2026-03-31"
+draft: true
+execute:
+  echo: true
+  message: false
+  warning: false
+format: 
+  html:
+    code-fold: true
+---
+
+
+This #tidytuesday comes from March 31st, 2026 and explores ocean temperature in Nova Scotia. The GitHub page can be found [here](https://github.com/rfordatascience/tidytuesday/tree/main/data/2026/2026-03-31) and provides the following description: 
+
+> The Province of Nova Scotia recognizes the importance of coastal waters, which are critical to the prosperity and sustainability of rural and coastal communities. To bridge the gap between science and decision making, the Nova Scotia Department of Fisheries and Aquaculture (NSDFA) partners with the Centre for Marine Applied Research (CMAR) to measure the environmental conditions of Nova Scotia’s coastal waters.
+
+My goal with these datasets is as follows: 
+
+1. Create a media-quality graphic 
+2. Create a statistical graphic
+
+
+## Data
+
+```{r}
+# Packages
+library(tidyverse)
+
+# Load data
+tuesdata <- tidytuesdayR::tt_load('2026-03-31')
+
+# Extract data
+ocean_temperature <- tuesdata$ocean_temperature
+ocean_temperature_deployments <- tuesdata$ocean_temperature_deployments
+```
+
+## Media Graphic
+
+To show which counties had the most losses over the 2020-2025 period, I decided on a horizontal bar chart. Although my goal was to show this for the entire time frame, using stacked bars for years provides additional transparency for year-to-year variability.
+
+```{r}
+#| fig-width: 6
+#| fig-height: 4
+#| fig-dpi: 1200
+
+library(leaflet)
+
+canada <- map_data('world', 'canada')
+
+canada %>% 
+  # filter(subregion %in% c('Cape Breton Island', 'Sable Island')) %>% 
+  ggplot(mapping = aes(x = long, y = lat, group = group)) + 
+  geom_polygon() +
+  geom_point(aes(x = longitude, y = latitude, group = NULL), data = ocean_temperature_deployments,
+             color = 'red') + 
+  theme_void() +
+  coord_map()
+
+```
+
+## Statistical Graphic
+
+The mortality dataset provided median mortality rates along with the first and third quartiles. This interquartile range provides a good opportunity to display variability. In this chart, the top 3 counties with the highest salmon losses are considered. 
+
+
+
+```{r}
+#| fig-width: 6
+#| fig-height: 4
+#| fig-dpi: 1200
+
+ocean_temperature %>% 
+  ggplot(mapping = aes(x = date, y = mean_temperature_degree_c)) + 
+  geom_line() + 
+  facet_wrap(~sensor_depth_at_low_tide_m)
+
+
+
+```
+
