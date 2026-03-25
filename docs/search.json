@@ -11,7 +11,7 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "I am a Ph.D. candidate in Statistics at the University of Nebraska-Lincoln (expected May 2026) with experience in consulting, teaching, and applied analytics. I focus on translating complex research and operational questions into rigorous analysis and clear, decision-ready communication."
+    "text": "I am a Ph.D. candidate in Statistics at the University of Nebraska-Lincoln (expected May 2026) with experience in consulting, teaching, and applied analytics. I focus on translating complex research and research questions into rigorous analysis and clear, decision-ready communication."
   },
   {
     "objectID": "about.html#education",
@@ -25,7 +25,7 @@
     "href": "about.html#experience",
     "title": "About",
     "section": "Experience",
-    "text": "Experience\n\nUniversity of Nebraska-Lincoln (Lincoln, NE)\nStatistical Consultant | June 2023-Present\n\nAssisted 67 clients across all stages of research, including experimental design, statistical analysis, and interpretation.\nAuthored and reviewed technical reports to align results with applied research questions.\nCo-developed and presented workshops and instructional resources in R, including data visualization and two-way ANOVA.\n\n\n\nUniversity of Nebraska-Lincoln (Lincoln, NE)\nGraduate Teaching Assistant | August 2021-May 2023\n\nServed as instructor of record for undergraduate and graduate statistics courses.\nDesigned syllabi and lesson plans, assessed learning outcomes, and supported student success through office hours.\nLed graduate lab instruction in statistical methods and research design.\n\n\n\nFastenal (Winona, MN)\nIT Data Support Analyst | June 2020-August 2021\n\nResponded to internal reporting requests and data questions from business stakeholders.\nInvestigated source-code and reporting discrepancies using Oracle SQL."
+    "text": "Experience\n\nUniversity of Nebraska-Lincoln (Lincoln, NE)\nStatistical Consultant | June 2023-Present\n\nAssisted 70+ clients across all stages of research, including experimental design, statistical analysis, and interpretation.\nAuthored and reviewed technical reports to align results with applied research questions.\nCo-developed and presented workshops and instructional resources in R, including data visualization and two-way ANOVA.\n\n\n\nUniversity of Nebraska-Lincoln (Lincoln, NE)\nGraduate Teaching Assistant | August 2021-May 2023\n\nServed as instructor of record for undergraduate and graduate statistics courses.\nDesigned syllabi and lesson plans, assessed learning outcomes, and supported student success through office hours.\nLed graduate lab instruction in statistical methods and research design.\n\n\n\nFastenal (Winona, MN)\nIT Data Support Analyst | June 2020-August 2021\n\nResponded to internal reporting requests and data questions from business stakeholders.\nInvestigated source-code and reporting discrepancies using Oracle SQL."
   },
   {
     "objectID": "about.html#technical-skills",
@@ -40,6 +40,13 @@
     "title": "About",
     "section": "Honors and Awards",
     "text": "Honors and Awards\n\nStatistics Graduate Student Fellowship (University of Nebraska-Lincoln, 2025)\nDavid H. and Annie E. Larrick Graduate Student Travel Award (University of Nebraska-Lincoln, 2023)\nOthmer Fellowship (University of Nebraska-Lincoln, 2021)"
+  },
+  {
+    "objectID": "about.html#courses-taught",
+    "href": "about.html#courses-taught",
+    "title": "About",
+    "section": "Courses Taught",
+    "text": "Courses Taught\n\nUniversity of Nebraska–Lincoln\nSTAT 218: Introduction to Statistics | Fall 2021, Spring 2022, Summer 2022\n\nInstructor of record\nThe practical application of statistical thinking to contemporary issues; collection and organization of data; probability distributions; statistical inference; estimation; and hypothesis testing.\n\nSTAT 380: Statistics and Applications | Spring 2023\n\nInstructor of record\nProbability calculus; random variables, their probability distributions and expected values; t, F and chi-square sampling distributions; estimation; testing of hypothesis; and regression analysis with applications.\n\nSTAT 801A: Statistical Methods in Research (Non Calculus) | Fall 2022\n\nLab instructor\nStatistical concepts and statistical methodology useful in descriptive, experimental, and analytical study of biological and other natural phenomena. Practical application of statistics rather than on statistical theory.\n\nSTAT 811T: Statistics for Middle-Level Teachers | Summer 2022\n\nCo-instructor\nDesigned primarily to develop and equip middle-level teachers with the statistical knowledge they need for teaching. The course follows an inquiry/discovery design, dedicating much of class time to activities, discussion and group work. The course emphasizes topics in statistics that are part of the middle-school mathematics curriculum, as well as their application in other disciplines. The course also includes statistics that are used in education and school-based research."
   },
   {
     "objectID": "about.html#workshops",
@@ -193,6 +200,6 @@
     "href": "portfolio.html#color-palette-generation-from-images",
     "title": "Portfolio",
     "section": "Color palette generation from images",
-    "text": "Color palette generation from images\nIn collaboration with Muxin Hua, we developed an R package focused on creating color palettes from images. The overall theory was to identify the colors in the image and use clustering to generate distinct separated colors. We also included a color-blind mode that initially put images through color filters before clustering.\nYou can check out the GitHub page here, or try it for yourself!\n\n# install.packages(\"devtools\")\ndevtools::install_github(\"Hiiiua/Photopal\")"
+    "text": "Color palette generation from images\nIn collaboration with Muxin Hua, we developed an R package focused on creating color palettes from images. The overall theory was to identify the colors in the image and use clustering to generate distinct separated colors. We also included a color-blind mode that initially put images through color filters before clustering.\nYou can check out the GitHub page here, or try it for yourself!\n\n# install.packages(\"devtools\")\ndevtools::install_github(\"Hiiiua/Photopal\")\n\nlibrary(Photopal)\nlibrary(ggplot2)\n\n# Use demo image template\nmy_cols &lt;- Photopal::palette_create(num.col = 3, df.rgb = image2rgb(), plot = F)\n\n# Create plot using penguins dataset\npenguins |&gt;\n  ggplot(mapping = aes(x = bill_len, y = bill_dep, color = species)) + \n  geom_point(size = 1/2) + \n  scale_color_manual(values = c(\n    'Adelie'= my_cols[1,4],\n    'Chinstrap' = my_cols[2,4],\n    'Gentoo' = my_cols[3,4]\n  )) + \n  theme_bw()\n#ggsave('sample-plot.png', width = 806, height = 605, units = 'px')\n\n\n\n\n\n\n\n\n\n\nSample image\n\n\n\n\n\n\n\nPlot with palette"
   }
 ]

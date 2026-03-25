@@ -72,5 +72,31 @@ You can check out the GitHub page [here](https://github.com/Hiiiua/Photopal), or
 ```{r, eval=FALSE, echo=TRUE}
 # install.packages("devtools")
 devtools::install_github("Hiiiua/Photopal")
+
+library(Photopal)
+library(ggplot2)
+
+# Use demo image template
+my_cols <- Photopal::palette_create(num.col = 3, df.rgb = image2rgb(), plot = F)
+
+# Create plot using penguins dataset
+penguins |>
+  ggplot(mapping = aes(x = bill_len, y = bill_dep, color = species)) + 
+  geom_point(size = 1/2) + 
+  scale_color_manual(values = c(
+    'Adelie'= my_cols[1,4],
+    'Chinstrap' = my_cols[2,4],
+    'Gentoo' = my_cols[3,4]
+  )) + 
+  theme_bw()
+#ggsave('sample-plot.png', width = 806, height = 605, units = 'px')
 ```
 
+:::{layout-ncol=2 out-width=90%}
+
+
+![Sample image](https://github.com/Hiiiua/Photopal/blob/main/memorial_stadium.JPG?raw=true)
+
+![Plot with palette](sample-plot.png)
+
+:::

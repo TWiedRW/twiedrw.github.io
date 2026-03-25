@@ -2,7 +2,7 @@
 title: "About"
 ---
 
-I am a Ph.D. candidate in Statistics at the University of Nebraska-Lincoln (expected May 2026) with experience in consulting, teaching, and applied analytics. I focus on translating complex research and operational questions into rigorous analysis and clear, decision-ready communication.
+I am a Ph.D. candidate in Statistics at the University of Nebraska-Lincoln (expected May 2026) with experience in consulting, teaching, and applied analytics. I focus on translating complex research and research questions into rigorous analysis and clear, decision-ready communication.
 
 
 ## Education
@@ -22,7 +22,7 @@ I am a Ph.D. candidate in Statistics at the University of Nebraska-Lincoln (expe
 ### University of Nebraska-Lincoln (Lincoln, NE)
 **Statistical Consultant** | June 2023-Present
 
-- Assisted 67 clients across all stages of research, including experimental design, statistical analysis, and interpretation.
+- Assisted 70+ clients across all stages of research, including experimental design, statistical analysis, and interpretation.
 - Authored and reviewed technical reports to align results with applied research questions.
 - Co-developed and presented workshops and instructional resources in R, including data visualization and two-way ANOVA.
 
@@ -50,6 +50,34 @@ I am a Ph.D. candidate in Statistics at the University of Nebraska-Lincoln (expe
 - Statistics Graduate Student Fellowship (University of Nebraska-Lincoln, 2025)
 - David H. and Annie E. Larrick Graduate Student Travel Award (University of Nebraska-Lincoln, 2023)
 - Othmer Fellowship (University of Nebraska-Lincoln, 2021)
+
+
+## Courses Taught
+
+### University of Nebraska--Lincoln
+
+**STAT 218**: Introduction to Statistics | Fall 2021, Spring 2022, Summer 2022
+
+- Instructor of record
+- The practical application of statistical thinking to contemporary issues; collection and organization of data; probability distributions; statistical inference; estimation; and hypothesis testing.
+
+**STAT 380**: Statistics and Applications | Spring 2023
+
+- Instructor of record
+- Probability calculus; random variables, their probability distributions and expected values; t, F and chi-square sampling distributions; estimation; testing of hypothesis; and regression analysis with applications.
+
+**STAT 801A**: Statistical Methods in Research (Non Calculus) | Fall 2022
+
+- Lab instructor
+- Statistical concepts and statistical methodology useful in descriptive, experimental, and analytical study of biological and other natural phenomena. Practical application of statistics rather than on statistical theory.
+
+**STAT 811T**: Statistics for Middle-Level Teachers | Summer 2022
+
+- Co-instructor
+- Designed primarily to develop and equip middle-level teachers with the statistical knowledge they need for teaching. The course follows an inquiry/discovery design, dedicating much of class time to activities, discussion and group work. The course emphasizes topics in statistics that are part of the middle-school mathematics curriculum, as well as their application in other disciplines. The course also includes statistics that are used in education and school-based research.
+
+
+
 
 ## Workshops
 
