@@ -109,7 +109,7 @@
     "href": "blog/index.html",
     "title": "Blog",
     "section": "",
-    "text": "When I started getting involved in data science, the most captivating aspect was the ability to take data and tell a story. On this page, I am taking inspiration from TidyTuesday to keep my skills sharp.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSalmonid Mortality Data\n\n\n\n\n\n\ntidytuesday\n\n\n\n\n\n\n\n\n\nMar 20, 2026\n\n\n\n\n\n\nNo matching items"
+    "text": "When I started getting involved in data science, the most captivating aspect was the ability to take data and tell a story. On this page, I am taking inspiration from TidyTuesday to keep my skills sharp.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ntidytuesday-2026-03-24\n\n\n\n\n\n\ntidytuesday\n\n\n\n\n\n\n\n\n\nMar 31, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nNovia Scotia Ocean Temperatures\n\n\n\n\n\n\ntidytuesday\n\n\n\n\n\n\n\n\n\nMar 31, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nSalmonid Mortality Data\n\n\n\n\n\n\ntidytuesday\n\n\n\n\n\n\n\n\n\nMar 20, 2026\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "portfolio.html",
@@ -152,5 +152,82 @@
     "title": "Portfolio",
     "section": "Color palette generation from images",
     "text": "Color palette generation from images\nIn collaboration with Muxin Hua, we developed an R package focused on creating color palettes from images. The overall theory was to identify the colors in the image and use clustering to generate distinct separated colors. We also included a color-blind mode that initially put images through color filters before clustering.\nYou can check out the GitHub page here, or try it for yourself!\n\n# install.packages(\"devtools\")\ndevtools::install_github(\"Hiiiua/Photopal\")"
+  },
+  {
+    "objectID": "blog/posts/tidytuesday-2026-03-24.html",
+    "href": "blog/posts/tidytuesday-2026-03-24.html",
+    "title": "tidytuesday-2026-03-24",
+    "section": "",
+    "text": "This week’s dataset comes from the TidyTuesday repository and contains the digits of pi. As Eve Andersson notes:\n\n“Pi is an irrational number, meaning its decimal representation never ends and never settles into a permanent repeating pattern.”\n\nSince pi’s digits are essentially random, I thought it would be fun to treat them as directions on a compass and create a visualization showing the “walking path” that pi traces out. I saw a great post by Steven Ponce on Bluesky where he created a random walk using digits as compass directions, and I wanted to recreate his visualization for myself."
+  },
+  {
+    "objectID": "blog/posts/tidytuesday-2026-03-24.html#data",
+    "href": "blog/posts/tidytuesday-2026-03-24.html#data",
+    "title": "tidytuesday-2026-03-24",
+    "section": "Data",
+    "text": "Data\n\n\nCode\n# Packages\nlibrary(tidyverse)\n\n# Load data\ntuesdata &lt;- tidytuesdayR::tt_load('2026-03-24')\n\n# Extract data\npi_digits &lt;- tuesdata$pi_digits"
+  },
+  {
+    "objectID": "blog/posts/tidytuesday-2026-03-31.html",
+    "href": "blog/posts/tidytuesday-2026-03-31.html",
+    "title": "Novia Scotia Ocean Temperatures",
+    "section": "",
+    "text": "This #tidytuesday comes from March 31st, 2026 and explores ocean temperature in Nova Scotia. The GitHub page can be found here and provides the following description:\nMy goal with these datasets is as follows:"
+  },
+  {
+    "objectID": "blog/posts/tidytuesday-2026-03-31.html#data",
+    "href": "blog/posts/tidytuesday-2026-03-31.html#data",
+    "title": "Novia Scotia Ocean Temperatures",
+    "section": "Data",
+    "text": "Data\n\n\nCode\n# Packages\nlibrary(tidyverse)\n\n# Load data\ntuesdata &lt;- tidytuesdayR::tt_load('2026-03-31')\n\n# Extract data\nocean_temperature &lt;- tuesdata$ocean_temperature\nocean_temperature_deployments &lt;- tuesdata$ocean_temperature_deployments"
+  },
+  {
+    "objectID": "blog/posts/tidytuesday-2026-03-31.html#media-graphic",
+    "href": "blog/posts/tidytuesday-2026-03-31.html#media-graphic",
+    "title": "Novia Scotia Ocean Temperatures",
+    "section": "Media Graphic",
+    "text": "Media Graphic\nTo show which counties had the most losses over the 2020-2025 period, I decided on a horizontal bar chart. Although my goal was to show this for the entire time frame, using stacked bars for years provides additional transparency for year-to-year variability.\n\n\nCode\nlibrary(leaflet)\n\ncanada &lt;- map_data('world', 'canada')\n\ncanada %&gt;% \n  # filter(subregion %in% c('Cape Breton Island', 'Sable Island')) %&gt;% \n  ggplot(mapping = aes(x = long, y = lat, group = group)) + \n  geom_polygon() +\n  geom_point(aes(x = longitude, y = latitude, group = NULL), data = ocean_temperature_deployments,\n             color = 'red') + \n  theme_void() +\n  coord_map()"
+  },
+  {
+    "objectID": "blog/posts/tidytuesday-2026-03-31.html#statistical-graphic",
+    "href": "blog/posts/tidytuesday-2026-03-31.html#statistical-graphic",
+    "title": "Novia Scotia Ocean Temperatures",
+    "section": "Statistical Graphic",
+    "text": "Statistical Graphic\nThe mortality dataset provided median mortality rates along with the first and third quartiles. This interquartile range provides a good opportunity to display variability. In this chart, the top 3 counties with the highest salmon losses are considered.\n\n\nCode\nocean_temperature %&gt;% \n  ggplot(mapping = aes(x = date, y = mean_temperature_degree_c)) + \n  geom_line() + \n  facet_wrap(~sensor_depth_at_low_tide_m)"
+  },
+  {
+    "objectID": "blog/posts/tidytuesday-2026-03-24.html#chart",
+    "href": "blog/posts/tidytuesday-2026-03-24.html#chart",
+    "title": "tidytuesday-2026-03-24",
+    "section": "Chart",
+    "text": "Chart\nPi is an irrational number is its digits are seemingly random. I saw this post by Steven Ponce on Bluesky where a random walk using the digits as directions and decided to try and replicate his figure.\nFirst, we need to define the directions and steps. A compass consists of 360 degrees, meaning that each from 0 to 9 can be separated by 36 degrees. Let the digit 0 be 0 degrees, 1 be 36 degrees, and so forth. For a unit circle centered at \\((0,0)\\), the coordinate for movement of one unit at degree \\(\\theta\\) becomes \\((\\cos (\\theta),\\sin(\\theta))\\). To find the position for the current digit placement, we can take the cumulative summation of displacements in the x and y axis directions. Finally, placing these as a path shows the direction that the digits of pi walk.\n\n\nCode\n# Load packages\nlibrary(tidyverse)\n\n# Define the direction in degrees and radians\nstep_directions &lt;- data.frame(\n  digit = 0:9,\n  degree = seq(0, 360-36, l = 10)\n) %&gt;% \n  mutate(\n    radian = degree*pi/180\n  )\n\n# Set end point to set the number of digits\nend_spot &lt;- 10000\n\n# Create the walking path\np_walk &lt;- pi_digits %&gt;% \n  left_join(step_directions, by = 'digit') %&gt;% \n  mutate(displacement_x = cos(radian),\n         displacement_y = sin(radian),\n         pos_x = cumsum(displacement_x),\n         pos_y = cumsum(displacement_y)) %&gt;% \n  filter(digit_position &lt;= end_spot) %&gt;%\n  ggplot(mapping = aes(x = pos_x, y = pos_y)) + \n  geom_path(alpha = 1/3, color = '#63B3ED') + \n  labs(title = \"Where did my π go?\",\n       subtitle = 'The walking path of π. Digit values are used to\\nmark the direction of travel (0=0°, 1=36°, ..., 9=324°)') + \n  theme_void() + \n  theme(aspect.ratio = 1,\n        plot.background =  element_rect(fill = '#151D28', color = 'black'),\n        plot.margin = margin(1/2, 1, 0, 1/2, \"cm\"),\n        plot.title = element_text(color = 'grey99', face = 'bold', size = 24),\n        plot.subtitle = element_text(color = 'grey99', size = 10))\np_walk\n\n\n\n\n\n\n\n\n\nWhile a static chart shows the path that the digits of pi took, we can make this a little more fun by animating the path with the gganimate package. I also included a point to clearly show the current position of the walking path.\n\n\nCode\nlibrary(gganimate)\np_animate &lt;- p_walk + \n  geom_point(color = 'gold', size = 2) + \n  transition_reveal(digit_position) +\n  ease_aes('linear')\n\nanimate(p_animate, nframes = 100, end_pause = 10, rewind = TRUE)"
+  },
+  {
+    "objectID": "blog/posts/tidytuesday-2026-03-24.html#the-data",
+    "href": "blog/posts/tidytuesday-2026-03-24.html#the-data",
+    "title": "tidytuesday-2026-03-24",
+    "section": "",
+    "text": "This week’s dataset comes from the TidyTuesday repository and contains the digits of pi. As Eve Andersson notes:\n\n“Pi is an irrational number, meaning its decimal representation never ends and never settles into a permanent repeating pattern.”\n\nSince pi’s digits are essentially random, I thought it would be fun to treat them as directions on a compass and create a visualization showing the “walking path” that pi traces out. I saw a great post by Steven Ponce on Bluesky where he created a random walk using digits as compass directions, and I wanted to recreate his visualization for myself."
+  },
+  {
+    "objectID": "blog/posts/tidytuesday-2026-03-24.html#loading-the-data",
+    "href": "blog/posts/tidytuesday-2026-03-24.html#loading-the-data",
+    "title": "tidytuesday-2026-03-24",
+    "section": "Loading the Data",
+    "text": "Loading the Data\n\n\nCode\n# Packages\nlibrary(tidyverse)\n\n# Load data\ntuesdata &lt;- tidytuesdayR::tt_load('2026-03-24')\n\n# Extract data\npi_digits &lt;- tuesdata$pi_digits\n\n# Show the first few values\nhead(pi_digits)\n\n\n# A tibble: 6 × 2\n  digit_position digit\n           &lt;dbl&gt; &lt;dbl&gt;\n1              1     3\n2              2     1\n3              3     4\n4              4     1\n5              5     5\n6              6     9"
+  },
+  {
+    "objectID": "blog/posts/tidytuesday-2026-03-24.html#creating-the-visualization",
+    "href": "blog/posts/tidytuesday-2026-03-24.html#creating-the-visualization",
+    "title": "tidytuesday-2026-03-24",
+    "section": "Creating the Visualization",
+    "text": "Creating the Visualization\nHere’s the concept: A compass has 360 degrees, so we can divide it into 10 equal sections—one for each digit 0-9. Each digit gets 36 degrees (digit 0 = 0°, digit 1 = 36°, and so on).\nUsing basic trigonometry, for a unit circle centered at (0,0), moving one unit at angle \\(\\theta\\) gives us the coordinates \\((\\cos(\\theta), \\sin(\\theta))\\). By taking the cumulative sum of all these displacements in the x and y directions, we can plot the path that pi traces out:\n\n\nCode\n# Define the direction in degrees and radians\nstep_directions &lt;- data.frame(\n  digit = 0:9,\n  degree = seq(0, 360-36, l = 10)\n) %&gt;% \n  mutate(\n    radian = degree*pi/180\n  )\n\n# Set end point to set the number of digits\nend_spot &lt;- 10000\n\n# Create the walking path\np_walk &lt;- pi_digits %&gt;% \n  left_join(step_directions, by = 'digit') %&gt;% \n  mutate(displacement_x = cos(radian),\n         displacement_y = sin(radian),\n         pos_x = cumsum(displacement_x),\n         pos_y = cumsum(displacement_y)) %&gt;% \n  filter(digit_position &lt;= end_spot) %&gt;%\n  ggplot(mapping = aes(x = pos_x, y = pos_y)) + \n  geom_path(alpha = 1/3, color = '#63B3ED') + \n  labs(title = \"Where did my π go?\",\n       subtitle = 'The walking path of π. Digit values are used to\\nmark the direction of travel (0=0°, 1=36°, ..., 9=324°)',\n       caption = '') + \n  theme_void() + \n  theme(aspect.ratio = 1,\n        plot.background =  element_rect(fill = '#151D28', color = 'black'),\n        plot.margin = margin(1/2, 1, 0, 1/2, \"cm\"),\n        plot.title = element_text(color = 'grey99', face = 'bold', size = 24),\n        plot.subtitle = element_text(color = 'grey99', size = 10))\np_walk"
+  },
+  {
+    "objectID": "blog/posts/tidytuesday-2026-03-24.html#adding-animation",
+    "href": "blog/posts/tidytuesday-2026-03-24.html#adding-animation",
+    "title": "tidytuesday-2026-03-24",
+    "section": "Adding Animation",
+    "text": "Adding Animation\nThe static chart above shows the complete path, but we can make it more engaging by animating it with the gganimate package. I also included a point to clearly show the current position of the walking path:\n\n\nCode\nlibrary(gganimate)\np_animate &lt;- p_walk + \n  geom_point(color = 'gold', size = 2) + \n  transition_reveal(digit_position) +\n  ease_aes('linear')\n\nanimate(p_animate, nframes = 100, end_pause = 10, rewind = TRUE)"
   }
 ]

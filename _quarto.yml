@@ -2,6 +2,9 @@ project:
   type: website
   output-dir: docs
 
+execute:
+  freeze: auto
+
 website:
   title: "Tyler Wiederich"
   navbar:
@@ -12,7 +15,7 @@ website:
       - presentations.qmd
       - portfolio.qmd
       - href: blog/index.qmd
-        text: Blog
+        text: tidytuesday
 
 format:
   html:

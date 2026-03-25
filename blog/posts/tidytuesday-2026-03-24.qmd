@@ -1,0 +1,93 @@
+---
+title: "tidytuesday-2026-03-24"
+categories:
+  - tidytuesday
+date: "2026-03-31"
+execute:
+  echo: true
+  message: false
+  warning: false
+format: 
+  html:
+    code-fold: true
+---
+
+## The Data
+
+This week's dataset comes from the [TidyTuesday repository](https://github.com/rfordatascience/tidytuesday/tree/main/data/2026/2026-03-24) and contains the digits of pi. As Eve Andersson notes:
+
+> "Pi is an irrational number, meaning its decimal representation never ends and never settles into a permanent repeating pattern."
+
+Since pi's digits are essentially random, I thought it would be fun to treat them as directions on a compass and create a visualization showing the "walking path" that pi traces out. I saw a great post by [Steven Ponce on Bluesky](https://bsky.app/profile/sponce1.bsky.social/post/3mhlvttmhis23) where he created a random walk using digits as compass directions, and I wanted to recreate his visualization for myself.
+
+## Loading the Data
+
+```{r}
+# Packages
+library(tidyverse)
+
+# Load data
+tuesdata <- tidytuesdayR::tt_load('2026-03-24')
+
+# Extract data
+pi_digits <- tuesdata$pi_digits
+
+# Show the first few values
+head(pi_digits)
+```
+
+## Creating the Visualization
+
+Here's the concept: A compass has 360 degrees, so we can divide it into 10 equal sections—one for each digit 0-9. Each digit gets 36 degrees (digit 0 = 0°, digit 1 = 36°, and so on). 
+
+Using basic trigonometry, for a unit circle centered at (0,0), moving one unit at angle $\theta$ gives us the coordinates $(\cos(\theta), \sin(\theta))$. By taking the cumulative sum of all these displacements in the x and y directions, we can plot the path that pi traces out:
+
+```{r}
+# Define the direction in degrees and radians
+step_directions <- data.frame(
+  digit = 0:9,
+  degree = seq(0, 360-36, l = 10)
+) %>% 
+  mutate(
+    radian = degree*pi/180
+  )
+
+# Set end point to set the number of digits
+end_spot <- 10000
+
+# Create the walking path
+p_walk <- pi_digits %>% 
+  left_join(step_directions, by = 'digit') %>% 
+  mutate(displacement_x = cos(radian),
+         displacement_y = sin(radian),
+         pos_x = cumsum(displacement_x),
+         pos_y = cumsum(displacement_y)) %>% 
+  filter(digit_position <= end_spot) %>%
+  ggplot(mapping = aes(x = pos_x, y = pos_y)) + 
+  geom_path(alpha = 1/3, color = '#63B3ED') + 
+  labs(title = "Where did my π go?",
+       subtitle = 'The walking path of π. Digit values are used to\nmark the direction of travel (0=0°, 1=36°, ..., 9=324°)',
+       caption = '') + 
+  theme_void() + 
+  theme(aspect.ratio = 1,
+        plot.background =  element_rect(fill = '#151D28', color = 'black'),
+        plot.margin = margin(1/2, 1, 0, 1/2, "cm"),
+        plot.title = element_text(color = 'grey99', face = 'bold', size = 24),
+        plot.subtitle = element_text(color = 'grey99', size = 10))
+p_walk
+```
+
+## Adding Animation
+
+The static chart above shows the complete path, but we can make it more engaging by animating it with the `gganimate` package. I also included a point to clearly show the current position of the walking path:
+
+```{r}
+library(gganimate)
+p_animate <- p_walk + 
+  geom_point(color = 'gold', size = 2) + 
+  transition_reveal(digit_position) +
+  ease_aes('linear')
+
+animate(p_animate, nframes = 100, end_pause = 10, rewind = TRUE)
+```
+

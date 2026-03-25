@@ -12,18 +12,13 @@ format:
     code-fold: true
 ---
 
-This #tidytuesday comes from March 17th, 2026 and explores farmed fish mortality in Norway. The GitHub page can be found [here](https://github.com/rfordatascience/tidytuesday/tree/main/data/2026/2026-03-17) and provides the following description: 
+## The Data
+
+This week's dataset explores farmed salmon mortality in Norway. The [TidyTuesday GitHub repository](https://github.com/rfordatascience/tidytuesday/tree/main/data/2026/2026-03-17) provides this background:
 
 > The Fish Health Report is the Norwegian Veterinary Institute's annual status report on the health and welfare situation for Norwegian farmed fish and is based on official statistics, data from the Norwegian Veterinary Institute and private laboratories. The report also contains results from a survey among fish health personnel and inspectors from the Norwegian Food Safety Authority, as well as assessments of the situation, trends and risks.
 
-My goal with these datasets is as follows: 
-
-1. Create a media-quality graphic showing which counties had the largest salmon losses between 2020 and 2025. 
-2. Create a statistical graphic of salmon mortality rates and their variability over time. 
-3. Create a bad graphic (and better alternative) showing the composition of losses for farmed salmon in Norway over time.
-
-
-## Data
+With monthly loss and mortality data across Norwegian counties, I wanted to explore three angles: identify which counties experienced the largest salmon losses, show how mortality rates varied over time, and create both a misleading visualization and its corrected version to demonstrate data visualization best practices.
 
 ```{r}
 # Packages
@@ -37,9 +32,9 @@ monthly_losses_data <- tuesdata$monthly_losses_data
 monthly_mortality_data <- tuesdata$monthly_mortality_data
 ```
 
-## Media Graphic
+## County-Level Salmon Losses (2020–2025)
 
-To show which counties had the most losses over the 2020-2025 period, I decided on a horizontal bar chart. Although my goal was to show this for the entire time frame, using stacked bars for years provides additional transparency for year-to-year variability.
+To identify which counties had the largest losses, I created a horizontal stacked bar chart. Using stacked bars by year provides both geographic comparison and transparency about year-to-year trends:
 
 ```{r}
 #| fig-width: 6
@@ -78,9 +73,9 @@ monthly_losses_data %>%
         axis.text.y = element_text(hjust = 1, size = 7))
 ```
 
-## Statistical Graphic
+## Mortality Rates Over Time
 
-The mortality dataset provided median mortality rates along with the first and third quartiles. This interquartile range provides a good opportunity to display variability. In this chart, the top 3 counties with the highest salmon losses are considered. 
+Next, I'll examine how salmon mortality rates changed across the top three counties (those with the highest total losses). The dataset includes median mortality rates plus first and third quartiles, which I can use to show variability: 
 
 ```{r}
 #| fig-width: 6
@@ -108,9 +103,9 @@ monthly_mortality_data %>%
         axis.text.x = element_text(hjust = 1, angle = 30))
 ```
 
-## A bad graph
+## Visualizing Loss Composition: A Cautionary Tale
 
-Lastly, I wanted to create a bad graph just to have some fun. A century of research suggests that pie charts are bad for extracting numerical information when compared to bar charts. 
+For the final visualization, I want to explore the composition of salmon losses over time. But first, let me create an intentionally bad version to illustrate common data visualization mistakes. Decades of visualization research shows that pie charts struggle with numerical comparisons, and using polar coordinates for time series is equally problematic: 
 
 ```{r}
 #| fig-width: 4
@@ -137,13 +132,15 @@ monthly_losses_data %>%
         legend.position = 'bottom')
 ```
 
-This chart is bad for several reasons. First, the polar coordinates are forced into a context where it does not make a lot of sense. Time is linear, but polar coordinates are designed for seasonal effects or nominal categories. Additionally, it is nearly impossible to make comparisons across the categories. For example, how much larger is the count of dead fish in 2020 than the count for discarded fish? This chart is also a gross misuse of pie charts, where angles are used to separate equally represented categories. 
+This problematic visualization fails in several ways:
 
+- **Wrong coordinate system:** Polar coordinates are designed for cyclical data (seasons) or categorical data, not time series with inherent directionality.
+- **Impossible comparisons:** Try estimating how much larger the dead fish count in 2020 is compared to discarded fish—the chart makes this nearly impossible.
+- **Misused aggregation:** Pie charts work best for parts of a whole with equal importance, yet here they obscure the story entirely.
 
-To fix this chart, I made the following changes: 
+## Fixed Version
 
-- Combined the escaped and other categories since escaped always has small values. This reduces visual clutter in the legend. 
-- Converted the stacked layout into a line chart. Values are now comparable on an equal scale. 
+A better approach combines two key improvements: simplifying the legend by merging the small "escaped" and "other" categories, and switching to a line chart that uses a common y-axis scale for easy comparison: 
 
 ```{r}
 #| fig-width: 4
@@ -180,4 +177,4 @@ bg_df %>%
 ```
 
 
-With the refined chart, it is clear that dead salmon peaked in 2023 and declined over the following two years. While there was not much change in discarded fish, the "other" category had an increase in 2024 and 2025. The data dictionary did not specify what is included as "other", but this could be a concern worth further exploration.
+This revised chart tells a much clearer story: dead salmon peaked in 2023 before declining through 2025, while discarded fish remained relatively stable. Notably, the "other" category spiked in 2024–2025. Although the data dictionary doesn't specify what falls under "other," this increase warrants further investigation.
