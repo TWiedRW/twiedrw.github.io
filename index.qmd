@@ -6,7 +6,7 @@ about:
   template: jolla
   links:
     - icon: github
-      text: Github
+      text: GitHub
       href: https://github.com/TWiedRW
     - icon: linkedin
       text: LinkedIn
@@ -16,7 +16,7 @@ about:
 
 :::{#hero-heading}
 
-Hello! My name is Tyler Wiederich and I am a Ph.D. candidate in the Department of Statistics at the University of Nebraska-Lincoln. I am expecting to graduate in May and am currently looking for employment opportunities. On this site, you can find several of my portfolio projects and presentations. 
+Hello! My name is Tyler Wiederich and I am a Ph.D. candidate in the Department of Statistics at the University of Nebraska-Lincoln. I am expecting to graduate in May and am currently looking for employment opportunities. On this site, you can find several of my portfolio projects and presentations, as well as other 
 
 :::
 

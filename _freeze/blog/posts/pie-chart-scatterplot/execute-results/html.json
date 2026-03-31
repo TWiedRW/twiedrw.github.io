@@ -1,0 +1,17 @@
+{
+  "hash": "f51b137ad08e286b76c5abceb2001521",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Untitled\"\ndate: today\ndraft: true\n---\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\n```\n\n::: {.cell-output .cell-output-stderr}\n\n```\nWarning: package 'ggplot2' was built under R version 4.5.2\n```\n\n\n:::\n\n::: {.cell-output .cell-output-stderr}\n\n```\nWarning: package 'tibble' was built under R version 4.5.2\n```\n\n\n:::\n\n::: {.cell-output .cell-output-stderr}\n\n```\nWarning: package 'tidyr' was built under R version 4.5.2\n```\n\n\n:::\n\n::: {.cell-output .cell-output-stderr}\n\n```\nWarning: package 'purrr' was built under R version 4.5.2\n```\n\n\n:::\n\n::: {.cell-output .cell-output-stderr}\n\n```\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.6.0\n✔ ggplot2   4.0.1     ✔ tibble    3.3.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.2\n✔ purrr     1.2.1     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors\n```\n\n\n:::\n\n```{.r .cell-code}\nlibrary(flexmix)\n```\n\n::: {.cell-output .cell-output-stderr}\n\n```\nLoading required package: lattice\n```\n\n\n:::\n\n```{.r .cell-code}\npenguins2 <- filter(penguins, !is.na(bill_len) & !is.na(bill_dep))\n\niris %>% \n  ggplot(mapping = aes(x = Sepal.Length, y = Sepal.Width, color = Species)) + \n  geom_point()\n```\n\n::: {.cell-output-display}\n![](pie-chart-scatterplot_files/figure-html/unnamed-chunk-1-1.png){width=672}\n:::\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\nset.seed(22132)\nlibrary(mclust)\n```\n\n::: {.cell-output .cell-output-stderr}\n\n```\nPackage 'mclust' version 6.1.1\nType 'citation(\"mclust\")' for citing this R package in publications.\n```\n\n\n:::\n\n::: {.cell-output .cell-output-stderr}\n\n```\n\nAttaching package: 'mclust'\n```\n\n\n:::\n\n::: {.cell-output .cell-output-stderr}\n\n```\nThe following object is masked from 'package:purrr':\n\n    map\n```\n\n\n:::\n\n```{.r .cell-code}\nkm <- Mclust(penguins2[,c(\"bill_dep\", \"bill_dep\")], G = 3)\n\npenguins2 %>% \n  mutate(cluster = km$classification) %>% \n  ggplot(mapping = aes(x = bill_len, y = bill_dep, color = factor(cluster))) + \n  geom_point()\n```\n\n::: {.cell-output-display}\n![](pie-chart-scatterplot_files/figure-html/unnamed-chunk-2-1.png){width=672}\n:::\n:::\n",
+    "supporting": [
+      "pie-chart-scatterplot_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

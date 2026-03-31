@@ -1,5 +1,5 @@
 ---
-title: "Novia Scotia Ocean Temperatures"
+title: "Nova Scotia Ocean Temperatures"
 categories:
   - tidytuesday
 date: "2026-03-31"
@@ -40,7 +40,7 @@ ocean_temperature_deployments <- tuesdata$ocean_temperature_deployments
 
 ## Media Graphic
 
-To show which counties had the most losses over the 2020-2025 period, I decided on a horizontal bar chart. Although my goal was to show this for the entire time frame, using stacked bars for years provides additional transparency for year-to-year variability.
+To show where ocean temperature sensors are positioned around Nova Scotia, I decided to use a map-based graphic. Plotting deployment locations over the Canada map gives immediate geographic context for where these measurements were collected.
 
 ```{r}
 #| fig-width: 6
@@ -64,7 +64,7 @@ canada %>%
 
 ## Statistical Graphic
 
-The mortality dataset provided median mortality rates along with the first and third quartiles. This interquartile range provides a good opportunity to display variability. In this chart, the top 3 counties with the highest salmon losses are considered. 
+The ocean temperature dataset includes repeated measurements over time at multiple sensor depths. This chart shows how mean temperature changes over time across those depth levels.
 
 
 

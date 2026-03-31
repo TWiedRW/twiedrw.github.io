@@ -161,13 +161,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#personal-projects" id="toc-personal-projects" class="nav-link active" data-scroll-target="#personal-projects">Personal Projects</a>
   <ul class="collapse">
   <li><a href="#overlap-of-majors-and-minors-at-winona-state-university" id="toc-overlap-of-majors-and-minors-at-winona-state-university" class="nav-link" data-scroll-target="#overlap-of-majors-and-minors-at-winona-state-university">Overlap of Majors and Minors at Winona State University</a></li>
+  <li><a href="#color-palette-generation-from-images" id="toc-color-palette-generation-from-images" class="nav-link" data-scroll-target="#color-palette-generation-from-images">Color palette generation from images</a></li>
   <li><a href="#this-website" id="toc-this-website" class="nav-link" data-scroll-target="#this-website">This website!</a></li>
   </ul></li>
   <li><a href="#coursework" id="toc-coursework" class="nav-link" data-scroll-target="#coursework">Coursework</a>
   <ul class="collapse">
   <li><a href="#frequentist-bayesian-and-visual-inference" id="toc-frequentist-bayesian-and-visual-inference" class="nav-link" data-scroll-target="#frequentist-bayesian-and-visual-inference">Frequentist, Bayesian, and Visual Inference</a></li>
   <li><a href="#advanced-consulting-report" id="toc-advanced-consulting-report" class="nav-link" data-scroll-target="#advanced-consulting-report">Advanced Consulting Report</a></li>
-  <li><a href="#color-palette-generation-from-images" id="toc-color-palette-generation-from-images" class="nav-link" data-scroll-target="#color-palette-generation-from-images">Color palette generation from images</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -200,11 +200,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Personal Projects</h1>
 <section id="overlap-of-majors-and-minors-at-winona-state-university" class="level2">
 <h2 class="anchored" data-anchor-id="overlap-of-majors-and-minors-at-winona-state-university">Overlap of Majors and Minors at Winona State University</h2>
-<p>One of my very first projects in R was jokingly given to me by a friend by discussing which minors at Winona State would be the easiest to get depending on the major. He never intended for me to figure out an “answer”, but I decided to use the opportunity to learn about web scraping and data cleaning. Unfortunately, this was before I was using GitHub for my projects and I lost the project when migrating my campus-provided laptop (a lesson I have since learned). Below are the steps I used for accomplishing</p>
+<p>One of my very first projects in R came up in a conversation with a friend about which minors at Winona State would be the easiest to complete depending on the major. He never intended for me to figure out an “answer”, but I decided to use the opportunity to learn about web scraping and data cleaning. Unfortunately, this was before I was using GitHub for my projects, and I lost the project when migrating my campus-provided laptop (a lesson I have since learned). Below are the steps I used to complete the analysis.</p>
 <ol type="1">
-<li>For all pages for majors and minor, extract all courses listed into a single data frame with columns for course and program.</li>
+<li>For all pages for majors and minors, extract all courses listed into a single data frame with columns for course and program.</li>
 <li>Separate the data frame into a majors data frame and a minors data frame.</li>
-<li>Full join majors and minors on a dummy variable to get all combinations courses for each combination of majors and minors.</li>
+<li>Full join majors and minors on a dummy variable to get all combinations of courses for each combination of majors and minors.</li>
 <li>For each combination, compute the number of overlapping courses.</li>
 <li>Divide the number of overlapping courses by the number of courses listed for the minor.</li>
 </ol>
@@ -229,28 +229,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 My statistics department at UNL usually hosts an annual March Madness competition where we select teams in the bracket and compete based off the number of wins from their chosen teams. For fairness, we each have 100 points that can be used to purchase teams, where teams with higher seeds cost more points. In 2023, I got second place by selecting teams based off the distribution of points scored in regular season games. Rather than providing two web scraping projects in R here, I decided to replicate the analysis in Python. 
 
 --->
-</section>
-<section id="this-website" class="level2">
-<h2 class="anchored" data-anchor-id="this-website">This website!</h2>
-<p>Quarto offers many incredible features and I decided to use it to make this website. The code for this site can be found on <a href="https://github.com/TWiedRW/twiedrw.github.io">GitHub</a>.</p>
-</section>
-</section>
-<section id="coursework" class="level1">
-<h1>Coursework</h1>
-<p>I was initially hesitant to include any coursework in my portfolio. However, my courses often had opportunities for creative freedom and complexity. Everything here meets the following criteria: (1) the data set was freely chosen, (2) evaluation was on the skills used rather than the content, and (3) I am proud of the effort that went into it and it is something that I would do on my own.</p>
-<section id="frequentist-bayesian-and-visual-inference" class="level2">
-<h2 class="anchored" data-anchor-id="frequentist-bayesian-and-visual-inference">Frequentist, Bayesian, and Visual Inference</h2>
-<p>Many statisticians find themselves somewhere in the paradigm of Frequentist and Bayesian methodologies. These methods often use data visualizations in various stages of analysis, but the formalization of using graphics for inference is a relatively newer development.</p>
-<p>In this paper, Frequentist, Bayesian, and visual inference methods are compared and contrasted. I took this assignment a step further by incorporating an example using data from the Minnesota Wild hockey club. As a hockey fan, I was curious if there were any game statistics other than goals (e.g., shots on goal) that contributed to the probability of winning a game. I web scraped data for the 2023-24 and 2024-25 seasons and used Frequentist and Bayesian methods to assess location (home/away), shots on goal, penalty minutes, power play goals, and power play opportunities. In the end, I was surprised that only power play goals contributed to the probability of winning.</p>
-<div class="center" data-text-align="center">
-<p><a href="https://TWiedRW.github.io/stat-992/paper-vis-inference/paper.pdf">Paper</a> | <a href="https://github.com/TWiedRW/stat-992/tree/main/paper-vis-inference">GitHub</a></p>
-</div>
-</section>
-<section id="advanced-consulting-report" class="level2">
-<h2 class="anchored" data-anchor-id="advanced-consulting-report">Advanced Consulting Report</h2>
-<p>In my advanced consulting course, students functioned as a statistical consultant at the Statistical Cross-Disciplinary Collaboration &amp; Consulting Lab in the Department of Statistics at UNL. At the end of the course, we had to put together a portfolio of projects that we worked on over the semester. One of my clients was working on a project to determine if hilling, a process of covering crops, was effective or not in mitigating the damage of the soybean gall midge. My client had several responses that required fitting generalized linear mixed models using PROC GLIMMIX in SAS 9.4.</p>
-<p>This project was also my first time using a pdf template with Quarto documents, which I think ended up looking decent for a report.</p>
-<p><a href="https://twiedrw.github.io/stat930_presentation/report.pdf">Paper</a> | <a href="https://twiedrw.github.io/stat930_presentation/stat930-presentation.html">Presentation</a></p>
 </section>
 <section id="color-palette-generation-from-images" class="level2">
 <h2 class="anchored" data-anchor-id="color-palette-generation-from-images">Color palette generation from images</h2>
@@ -301,6 +279,28 @@ My statistics department at UNL usually hosts an annual March Madness competitio
 </div>
 </div>
 </div>
+</section>
+<section id="this-website" class="level2">
+<h2 class="anchored" data-anchor-id="this-website">This website!</h2>
+<p>Quarto offers many incredible features and I decided to use it to make this website. The code for this site can be found on <a href="https://github.com/TWiedRW/twiedrw.github.io">GitHub</a>.</p>
+</section>
+</section>
+<section id="coursework" class="level1">
+<h1>Coursework</h1>
+<p>I was initially hesitant to include any coursework in my portfolio. However, my courses often had opportunities for creative freedom and complexity. Everything here meets the following criteria: (1) the data set was freely chosen, (2) evaluation was on the skills used rather than the content, and (3) I am proud of the effort that went into it and it is something that I would do on my own.</p>
+<section id="frequentist-bayesian-and-visual-inference" class="level2">
+<h2 class="anchored" data-anchor-id="frequentist-bayesian-and-visual-inference">Frequentist, Bayesian, and Visual Inference</h2>
+<p>Many statisticians find themselves somewhere in the paradigm of Frequentist and Bayesian methodologies. These methods often use data visualizations in various stages of analysis, but the formalization of using graphics for inference is a relatively newer development.</p>
+<p>In this paper, Frequentist, Bayesian, and visual inference methods are compared and contrasted. I took this assignment a step further by incorporating an example using data from the Minnesota Wild hockey club. As a hockey fan, I was curious if there were any game statistics other than goals (e.g., shots on goal) that contributed to the probability of winning a game. I web scraped data for the 2023-24 and 2024-25 seasons and used Frequentist and Bayesian methods to assess location (home/away), shots on goal, penalty minutes, power play goals, and power play opportunities. In the end, I was surprised that only power play goals contributed to the probability of winning.</p>
+<div class="center" data-text-align="center">
+<p><a href="https://TWiedRW.github.io/stat-992/paper-vis-inference/paper.pdf">Paper</a> | <a href="https://github.com/TWiedRW/stat-992/tree/main/paper-vis-inference">GitHub</a></p>
+</div>
+</section>
+<section id="advanced-consulting-report" class="level2">
+<h2 class="anchored" data-anchor-id="advanced-consulting-report">Advanced Consulting Report</h2>
+<p>In my advanced consulting course, students functioned as a statistical consultant at the Statistical Cross-Disciplinary Collaboration &amp; Consulting Lab in the Department of Statistics at UNL. At the end of the course, we had to put together a portfolio of projects that we worked on over the semester. One of my clients was working on a project to determine if hilling, a process of covering crops, was effective or not in mitigating the damage of the soybean gall midge. My client had several responses that required fitting generalized linear mixed models using PROC GLIMMIX in SAS 9.4.</p>
+<p>This project was also my first time using a pdf template with Quarto documents, which I think ended up looking decent for a report.</p>
+<p><a href="https://twiedrw.github.io/stat930_presentation/report.pdf">Paper</a> | <a href="https://twiedrw.github.io/stat930_presentation/stat930-presentation.html">Presentation</a></p>
 
 
 </section>

@@ -11,7 +11,7 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "I am a Ph.D. candidate in Statistics at the University of Nebraska-Lincoln (expected May 2026) with experience in consulting, teaching, and applied analytics. I focus on translating complex research and research questions into rigorous analysis and clear, decision-ready communication."
+    "text": "I am a Ph.D. candidate in Statistics at the University of Nebraska-Lincoln (expected May 2026) with experience in consulting, teaching, and applied analytics. I focus on translating complex research questions into rigorous analysis and clear, decision-ready communication."
   },
   {
     "objectID": "about.html#education",
@@ -46,7 +46,7 @@
     "href": "about.html#courses-taught",
     "title": "About",
     "section": "Courses Taught",
-    "text": "Courses Taught\n\nUniversity of Nebraska–Lincoln\nSTAT 218: Introduction to Statistics | Fall 2021, Spring 2022, Summer 2022\n\nInstructor of record\nThe practical application of statistical thinking to contemporary issues; collection and organization of data; probability distributions; statistical inference; estimation; and hypothesis testing.\n\nSTAT 380: Statistics and Applications | Spring 2023\n\nInstructor of record\nProbability calculus; random variables, their probability distributions and expected values; t, F and chi-square sampling distributions; estimation; testing of hypothesis; and regression analysis with applications.\n\nSTAT 801A: Statistical Methods in Research (Non Calculus) | Fall 2022\n\nLab instructor\nStatistical concepts and statistical methodology useful in descriptive, experimental, and analytical study of biological and other natural phenomena. Practical application of statistics rather than on statistical theory.\n\nSTAT 811T: Statistics for Middle-Level Teachers | Summer 2022\n\nCo-instructor\nDesigned primarily to develop and equip middle-level teachers with the statistical knowledge they need for teaching. The course follows an inquiry/discovery design, dedicating much of class time to activities, discussion and group work. The course emphasizes topics in statistics that are part of the middle-school mathematics curriculum, as well as their application in other disciplines. The course also includes statistics that are used in education and school-based research."
+    "text": "Courses Taught\n\nUniversity of Nebraska-Lincoln\nSTAT 218: Introduction to Statistics | Fall 2021, Spring 2022, Summer 2022\n\nInstructor of record\nThe practical application of statistical thinking to contemporary issues; collection and organization of data; probability distributions; statistical inference; estimation; and hypothesis testing.\n\nSTAT 380: Statistics and Applications | Spring 2023\n\nInstructor of record\nProbability calculus; random variables, their probability distributions and expected values; t, F and chi-square sampling distributions; estimation; testing of hypothesis; and regression analysis with applications.\n\nSTAT 801A: Statistical Methods in Research (Non Calculus) | Fall 2022\n\nLab instructor\nStatistical concepts and statistical methodology useful in descriptive, experimental, and analytical study of biological and other natural phenomena. Practical application of statistics rather than on statistical theory.\n\nSTAT 811T: Statistics for Middle-Level Teachers | Summer 2022\n\nCo-instructor\nDesigned primarily to develop and equip middle-level teachers with the statistical knowledge they need for teaching. The course follows an inquiry/discovery design, dedicating much of class time to activities, discussion and group work. The course emphasizes topics in statistics that are part of the middle-school mathematics curriculum, as well as their application in other disciplines. The course also includes statistics that are used in education and school-based research."
   },
   {
     "objectID": "about.html#workshops",
@@ -112,6 +112,13 @@
     "text": "Fixed Version\nA better approach combines two key improvements: simplifying the legend by merging the small “escaped” and “other” categories, and switching to a line chart that uses a common y-axis scale for easy comparison:\n\n\nCode\nmy_cols &lt;- c('dead'='#5e4c5f',\n             'discarded'='#ffbb6f',\n             'other'='#999999')\n\nbg_df &lt;- monthly_losses_data %&gt;% \n  filter(geo_group == 'country' & species == 'salmon') %&gt;% \n  mutate(other = other + escaped, .keep = 'unused') %&gt;% \n  pivot_longer(dead:other, values_to = 'count', names_to = 'type_of_loss') %&gt;% \n  group_by(year = year(date), type_of_loss) %&gt;% \n  summarise(count = sum(count)/1e6) \n\nbg_df %&gt;% \n  ggplot(mapping = aes(x = year, y = count, color = type_of_loss)) + \n  geom_line() + \n  geom_point() + \n  scale_x_continuous(breaks = 2020:2025) +\n  scale_color_manual(values = my_cols) + \n  labs(x = 'Year', y = 'Count\\n(in millions)', title = 'How are salmon lost in Norge?', color = 'Type of Loss') + \n  theme_bw() + \n  theme(plot.title = element_text(size = 16, face = 'bold', hjust = 0.5),\n        axis.text = element_text(size = 8),\n        axis.title = element_text(size = 10),\n        strip.text = element_text(size = 8),\n        panel.grid = element_blank(),\n        aspect.ratio = 1/2,\n        legend.position = 'bottom') \n\n\n\n\n\n\n\n\n\nThis revised chart tells a much clearer story: dead salmon peaked in 2023 before declining through 2025, while discarded fish remained relatively stable. Notably, the “other” category spiked in 2024–2025. Although the data dictionary doesn’t specify what falls under “other,” this increase warrants further investigation."
   },
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "About",
+    "section": "",
+    "text": "Hello! My name is Tyler Wiederich and I am a Ph.D. candidate in the Department of Statistics at the University of Nebraska-Lincoln. I am expecting to graduate in May and am currently looking for employment opportunities. On this site, you can find several of my portfolio projects and presentations, as well as other"
+  },
+  {
     "objectID": "blog/posts/tidytuesday-2026-03-24.html",
     "href": "blog/posts/tidytuesday-2026-03-24.html",
     "title": "One Million Digits of Pi",
@@ -147,13 +154,6 @@
     "text": "Adding Animation\nThe static chart above shows the complete path, but we can make it more engaging by animating it with the gganimate package. I also included a point to clearly show the current position of the walking path:\n\n\nCode\nlibrary(gganimate)\np_animate &lt;- p_walk + \n  geom_point(color = 'gold', size = 2) + \n  transition_reveal(digit_position) +\n  ease_aes('linear')\n\nanimate(p_animate, nframes = 100, end_pause = 10, rewind = TRUE)"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "About",
-    "section": "",
-    "text": "Hello! My name is Tyler Wiederich and I am a Ph.D. candidate in the Department of Statistics at the University of Nebraska-Lincoln. I am expecting to graduate in May and am currently looking for employment opportunities. On this site, you can find several of my portfolio projects and presentations."
-  },
-  {
     "objectID": "blog/index.html",
     "href": "blog/index.html",
     "title": "Blog",
@@ -172,7 +172,14 @@
     "href": "portfolio.html#overlap-of-majors-and-minors-at-winona-state-university",
     "title": "Portfolio",
     "section": "Overlap of Majors and Minors at Winona State University",
-    "text": "Overlap of Majors and Minors at Winona State University\nOne of my very first projects in R was jokingly given to me by a friend by discussing which minors at Winona State would be the easiest to get depending on the major. He never intended for me to figure out an “answer”, but I decided to use the opportunity to learn about web scraping and data cleaning. Unfortunately, this was before I was using GitHub for my projects and I lost the project when migrating my campus-provided laptop (a lesson I have since learned). Below are the steps I used for accomplishing\n\nFor all pages for majors and minor, extract all courses listed into a single data frame with columns for course and program.\nSeparate the data frame into a majors data frame and a minors data frame.\nFull join majors and minors on a dummy variable to get all combinations courses for each combination of majors and minors.\nFor each combination, compute the number of overlapping courses.\nDivide the number of overlapping courses by the number of courses listed for the minor.\n\nAt the time, there were 110 majors and 77 minors available at Winona State. Below is an early iteration of my graphic, which was designed to be printed on a poster.\n\n\n\nEarly figure\n\n\nI recently decided to replicate this analysis and have the code available on GitHub. The main improvement was limiting the number of majors to Bachelor of Science degrees and removing minors with low overlap.\n\n\n\nFinal figure"
+    "text": "Overlap of Majors and Minors at Winona State University\nOne of my very first projects in R came up in a conversation with a friend about which minors at Winona State would be the easiest to complete depending on the major. He never intended for me to figure out an “answer”, but I decided to use the opportunity to learn about web scraping and data cleaning. Unfortunately, this was before I was using GitHub for my projects, and I lost the project when migrating my campus-provided laptop (a lesson I have since learned). Below are the steps I used to complete the analysis.\n\nFor all pages for majors and minors, extract all courses listed into a single data frame with columns for course and program.\nSeparate the data frame into a majors data frame and a minors data frame.\nFull join majors and minors on a dummy variable to get all combinations of courses for each combination of majors and minors.\nFor each combination, compute the number of overlapping courses.\nDivide the number of overlapping courses by the number of courses listed for the minor.\n\nAt the time, there were 110 majors and 77 minors available at Winona State. Below is an early iteration of my graphic, which was designed to be printed on a poster.\n\n\n\nEarly figure\n\n\nI recently decided to replicate this analysis and have the code available on GitHub. The main improvement was limiting the number of majors to Bachelor of Science degrees and removing minors with low overlap.\n\n\n\nFinal figure"
+  },
+  {
+    "objectID": "portfolio.html#color-palette-generation-from-images",
+    "href": "portfolio.html#color-palette-generation-from-images",
+    "title": "Portfolio",
+    "section": "Color palette generation from images",
+    "text": "Color palette generation from images\nIn collaboration with Muxin Hua, we developed an R package focused on creating color palettes from images. The overall theory was to identify the colors in the image and use clustering to generate distinct separated colors. We also included a color-blind mode that initially put images through color filters before clustering.\nYou can check out the GitHub page here, or try it for yourself!\n\n# install.packages(\"devtools\")\ndevtools::install_github(\"Hiiiua/Photopal\")\n\nlibrary(Photopal)\nlibrary(ggplot2)\n\n# Use demo image template\nmy_cols &lt;- Photopal::palette_create(num.col = 3, df.rgb = image2rgb(), plot = F)\n\n# Create plot using penguins dataset\npenguins |&gt;\n  ggplot(mapping = aes(x = bill_len, y = bill_dep, color = species)) + \n  geom_point(size = 1/2) + \n  scale_color_manual(values = c(\n    'Adelie'= my_cols[1,4],\n    'Chinstrap' = my_cols[2,4],\n    'Gentoo' = my_cols[3,4]\n  )) + \n  theme_bw()\n#ggsave('sample-plot.png', width = 806, height = 605, units = 'px')\n\n\n\n\n\n\n\n\n\n\nSample image\n\n\n\n\n\n\n\nPlot with palette"
   },
   {
     "objectID": "portfolio.html#this-website",
@@ -194,12 +201,5 @@
     "title": "Portfolio",
     "section": "Advanced Consulting Report",
     "text": "Advanced Consulting Report\nIn my advanced consulting course, students functioned as a statistical consultant at the Statistical Cross-Disciplinary Collaboration & Consulting Lab in the Department of Statistics at UNL. At the end of the course, we had to put together a portfolio of projects that we worked on over the semester. One of my clients was working on a project to determine if hilling, a process of covering crops, was effective or not in mitigating the damage of the soybean gall midge. My client had several responses that required fitting generalized linear mixed models using PROC GLIMMIX in SAS 9.4.\nThis project was also my first time using a pdf template with Quarto documents, which I think ended up looking decent for a report.\nPaper | Presentation"
-  },
-  {
-    "objectID": "portfolio.html#color-palette-generation-from-images",
-    "href": "portfolio.html#color-palette-generation-from-images",
-    "title": "Portfolio",
-    "section": "Color palette generation from images",
-    "text": "Color palette generation from images\nIn collaboration with Muxin Hua, we developed an R package focused on creating color palettes from images. The overall theory was to identify the colors in the image and use clustering to generate distinct separated colors. We also included a color-blind mode that initially put images through color filters before clustering.\nYou can check out the GitHub page here, or try it for yourself!\n\n# install.packages(\"devtools\")\ndevtools::install_github(\"Hiiiua/Photopal\")\n\nlibrary(Photopal)\nlibrary(ggplot2)\n\n# Use demo image template\nmy_cols &lt;- Photopal::palette_create(num.col = 3, df.rgb = image2rgb(), plot = F)\n\n# Create plot using penguins dataset\npenguins |&gt;\n  ggplot(mapping = aes(x = bill_len, y = bill_dep, color = species)) + \n  geom_point(size = 1/2) + \n  scale_color_manual(values = c(\n    'Adelie'= my_cols[1,4],\n    'Chinstrap' = my_cols[2,4],\n    'Gentoo' = my_cols[3,4]\n  )) + \n  theme_bw()\n#ggsave('sample-plot.png', width = 806, height = 605, units = 'px')\n\n\n\n\n\n\n\n\n\n\nSample image\n\n\n\n\n\n\n\nPlot with palette"
   }
 ]
