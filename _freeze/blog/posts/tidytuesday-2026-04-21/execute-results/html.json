@@ -1,0 +1,17 @@
+{
+  "hash": "60c8fd930c4874767bbdaa7cd27ca83d",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"April 21st\"\ncategories:\n  - tidytuesday\ndate: \"2026-03-31\"\ndraft: true\nexecute:\n  echo: true\n  message: false\n  warning: false\nformat: \n  html:\n    code-fold: true\n---\n\n\n\n\nThis #tidytuesday comes from April 20th, 2026 and explores ocean temperature in Nova Scotia. The GitHub page can be found [here](https://github.com/rfordatascience/tidytuesday/tree/main/data/2026/2026-04-21) and provides the following description: \n\n> Description here!\n\nMy goal with these datasets is as follows: \n\n1. Create a media-quality graphic \n2. Create a statistical graphic\n\n\n## Data\n\n\n\n::: {.cell}\n\n```{.r .cell-code  code-fold=\"false\"}\n# Packages\nlibrary(tidyverse)\n\n# Load data\ntuesdata <- tidytuesdayR::tt_load('2026-04-21')\n\n# Extract data\nfinancing_schemes <- tuesdata$financing_schemes\nhealth_spending <- tuesdata$health_spending\nspending_purpose <- tuesdata$spending_purpose\n```\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\nhealth_spending %>% \n  filter(indicator_code == 'che_usd2023') %>% \n  group_by(year) %>% \n  mutate(rank = rank(-value)) %>% \n  arrange(year, rank) %>% \n  filter(rank <= 9) %>%\n  ggplot(mapping = aes(x = year, y = value, group = country_name, color = iso3_code)) + \n  geom_point() + \n  scale_y_log10() +\n  geom_line()\n```\n\n::: {.cell-output-display}\n![](tidytuesday-2026-04-21_files/figure-html/unnamed-chunk-2-1.png){width=3000}\n:::\n:::",
+    "supporting": [
+      "tidytuesday-2026-04-21_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

@@ -12,13 +12,9 @@ format:
     code-fold: true
 ---
 
-## The Data
-
-This week's dataset explores farmed salmon mortality in Norway. The [TidyTuesday GitHub repository](https://github.com/rfordatascience/tidytuesday/tree/main/data/2026/2026-03-17) provides this background:
+Farmed salmon in Norway is the subject of this week's [TidyTuesday](https://github.com/rfordatascience/tidytuesday/tree/main/data/2026/2026-03-17). The data is accompanied by the following description: 
 
 > The Fish Health Report is the Norwegian Veterinary Institute's annual status report on the health and welfare situation for Norwegian farmed fish and is based on official statistics, data from the Norwegian Veterinary Institute and private laboratories. The report also contains results from a survey among fish health personnel and inspectors from the Norwegian Food Safety Authority, as well as assessments of the situation, trends and risks.
-
-With monthly loss and mortality data across Norwegian counties, I wanted to explore three angles: identify which counties experienced the largest salmon losses, show how mortality rates varied over time, and create both a misleading visualization and its corrected version to demonstrate data visualization best practices.
 
 ```{r}
 # Packages
@@ -32,37 +28,64 @@ monthly_losses_data <- tuesdata$monthly_losses_data
 monthly_mortality_data <- tuesdata$monthly_mortality_data
 ```
 
-## County-Level Salmon Losses (2020–2025)
 
-To identify which counties had the largest losses, I created a horizontal stacked bar chart. Using stacked bars by year provides both geographic comparison and transparency about year-to-year trends:
+I wanted to explore a few different questions to help guide my visualizations:
+
+1. Which counties had the most salmon loss in the last five years?
+2. How have county-level mortality rates changed over time?
+3. In what ways are salmon lost?
+
+# County-Level Salmon Losses
+
+To answer my first question, it would be easy enough to calculate the sum of salmon losses for each county over the 2020 to 2025 time period. However, there are a couple of considerations that I want to note for this type of visualization:
+
+1. Sums across the time periods does not show year-to-year variation.
+2. Displaying yearly data may not show which counties had the highest total losses.
+
+My primary goal is to easily answer which counties had the most salmon losses over the five-year period. To do this, I decided to create a stacked bar chart, where each year is represented by a different shade of red. While this visualization is not great at showing year-to-year differences, it is easy to see that Vestland had a large number of losses during this time period. 
+
+## 1. Visualization
 
 ```{r}
 #| fig-width: 6
 #| fig-height: 4
-#| fig-dpi: 1200
+#| fig-dpi: 300
+
+# Pre-process
 monthly_losses_data %>% 
   filter(geo_group == 'county' & species == 'salmon') %>% 
   group_by(region, year = factor(year(date))) %>% 
   summarise(losses = sum(losses)) %>% 
+  
+# Plot
   ggplot(mapping = aes(y = reorder(region, losses, sum), 
                        x = losses/1e6, fill = year)) + 
+  # Stacked bar chart
   geom_col(width = 1/2) + 
+  
+  # Black outline
   geom_col(aes(x = total_losses/1e6, y = reorder(region, total_losses), fill = NULL),
            data = monthly_losses_data %>% 
             filter(geo_group == 'county' & species == 'salmon') %>% 
              group_by(region) %>% 
             summarise(total_losses = sum(losses)),
            fill = NA, color = 'black', width = 1/2) + 
-  geom_text(aes(x = total_losses/1e6 + 3.1, y = reorder(region, total_losses), fill = NULL, label = round(total_losses/1e6, 2)),
+  
+  # Text labels
+  geom_text(aes(x = total_losses/1e6, y = reorder(region, total_losses), fill = NULL, label = round(total_losses/1e6, 2)),
             size = 2,
            data = monthly_losses_data %>% 
             filter(geo_group == 'county' & species == 'salmon') %>% 
              group_by(region) %>% 
-            summarise(total_losses = sum(losses))) + 
+            summarise(total_losses = sum(losses)),
+           hjust = -0.2) + 
+  
+  # Aesthetics
   scale_fill_brewer(palette = 'Reds') +
   labs(x = 'Total losses\n(in millions)', fill = 'Year', y = '',
        title = 'Salmon Losses in Norwegian Counties',
-       subtitle = '2020 - 2025') + 
+       subtitle = '2020 - 2025',
+       caption = 'Source: #TidyTuesday Week 13, 2026') + 
   scale_x_continuous(limits = c(0, 100)) + 
   theme_minimal() + 
   theme(aspect.ratio = 1/2, panel.grid.major.y = element_blank(),
@@ -70,82 +93,105 @@ monthly_losses_data %>%
         legend.text = element_text(size = 7, hjust = 0),
         plot.title = element_text(face = 'bold', hjust = 0.5, size = 14),
         plot.subtitle = element_text(hjust = 0.5, size = 10),
+        plot.caption = element_text(size = 8),
         axis.text.y = element_text(hjust = 1, size = 7))
 ```
 
-## Mortality Rates Over Time
+# Mortality Rates Over Time
 
-Next, I'll examine how salmon mortality rates changed across the top three counties (those with the highest total losses). The dataset includes median mortality rates plus first and third quartiles, which I can use to show variability: 
+The morality data provides median mortality rates for multiple regional levels. Following the county totals for each year, it is reasonable to show the median mortality rate at the county level. Additionally, including the average of these rates provides some insight for the typical county. 
+
+## 1. Data Cleaning
+
+```{r}
+# Average median mortality
+monthly_mortality_data_avg <- monthly_mortality_data %>% 
+  filter(geo_group == 'county') %>% 
+  group_by(date) %>% 
+  summarize(mean_mortality = mean(median))
+```
+
+
+## 2. Visualization
+
+Line charts are typically used to show trends over time. My goal with this chart is to emphasize the typical county mortality rate, which I can accomplish by overlaying a darker dashed line of the average rate over individual opaque lines for each county. This allows for the chart to show individual county variation and a clear average mortality rate. 
 
 ```{r}
 #| fig-width: 6
 #| fig-height: 4
-#| fig-dpi: 1200
+#| fig-dpi: 300
+
+# Figure
 monthly_mortality_data %>% 
-  filter(geo_group == 'county' & species == 'salmon' & region %in% c('Vestland', 'Trøndelag', 'Nordland')) %>%
-  ggplot(mapping = aes(x = date, y = median)) + 
-  geom_ribbon(aes(ymin = q1, ymax = q3), alpha = 0.2) + 
-  geom_line() + 
-  facet_wrap(~region, nrow = 1) + 
+  
+  # Filter to county-level
+  filter(geo_group == 'county') %>%
+  
+  # Create plot
+  ggplot(mapping = aes(x = date, y = median, group = region)) + 
+  
+  # Median mortality per county
+  geom_line(aes(linetype = 'County\nMedian'), 
+            alpha = 0.2, color = '#97a6c4') + 
+  
+  # Mean of median mortality
+  geom_line(data = monthly_mortality_data_avg, 
+            mapping = aes(y = mean_mortality, group = NULL,
+                          linetype = 'Average County\nMedian'),
+            color = '#384860') + 
+  
+  # Aesthetics
   labs(y = 'Mortality Rate', title = 'Mortality Rate of Salmon',
-       subtitle = "Median with interquartile range (Q1–Q3)",
-       x = '') + 
+       subtitle = "Norway (2020-2025)",
+       x = '', linetype = '') + 
+  scale_linetype_manual(
+    values = c(
+      "County\nMedian" = "solid",
+      "Average County\nMedian" = "dashed"
+    )
+  ) +
+  scale_x_date(date_breaks = 'year', date_labels = '%Y') +
+  guides(
+    linetype = guide_legend(
+      label.position = "top"
+    )
+  ) +
   theme_bw() + 
   theme(aspect.ratio = 0.6, 
         plot.title = element_text(hjust = 0.5, face = 'bold', size = 14),
         plot.subtitle = element_text(hjust = 0.5, size = 10),
         strip.text = element_text(size = 8),
+        legend.position = 'right',
+        legend.text = element_text(size = 8),
+        legend.spacing.y = unit(5, 'in'),
         panel.spacing = unit(1.5, "lines"),
         panel.grid.minor = element_blank(),
         panel.grid.major.x = element_blank(),
-        axis.text = element_text(size = 6),
-        axis.title = element_text(size = 8),
-        axis.text.x = element_text(hjust = 1, angle = 30))
+        axis.text = element_text(size = 10),
+        axis.title = element_text(size = 12),
+        axis.text.x = element_text(hjust = 0.5, size = 10))
 ```
 
-## Visualizing Loss Composition: A Cautionary Tale
+# Composition of Losses
 
-For the final visualization, I want to explore the composition of salmon losses over time. But first, let me create an intentionally bad version to illustrate common data visualization mistakes. Decades of visualization research shows that pie charts struggle with numerical comparisons, and using polar coordinates for time series is equally problematic: 
+For my final chart, I wanted to explore how salmon were lost. The categories for salmon loss are dead, discarded, escaped, and other. The "escaped" category has considerably fewer counts than the dead and discarded categories, so I decided to combine "escaped" with "other".
 
 ```{r}
-#| fig-width: 4
-#| fig-height: 4
-#| fig-dpi: 1200
-
 monthly_losses_data %>% 
   filter(geo_group == 'country' & species == 'salmon') %>% 
-  pivot_longer(dead:other, values_to = 'count', names_to = 'type_of_loss') %>% 
-  group_by(year = year(date), type_of_loss) %>% 
-  summarise(count = sum(count)) %>% 
-  mutate(year_lab = ifelse(type_of_loss == 'dead', year, NA),
-         year_pos = sum(count)+10500000) %>%
-  ggplot(mapping = aes(x = year, y = count, fill = type_of_loss)) + 
-  geom_col(width = 1, color = 'black') + 
-  geom_text(aes(label = year_lab, y = year_pos)) +
-  scale_fill_brewer(palette = 3) + 
-  labs(title = 'How are salmon lost in Norge?',
-       fill = 'Type of loss') + 
-  coord_polar() + 
-  theme_void() + 
-  theme(plot.title = element_text(size = 16, face = 'bold', hjust = 0.5),
-        aspect.ratio = 1,
-        legend.position = 'bottom')
+  select(-losses) %>% 
+  pivot_longer(dead:other, names_to = 'category', values_to = 'losses')  %>% 
+  group_by(category) %>% 
+  summarize(prop = sum(losses))
 ```
 
-This problematic visualization fails in several ways:
 
-- **Wrong coordinate system:** Polar coordinates are designed for cyclical data (seasons) or categorical data, not time series with inherent directionality.
-- **Impossible comparisons:** Try estimating how much larger the dead fish count in 2020 is compared to discarded fish—the chart makes this nearly impossible.
-- **Misused aggregation:** Pie charts work best for parts of a whole with equal importance, yet here they obscure the story entirely.
-
-## Fixed Version
-
-A better approach combines two key improvements: simplifying the legend by merging the small "escaped" and "other" categories, and switching to a line chart that uses a common y-axis scale for easy comparison: 
+## 1. Data Cleaning
 
 ```{r}
 #| fig-width: 4
 #| fig-height: 4
-#| fig-dpi: 1200
+#| fig-dpi: 300
 
 my_cols <- c('dead'='#5e4c5f',
              'discarded'='#ffbb6f',
@@ -156,25 +202,49 @@ bg_df <- monthly_losses_data %>%
   mutate(other = other + escaped, .keep = 'unused') %>% 
   pivot_longer(dead:other, values_to = 'count', names_to = 'type_of_loss') %>% 
   group_by(year = year(date), type_of_loss) %>% 
-  summarise(count = sum(count)/1e6) 
+  summarise(count = sum(count)/1e6)
+```
 
+
+## 2. Visualization
+
+```{r}
+#| fig-dpi: 300
+#| fig-width: 6
 bg_df %>% 
+  
+  # Base chart
   ggplot(mapping = aes(x = year, y = count, color = type_of_loss)) + 
-  geom_line() + 
+  
+  # Annotations behind chart features
+  annotate('rect', xmin = 2023, xmax = 2025,
+           ymin = -Inf, ymax = Inf, 
+           fill = 'grey', alpha = 0.2) +
+  annotate('text',
+           x = 2024, y = 32, label = 'Shift in composition',
+           size = 2.5) + 
+  
+  # Chart
+  geom_line(linewidth = 1) + 
   geom_point() + 
+  
+  # Aesthetics
   scale_x_continuous(breaks = 2020:2025) +
   scale_color_manual(values = my_cols) + 
-  labs(x = 'Year', y = 'Count\n(in millions)', title = 'How are salmon lost in Norge?', color = 'Type of Loss') + 
+  labs(x = 'Year', y = 'Count\n(in millions)', 
+       title = 'Composition of Farmed Salmon Loss in Norway',
+       subtitle = 'The majority of salmon loss is attributed to death, which peaked in 2023.\nIn the following years, salmon death decreased while other types of loss\nincreased.',
+       color = 'Type of Loss') + 
   theme_bw() + 
-  theme(plot.title = element_text(size = 16, face = 'bold', hjust = 0.5),
+  theme(plot.title = element_text(size = 12, face = 'bold', hjust = 0.0),
+        plot.subtitle = element_text(size = 8, color = 'grey30'),
         axis.text = element_text(size = 8),
         axis.title = element_text(size = 10),
         strip.text = element_text(size = 8),
         panel.grid = element_blank(),
         aspect.ratio = 1/2,
-        legend.position = 'bottom') 
+        legend.position = 'bottom',
+        legend.title = element_text(size = 10),
+        legend.text = element_text(size = 8)) 
 
 ```
-
-
-This revised chart tells a much clearer story: dead salmon peaked in 2023 before declining through 2025, while discarded fish remained relatively stable. Notably, the "other" category spiked in 2024–2025. Although the data dictionary doesn't specify what falls under "other," this increase warrants further investigation.

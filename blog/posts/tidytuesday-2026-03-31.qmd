@@ -14,6 +14,8 @@ format:
 ---
 
 
+
+
 This #tidytuesday comes from March 31st, 2026 and explores ocean temperature in Nova Scotia. The GitHub page can be found [here](https://github.com/rfordatascience/tidytuesday/tree/main/data/2026/2026-03-31) and provides the following description: 
 
 > The Province of Nova Scotia recognizes the importance of coastal waters, which are critical to the prosperity and sustainability of rural and coastal communities. To bridge the gap between science and decision making, the Nova Scotia Department of Fisheries and Aquaculture (NSDFA) partners with the Centre for Marine Applied Research (CMAR) to measure the environmental conditions of Nova Scotia’s coastal waters.
@@ -38,6 +40,8 @@ ocean_temperature <- tuesdata$ocean_temperature
 ocean_temperature_deployments <- tuesdata$ocean_temperature_deployments
 ```
 
+
+
 ## Media Graphic
 
 To show where ocean temperature sensors are positioned around Nova Scotia, I decided to use a map-based graphic. Plotting deployment locations over the Canada map gives immediate geographic context for where these measurements were collected.
@@ -45,40 +49,48 @@ To show where ocean temperature sensors are positioned around Nova Scotia, I dec
 ```{r}
 #| fig-width: 6
 #| fig-height: 4
-#| fig-dpi: 1200
+#| fig-dpi: 300
 
-library(leaflet)
-
-canada <- map_data('world', 'canada')
-
-canada %>% 
-  # filter(subregion %in% c('Cape Breton Island', 'Sable Island')) %>% 
-  ggplot(mapping = aes(x = long, y = lat, group = group)) + 
-  geom_polygon() +
-  geom_point(aes(x = longitude, y = latitude, group = NULL), data = ocean_temperature_deployments,
-             color = 'red') + 
-  theme_void() +
-  coord_map()
-
+ocean_temperature %>% 
+  ggplot(mapping = aes(x = date, 
+                       y = mean_temperature_degree_c,
+                       color = factor(sensor_depth_at_low_tide_m),
+                       fill = factor(sensor_depth_at_low_tide_m))) + 
+  geom_point(size = 1/10) +
+  theme_bw() +
+  theme(
+    aspect.ratio = 1/2,
+    legend.position = 'bottom'
+  )
 ```
-
-## Statistical Graphic
-
-The ocean temperature dataset includes repeated measurements over time at multiple sensor depths. This chart shows how mean temperature changes over time across those depth levels.
-
 
 
 ```{r}
 #| fig-width: 6
-#| fig-height: 4
-#| fig-dpi: 1200
+#| fig-dpi: 300
+all_dates <- data.frame(date = seq.Date(min(ocean_temperature$date),
+         max(ocean_temperature$date))) %>% 
+  mutate(Year = year(date),
+         Month = month(date, abbr = T, label = T)) %>% 
+  expand_grid(data.frame(sensor_depth_at_low_tide_m = unique(ocean_temperature$sensor_depth_at_low_tide_m)))
 
 ocean_temperature %>% 
-  ggplot(mapping = aes(x = date, y = mean_temperature_degree_c)) + 
+  group_by(Month = month(date, abbr = T, label = T), sensor_depth_at_low_tide_m) %>% 
+  summarize(mean = mean(mean_temperature_degree_c, na.rm = T)) %>% 
+  full_join(all_dates) %>% 
+  mutate(Depth = glue::glue('Depth: {sensor_depth_at_low_tide_m} m')) %>% 
+  ggplot(mapping = aes(x = Month, y = mean, group = sensor_depth_at_low_tide_m)) + 
+  # geom_point() + 
   geom_line() + 
-  facet_wrap(~sensor_depth_at_low_tide_m)
-
-
+  # facet_wrap(~sensor_depth_at_low_tide_m, ncol = 3) + 
+  theme_bw() + 
+  theme(aspect.ratio = 1/2)
 
 ```
 
+
+
+
+## Statistical Graphic
+
+The ocean temperature dataset includes repeated measurements over time at multiple sensor depths. This chart shows how mean temperature changes over time across those depth levels.

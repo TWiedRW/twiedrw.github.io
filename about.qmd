@@ -2,39 +2,47 @@
 title: "About"
 ---
 
-I am a Ph.D. candidate in Statistics at the University of Nebraska-Lincoln (expected May 2026) with experience in consulting, teaching, and applied analytics. I focus on translating complex research questions into rigorous analysis and clear, decision-ready communication.
+I am a recent Ph.D. graduate in Statistics from the University of Nebraska-Lincoln with experience in consulting, teaching, and applied analytics. 
 
+**ADD MORE HERE**
 
 ## Education
 
 - **University of Nebraska-Lincoln** (Lincoln, NE)  
-  Ph.D. in Statistics, expected May 2026
-- **University of Nebraska-Lincoln** (Lincoln, NE)  
-  M.S. in Statistics, 2021-2023
-- **Winona State University** (Winona, MN)  
-  B.S. in Mathematics and Statistics, Minor in Data Science, 2018-2021
+  Ph.D. in Statistics, 2026
   
-
-
+- **University of Nebraska-Lincoln** (Lincoln, NE)  
+  M.S. in Statistics, 2023
+- **Winona State University** (Winona, MN)  
+  B.S. in Mathematics, B.S. in Statistics, Minor Data Science, 2021
 
 ## Experience
 
+
+
 ### University of Nebraska-Lincoln (Lincoln, NE)
-**Statistical Consultant** | June 2023-Present
+
+**Lecturer (1 FTE)** | June 2026 -- Present
+
+I currently serve as a full-time Lecturer in the Department of Statistics, where my appointment is 100% developing and delivering courses at the undergraduate and graduate levels. 
+
+- Fall 2026: Stat 218, Stat 380, Stat 801A
+
+**Statistical Consultant** | June 2023 -- May 2026
 
 - Assisted 70+ clients across all stages of research, including experimental design, statistical analysis, and interpretation.
 - Authored and reviewed technical reports to align results with applied research questions.
 - Co-developed and presented workshops and instructional resources in R, including data visualization and two-way ANOVA.
 
-### University of Nebraska-Lincoln (Lincoln, NE)
-**Graduate Teaching Assistant** | August 2021-May 2023
+**Graduate Teaching Assistant** | August 2021 -- May 2023
 
 - Served as instructor of record for undergraduate and graduate statistics courses.
 - Designed syllabi and lesson plans, assessed learning outcomes, and supported student success through office hours.
 - Led graduate lab instruction in statistical methods and research design.
 
 ### Fastenal (Winona, MN)
-**IT Data Support Analyst** | June 2020-August 2021
+
+**IT Data Support Analyst** | June 2020 -- August 2021
 
 - Responded to internal reporting requests and data questions from business stakeholders.
 - Investigated source-code and reporting discrepancies using Oracle SQL.
@@ -50,25 +58,28 @@ I am a Ph.D. candidate in Statistics at the University of Nebraska-Lincoln (expe
 - Statistics Graduate Student Fellowship (University of Nebraska-Lincoln, 2025)
 - David H. and Annie E. Larrick Graduate Student Travel Award (University of Nebraska-Lincoln, 2023)
 - Othmer Fellowship (University of Nebraska-Lincoln, 2021)
+- Presidential Honor Scholarship (Winona State University, 2018)
 
 
 ## Courses Taught
 
 ### University of Nebraska-Lincoln
 
-**STAT 218**: Introduction to Statistics | Fall 2021, Spring 2022, Summer 2022
+**STAT 218**: Introduction to Statistics | Fall 2021, Spring 2022, Summer 2022, Fall 2026
 
 - Instructor of record
 - The practical application of statistical thinking to contemporary issues; collection and organization of data; probability distributions; statistical inference; estimation; and hypothesis testing.
+- [Sample quiz](teaching-samples/Quiz_CH6-7.pdf)
 
-**STAT 380**: Statistics and Applications | Spring 2023
+**STAT 380**: Statistics and Applications | Spring 2023, Fall 2026
 
 - Instructor of record
 - Probability calculus; random variables, their probability distributions and expected values; t, F and chi-square sampling distributions; estimation; testing of hypothesis; and regression analysis with applications.
+- [Sample quiz](teaching-samples/quiz2.pdf)
 
-**STAT 801A**: Statistical Methods in Research (Non Calculus) | Fall 2022
+**STAT 801A**: Statistical Methods in Research (Non Calculus) | Fall 2022, Fall 2026
 
-- Lab instructor
+- Lab instructor (Fall 2022) and instructor of record (Fall 2026)
 - Statistical concepts and statistical methodology useful in descriptive, experimental, and analytical study of biological and other natural phenomena. Practical application of statistics rather than on statistical theory.
 
 **STAT 811T**: Statistics for Middle-Level Teachers | Summer 2022

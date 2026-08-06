@@ -4,8 +4,6 @@ title: "Portfolio"
 
 My passion for working with data started during the summer break after my first year of my undergraduate degree. At the time, I was double majoring in mathematics and statistics, but I had just taken the introductory data science course. I instantly found a spark for working with data in R and read through R for Data Science by Hadley Wickham (<https://r4ds.hadley.nz>). Since then, I have worked on numerous projects for personal development and my own curiosity. 
 
-On this page, I selected a few of my open-ended coursework and personal projects that I feel proud of. 
-
 # Personal Projects
 
 ## Overlap of Majors and Minors at Winona State University
@@ -36,7 +34,7 @@ My statistics department at UNL usually hosts an annual March Madness competitio
 
 ## Color palette generation from images
 
-In collaboration with Muxin Hua, we developed an R package focused on creating color palettes from images. The overall theory was to identify the colors in the image and use clustering to generate distinct separated colors. We also included a color-blind mode that initially put images through color filters before clustering. 
+In collaboration with [Muxin Hua](https://github.com/Hiiiua), we developed an R package focused on creating color palettes from images. The overall theory was to identify the colors in the image and use clustering to generate distinct separated colors. We also included a color-blind mode that initially put images through color filters before clustering. 
 
 You can check out the GitHub page [here](https://github.com/Hiiiua/Photopal), or try it for yourself!
 
@@ -76,16 +74,11 @@ penguins |>
 
 Quarto offers many incredible features and I decided to use it to make this website. The code for this site can be found on [GitHub](https://github.com/TWiedRW/twiedrw.github.io). 
 
-# Coursework
-
-I was initially hesitant to include any coursework in my portfolio. However, my courses often had opportunities for creative freedom and complexity. Everything here meets the following criteria: (1) the data set was freely chosen, (2) evaluation was on the skills used rather than the content, and (3) I am proud of the effort that went into it and it is something that I would do on my own. 
-
-
 ## Frequentist, Bayesian, and Visual Inference
 
 Many statisticians find themselves somewhere in the paradigm of Frequentist and Bayesian methodologies. These methods often use data visualizations in various stages of analysis, but the formalization of using graphics for inference is a relatively newer development. 
 
-In this paper, Frequentist, Bayesian, and visual inference methods are compared and contrasted. I took this assignment a step further by incorporating an example using data from the Minnesota Wild hockey club. As a hockey fan, I was curious if there were any game statistics other than goals (e.g., shots on goal) that contributed to the probability of winning a game. I web scraped data for the 2023-24 and 2024-25 seasons and used Frequentist and Bayesian methods to assess location (home/away), shots on goal, penalty minutes, power play goals, and power play opportunities. In the end, I was surprised that only power play goals contributed to the probability of winning. 
+In this paper, I compare Frequentist, Bayesian, and visual inference methods. As a hockey fan, I was curious if there were any game statistics other than goals (e.g., shots on goal) that contributed to the probability of winning a game. I web scraped data for the 2023-24 and 2024-25 seasons and used Frequentist and Bayesian methods to assess location (home/away), shots on goal, penalty minutes, power play goals, and power play opportunities. In the end, I was surprised that only power play goals contributed to the probability of winning. 
 
 ::: {.center text-align=center}
 
@@ -99,5 +92,5 @@ In my advanced consulting course, students functioned as a statistical consultan
 
 This project was also my first time using a pdf template with Quarto documents, which I think ended up looking decent for a report. 
 
-[Paper](https://twiedrw.github.io/stat930_presentation/report.pdf) | [Presentation](https://twiedrw.github.io/stat930_presentation/stat930-presentation.html)
+[Paper](https://twiedrw.github.io/stat930_presentation/report.pdf) | [Presentation](https://twiedrw.github.io/stat930_presentation/stat930-presentation.html) | [GitHub](https://github.com/TWiedRW/stat930_presentation)
 

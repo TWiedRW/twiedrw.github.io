@@ -6,6 +6,8 @@ On this page, I selected several of the presentations that highlight my work and
 
 | Date | Title | Type | Description | Slides |
 |-----|-----|---|-----|---|
+| June 2026 | Creating Good Data Visualizations | UNL Summer Research Workshop | In an interactive presentation, I provided students in the UNL Summer Research program with tips for creating good graphics | [link](https://twiedrw.github.io/2026-UCARE-data-visualizations/#/title-slide)
+| April 2026 | Heat to Height: Comparing the Physical Dimensionality of Heat Maps | Ph.D. Defense | Successfully defended my dissertation on 3D-printed data visualizations :) | [link](https://twiedrw.github.io/ch3-heat3d/writeups/10-defense/index.html#/title-slide) | 
 | Nov 2025 | Heat to Height | Research Project | Students who participated in a graphics study are given the details and results of their experiment. | [link](https://twiedrw.github.io/ch3-heat3d/writeups/6-218-presentation/index.html#/title-slide)
 | Sept 2025 | Beyond the Surface | PhD Comprehensive Exam | Presentation on my dissertation progress and direction. | [link](https://twiedrw.github.io/comprehensive-exam/index.html) | 
 | Oct 2025 | Visualization in R | SC3L Workshop | Interactive workshop for creating visualizations in R with `ggplot2` | [link](https://twiedrw.github.io/R-data-visualizations/slides.html#/title-slide) |

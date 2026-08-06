@@ -12,15 +12,15 @@ format:
     code-fold: true
 ---
 
-## The Data
+Pi is an irrational number representing the ratio of a circle's circumference to its diameter. For this week's [TidyTuesday](https://github.com/rfordatascience/tidytuesday/tree/main/data/2026/2026-03-24), one million digits of pi and their placements are provided for a fun exploration project. 
 
-This week's dataset comes from the [TidyTuesday repository](https://github.com/rfordatascience/tidytuesday/tree/main/data/2026/2026-03-24) and contains the digits of pi. As Eve Andersson notes:
+> "Pi is an irrational number, meaning its decimal representation never ends and never settles into a permanent repeating pattern."" — Eve Andersson, collector of the one million digits dataset
 
-> "Pi is an irrational number, meaning its decimal representation never ends and never settles into a permanent repeating pattern."
+I saw a great post by [Steven Ponce on Bluesky](https://bsky.app/profile/sponce1.bsky.social/post/3mhlvttmhis23) showing the walking path of pi using the the digits to as compass directions. I decided to recreate the concept of this visualization, as well make my own contribution.
 
-Since pi's digits are essentially random, I thought it would be fun to treat them as directions on a compass and create a visualization showing the "walking path" that pi traces out. I saw a great post by [Steven Ponce on Bluesky](https://bsky.app/profile/sponce1.bsky.social/post/3mhlvttmhis23) where he created a random walk using digits as compass directions, and I wanted to recreate his visualization for myself.
+# Walking Path of π
 
-## Loading the Data
+## 1. Reading in the data
 
 ```{r}
 # Packages
@@ -33,20 +33,26 @@ tuesdata <- tidytuesdayR::tt_load('2026-03-24')
 pi_digits <- tuesdata$pi_digits
 
 # Show the first few values
-head(pi_digits)
+head(pi_digits) %>% 
+  knitr::kable()
 ```
 
-## Creating the Visualization
+## 2. Data Cleaning
 
-Here's the concept: A compass has 360 degrees, so we can divide it into 10 equal sections—one for each digit 0-9. Each digit gets 36 degrees (digit 0 = 0°, digit 1 = 36°, and so on). 
+A compass has 360 degrees, which can be divided into 10 increments of 36 degrees. Assigning digits to these increments provide directions, where 0 = 0°, 1 = 36°, ..., and 9 = 324°. 
 
-Using basic trigonometry, for a unit circle centered at (0,0), moving one unit at angle $\theta$ gives us the coordinates $(\cos(\theta), \sin(\theta))$. By taking the cumulative sum of all these displacements in the x and y directions, we can plot the path that pi traces out:
+With directions assigned, the next step is to figure out the positioning of each step. If $\theta$ represents the direction, the X-Y displacement is given by:
+
+- x-displacement: $\cos(\theta)$
+- y-displacement: $\sin(\theta)$
+
+Here, R requires that $\theta$ be represented by radians, meaning that we first need to transform our degrees, $D$ into radians using $D\times \frac{\pi}{180}=\theta$. After getting the X and Y displacements, the cumulative sum along the digits 
 
 ```{r}
 # Define the direction in degrees and radians
 step_directions <- data.frame(
   digit = 0:9,
-  degree = seq(0, 360-36, l = 10)
+  degree = seq(0, 360-36, l = 10) #Note: 360 is the same as 0
 ) %>% 
   mutate(
     radian = degree*pi/180
@@ -56,15 +62,24 @@ step_directions <- data.frame(
 end_spot <- 10000
 
 # Create the walking path
-p_walk <- pi_digits %>% 
+pi_walk <- pi_digits %>% 
   left_join(step_directions, by = 'digit') %>% 
   mutate(displacement_x = cos(radian),
          displacement_y = sin(radian),
          pos_x = cumsum(displacement_x),
          pos_y = cumsum(displacement_y)) %>% 
-  filter(digit_position <= end_spot) %>%
+  filter(digit_position <= end_spot)
+```
+
+
+## 3. Visualization
+
+```{r}
+p_walk <- pi_walk %>% 
   ggplot(mapping = aes(x = pos_x, y = pos_y)) + 
   geom_path(alpha = 1/3, color = '#63B3ED') + 
+  
+  # Aethestics
   labs(title = "Where did my π go?",
        subtitle = 'The walking path of π. Digit values are used to\nmark the direction of travel (0=0°, 1=36°, ..., 9=324°)',
        caption = '') + 
@@ -77,17 +92,107 @@ p_walk <- pi_digits %>%
 p_walk
 ```
 
-## Adding Animation
+## 4. Adding Animations
 
 The static chart above shows the complete path, but we can make it more engaging by animating it with the `gganimate` package. I also included a point to clearly show the current position of the walking path:
 
 ```{r}
+# Load package
 library(gganimate)
+
+# Update previous plot
 p_animate <- p_walk + 
   geom_point(color = 'gold', size = 2) + 
   transition_reveal(digit_position) +
   ease_aes('linear')
 
+# Animate!
 animate(p_animate, nframes = 100, end_pause = 10, rewind = TRUE)
 ```
+
+# Bump Chart
+
+Many visualization of pi tend to focus on the distributions of digits. While this gives an idea of how often a specific digit is represented, we can show how this changes over time with a bump chart for the ranking of counts. 
+
+## 1. Data Cleaning
+
+```{r}
+#| cache: true
+
+# Set upper limit of digits (for testing purposes of smaller dataset)
+n_digits <- nrow(pi_digits)
+
+# Get all digits for all positions (10 million rows!)
+pi_markers <- pi_digits %>% 
+  filter(digit_position <= n_digits) %>% 
+  expand(digit_position, digit2 = digit)
+
+# Get cumulative counts at each position and rank by count
+pi_ranks <- pi_digits %>% 
+  filter(digit_position <= n_digits) %>% 
+  full_join(pi_markers) %>% 
+  mutate(match = as.numeric(digit == digit2)) %>% 
+  group_by(digit2) %>% 
+  mutate(total = cumsum(match)) %>% 
+  select(digit_position, digit2, total) %>% 
+  group_by(digit_position) %>% 
+  mutate(rank = rank(-total, ties.method = 'first')) #negative so 1 = largest count
+
+# Remove markers to clear some memory
+rm(pi_markers)
+```
+
+## 2. Visualization
+
+The `ggbump` package works well here, but is no longer available on CRAN. Either the archive version of this package can be downloaded, or the development version from [GitHub](https://github.com/davidsjoberg/ggbump).
+
+A clear issue with 1 million positions is that the there will be 10 million data points. This is excessive, so I decided to only show ranks along the log base 10 scale. This seems to add clarity in the resulting chart, which is better than showing every value. 
+
+```{r}
+#| fig-dpi: 300
+#| fig-width: 6
+
+#devtools::install_github("davidsjoberg/ggbump")
+library(ggbump)
+library(scales)
+
+breaks <- 10*10^c(0:10)
+
+p_bump <- pi_ranks %>% 
+  filter(digit_position %in% breaks) %>%
+  
+  # Base chart
+  ggplot(mapping = aes(x = digit_position, y = rank, 
+                       group = digit2, color = factor(digit2))) + 
+  geom_bump() + 
+  geom_point(size = 3) + 
+  geom_text(aes(label = digit2), color = 'black', size = 2) + 
+  
+  # Aesthetics
+  scale_y_reverse(breaks = 1:10) + 
+  scale_x_log10(breaks = breaks, labels = comma) + 
+  labs(
+    x = 'Digit Position',
+    y = 'Rank',
+    title = 'Digit Frequency Rankings For Pi',
+    subtitle = 'Ranks are computed as the cumulative count of digits\nat equally spaced intervals of the log 10 scale.'
+  ) + 
+  theme_minimal() + 
+  theme(
+    aspect.ratio = 1/2,
+    legend.position = 'none',
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.major.y = element_line(color = 'grey70'),
+    plot.title = element_text(face = 'bold', size = 16),
+    plot.subtitle = element_text(size = 10, color = 'grey20'),
+    axis.title = element_text(size = 12, color = 'black'),
+    plot.background = element_rect(color = 'black', fill = 'grey90')
+  )
+
+p_bump
+```
+
+
+
 

@@ -1,0 +1,59 @@
+---
+title: "April 21st"
+categories:
+  - tidytuesday
+date: "2026-03-31"
+draft: true
+execute:
+  echo: true
+  message: false
+  warning: false
+format: 
+  html:
+    code-fold: true
+---
+
+
+This #tidytuesday comes from April 20th, 2026 and explores ocean temperature in Nova Scotia. The GitHub page can be found [here](https://github.com/rfordatascience/tidytuesday/tree/main/data/2026/2026-04-21) and provides the following description: 
+
+> Description here!
+
+My goal with these datasets is as follows: 
+
+1. Create a media-quality graphic 
+2. Create a statistical graphic
+
+
+## Data
+
+```{r}
+#| code-fold: false
+
+# Packages
+library(tidyverse)
+
+# Load data
+tuesdata <- tidytuesdayR::tt_load('2026-04-21')
+
+# Extract data
+financing_schemes <- tuesdata$financing_schemes
+health_spending <- tuesdata$health_spending
+spending_purpose <- tuesdata$spending_purpose
+```
+
+```{r}
+#| fig-height: 10
+#| fig-width: 5
+#| fig-dpi: 600
+
+health_spending %>% 
+  filter(indicator_code == 'che_usd2023') %>% 
+  group_by(year) %>% 
+  mutate(rank = rank(-value)) %>% 
+  arrange(year, rank) %>% 
+  filter(rank <= 9) %>%
+  ggplot(mapping = aes(x = year, y = value, group = country_name, color = iso3_code)) + 
+  geom_point() + 
+  scale_y_log10() +
+  geom_line()
+```

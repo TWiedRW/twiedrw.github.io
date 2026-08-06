@@ -1,5 +1,6 @@
 ---
-title: "About"
+title: "Tyler Wiederich"
+subtitle: "Statistician | Data Scientist | Educator"
 image: images/Profile_Wiederich.jpg
 background-image: images/Profile_Wiederich.jpg
 about:
@@ -11,12 +12,12 @@ about:
     - icon: linkedin
       text: LinkedIn
       href: https://www.linkedin.com/in/tyler-wiederich/
+    - icon: mortarboard-fill
+      text: Courses
+      href: https://www.example.com
 ---
 
+Hello! I am a statistician specializing in computational methods, applied statistical methodology, and data visualization. I currently serve as a Lecturer in Department of Statistics at the University of Nebraska–Lincoln, where I teach undergraduate and graduate level courses, with an emphasis in computational statistics. 
 
-:::{#hero-heading}
-
-Hello! My name is Tyler Wiederich and I am a Ph.D. candidate in the Department of Statistics at the University of Nebraska-Lincoln. I am expecting to graduate in May and am currently looking for employment opportunities. On this site, you can find several of my portfolio projects and presentations, as well as other 
-
-:::
+I am currently seeking employment opportunities beginning on or after June, 2027.
 
