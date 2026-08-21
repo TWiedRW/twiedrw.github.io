@@ -14,7 +14,7 @@ about:
       href: https://www.linkedin.com/in/tyler-wiederich/
     - icon: mortarboard-fill
       text: Courses
-      href: https://www.example.com
+      href: https://staturn-courses.github.io/
 ---
 
 Hello! I am a statistician specializing in computational methods, applied statistical methodology, and data visualization. I currently serve as a Lecturer in Department of Statistics at the University of Nebraska–Lincoln, where I teach undergraduate and graduate level courses, with an emphasis in computational statistics. 

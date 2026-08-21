@@ -179,7 +179,7 @@
     "href": "blog/index.html",
     "title": "Blog",
     "section": "",
-    "text": "When I started getting involved in data science, the most captivating aspect was the ability to take data and tell a story. On this page, I am taking inspiration from TidyTuesday to keep my skills sharp.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOne Million Digits of Pi\n\n\n\n\n\n\ntidytuesday\n\n\n\n\n\n\n\n\n\nMar 24, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nSalmonid Mortality Data\n\n\n\n\n\n\ntidytuesday\n\n\n\n\n\n\n\n\n\nMar 20, 2026\n\n\n\n\n\n\nNo matching items"
+    "text": "When I started getting involved in data science, the most captivating aspect was the ability to take data and tell a story. On this page, I am taking inspiration from TidyTuesday to keep my skills sharp.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOne Million Digits of Pi\n\n\n\ntidytuesday\n\n\n\n\n\n\n\n\n\nMar 24, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nSalmonid Mortality Data\n\n\n\ntidytuesday\n\n\n\n\n\n\n\n\n\nMar 20, 2026\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "portfolio.html",
@@ -200,7 +200,7 @@
     "href": "portfolio.html#color-palette-generation-from-images",
     "title": "Portfolio",
     "section": "Color palette generation from images",
-    "text": "Color palette generation from images\nIn collaboration with Muxin Hua, we developed an R package focused on creating color palettes from images. The overall theory was to identify the colors in the image and use clustering to generate distinct separated colors. We also included a color-blind mode that initially put images through color filters before clustering.\nYou can check out the GitHub page here, or try it for yourself!\n\n# install.packages(\"devtools\")\ndevtools::install_github(\"Hiiiua/Photopal\")\n\nlibrary(Photopal)\nlibrary(ggplot2)\n\n# Use demo image template\nmy_cols &lt;- Photopal::palette_create(num.col = 3, df.rgb = image2rgb(), plot = F)\n\n# Create plot using penguins dataset\npenguins |&gt;\n  ggplot(mapping = aes(x = bill_len, y = bill_dep, color = species)) + \n  geom_point(size = 1/2) + \n  scale_color_manual(values = c(\n    'Adelie'= my_cols[1,4],\n    'Chinstrap' = my_cols[2,4],\n    'Gentoo' = my_cols[3,4]\n  )) + \n  theme_bw()\n#ggsave('sample-plot.png', width = 806, height = 605, units = 'px')\n\n\n\n\n\n\n\n\n\n\nSample image\n\n\n\n\n\n\n\nPlot with palette"
+    "text": "Color palette generation from images\nIn collaboration with Muxin Hua, we developed an R package focused on creating color palettes from images. The overall theory was to identify the colors in the image and use clustering to generate distinct separated colors. We also included a color-blind mode that initially put images through color filters before clustering.\nYou can check out the GitHub page here, or try it for yourself!\n\n# install.packages(\"devtools\")\ndevtools::install_github(\"Hiiiua/Photopal\")\n\nlibrary(Photopal)\nlibrary(ggplot2)\n\n# Use demo image template\nmy_cols &lt;- Photopal::palette_create(num.col = 3, df.rgb = image2rgb(), plot = F)\n\n# Create plot using penguins dataset\npenguins |&gt;\n  ggplot(mapping = aes(x = bill_len, y = bill_dep, color = species)) + \n  geom_point(size = 1/2) + \n  scale_color_manual(values = c(\n    'Adelie'= my_cols[1,4],\n    'Chinstrap' = my_cols[2,4],\n    'Gentoo' = my_cols[3,4]\n  )) + \n  theme_bw()\n#ggsave('sample-plot.png', width = 806, height = 605, units = 'px')\n\n\n\n\n\n\n\nSample image\n\n\n\n\n\n\n\nPlot with palette"
   },
   {
     "objectID": "portfolio.html#this-website",

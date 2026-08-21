@@ -4,3 +4,5 @@
 .Ruserdata
 /.quarto/
 curriculum_vitae_tyler_wiederich.tex
+
+**/*.quarto_ipynb

@@ -1,0 +1,17 @@
+{
+  "hash": "4bea33532feb6533f9df4f3475569fa0",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"TITLE\"\ncategories:\n  - tidytuesday\ndate: \"2026-03-24\"\ndraft: true\nexecute:\n  echo: true\n  message: false\n  warning: false\nformat: \n  html:\n    code-fold: true\n---\n\nLink to data: [TidyTuesday](https://github.com/rfordatascience/tidytuesday/blob/main/data/2026/2026-08-11/readme.md)\n\n> We use the sample of emission-line nuclei derived from a recently completed optical spectroscopic survey of nearby galaxies to quantify the incidence of local (z = 0) nuclear activity. [...] Half of the objects can be classified as H II or star-forming nuclei and the other half as some form of AGN, of which we distinguish three classes — Seyfert nuclei, LINERs, and transition objects.\n\n## 0. Data\n\n\n::: {.cell}\n\n```{.r .cell-code  code-fold=\"false\"}\n# Packages\nlibrary(tidyverse)\n\n# Load data\ntuesdata <- tidytuesdayR::tt_load('2026-08-11')\n\npalomar_emission_lines <- tuesdata$palomar_emission_lines\npalomar_survey <- tuesdata$palomar_survey\n```\n:::\n\n\n# Visualization 1\n\n## 1. Data Cleaning\n\n\n::: {.cell}\n\n```{.r .cell-code}\njoined_data <- palomar_survey |> \n  full_join(palomar_emission_lines, by = 'galaxy_name') |> \n  filter(activity_type != 'Absorption' & !is.na(activity_type))\nnames(joined_data)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n [1] \"galaxy_name\"               \"hubble_type\"              \n [3] \"b_magnitude\"               \"helio_velocity_km_s\"      \n [5] \"ra_j2000\"                  \"dec_j2000\"                \n [7] \"ha_hb_ratio\"               \"internal_reddening_ebv\"   \n [9] \"sii_density_ratio\"         \"electron_density_cm3\"     \n[11] \"log_oiii_hb\"               \"log_oi_ha\"                \n[13] \"log_nii_ha\"                \"log_sii_ha\"               \n[15] \"spectral_class\"            \"activity_type\"            \n[17] \"activity_subtype\"          \"classification_confidence\"\n[19] \"velocity_dispersion_km_s\"  \"velocity_dispersion_error\"\n[21] \"h_gamma\"                   \"h_beta\"                   \n[23] \"oiii_5007\"                 \"oi_6300\"                  \n[25] \"nii_6583\"                  \"sii_6716\"                 \n[27] \"sii_6731\"                 \n```\n\n\n:::\n:::\n\n\n\n## 2. Data Visualization\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# joined_data |>\npalomar_survey |>\n  filter(activity_type != 'Absorption' & !is.na(activity_type)) |> \n  ggplot(mapping = aes(x = log_nii_ha, y = log_oiii_hb, shape = activity_type, color = activity_type)) + \n  geom_point() + \n  scale_x_log10() +\n  scale_y_log10() +\n  theme_bw() + \n  theme(aspect.ratio = 4/6)\n```\n\n::: {.cell-output-display}\n![](tidytuesday-2026-08-11_files/figure-html/unnamed-chunk-3-1.png){width=576}\n:::\n:::\n\n\n",
+    "supporting": [
+      "tidytuesday-2026-08-11_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
