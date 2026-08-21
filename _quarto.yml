@@ -19,7 +19,7 @@ website:
 
 format:
   html:
-    theme: cosmo
+    theme: flatly
     css: styles.css
     toc: true
     respect-user-color-scheme: true

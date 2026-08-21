@@ -1,0 +1,62 @@
+---
+title: "TITLE"
+categories:
+  - tidytuesday
+date: "2026-03-24"
+draft: true
+execute:
+  echo: true
+  message: false
+  warning: false
+format: 
+  html:
+    code-fold: true
+---
+
+Link to data: [TidyTuesday](https://github.com/rfordatascience/tidytuesday/blob/main/data/2026/2026-08-11/readme.md)
+
+> We use the sample of emission-line nuclei derived from a recently completed optical spectroscopic survey of nearby galaxies to quantify the incidence of local (z = 0) nuclear activity. [...] Half of the objects can be classified as H II or star-forming nuclei and the other half as some form of AGN, of which we distinguish three classes — Seyfert nuclei, LINERs, and transition objects.
+
+## 0. Data
+
+```{r}
+#| code-fold: false
+# Packages
+library(tidyverse)
+
+# Load data
+tuesdata <- tidytuesdayR::tt_load('2026-08-11')
+
+palomar_emission_lines <- tuesdata$palomar_emission_lines
+palomar_survey <- tuesdata$palomar_survey
+```
+
+# Visualization 1
+
+## 1. Data Cleaning
+
+```{r}
+joined_data <- palomar_survey |> 
+  full_join(palomar_emission_lines, by = 'galaxy_name') |> 
+  filter(activity_type != 'Absorption' & !is.na(activity_type))
+names(joined_data)
+```
+
+
+## 2. Data Visualization
+
+```{r}
+#| fig-width: 6
+#| fig-height: 4
+# joined_data |>
+palomar_survey |>
+  filter(activity_type != 'Absorption' & !is.na(activity_type)) |> 
+  ggplot(mapping = aes(x = log_nii_ha, y = log_oiii_hb, shape = activity_type, color = activity_type)) + 
+  geom_point() + 
+  scale_x_log10() +
+  scale_y_log10() +
+  theme_bw() + 
+  theme(aspect.ratio = 4/6)
+
+```
+

@@ -1,0 +1,60 @@
+---
+title: "TITLE"
+categories:
+  - tidytuesday
+date: "2026-03-24"
+draft: true
+execute:
+  echo: true
+  message: false
+  warning: false
+format: 
+  html:
+    code-fold: true
+---
+
+Link to data: [TidyTuesday](https://www.example.com)
+
+> Data description
+
+## 0. Data
+
+```{r}
+#| code-fold: false
+# Packages
+library(tidyverse)
+
+# Load data
+tuesdata <- tidytuesdayR::tt_load('2026-03-24')
+```
+
+# Visualization 1
+
+## 1. Data Cleaning
+
+```{r}
+
+```
+
+
+## 2. Data Visualization
+
+```{r}
+
+```
+
+
+# Visualization 2
+
+## 1. Data Cleaning
+
+```{r}
+
+```
+
+
+## 2. Data Visualization
+
+```{r}
+
+```

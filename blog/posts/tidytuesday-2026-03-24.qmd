@@ -12,7 +12,7 @@ format:
     code-fold: true
 ---
 
-Pi is an irrational number representing the ratio of a circle's circumference to its diameter. For this week's [TidyTuesday](https://github.com/rfordatascience/tidytuesday/tree/main/data/2026/2026-03-24), one million digits of pi and their placements are provided for a fun exploration project. 
+Link to data: [TidyTuesday](https://github.com/rfordatascience/tidytuesday/tree/main/data/2026/2026-03-24)
 
 > "Pi is an irrational number, meaning its decimal representation never ends and never settles into a permanent repeating pattern."" — Eve Andersson, collector of the one million digits dataset
 
@@ -20,9 +20,10 @@ I saw a great post by [Steven Ponce on Bluesky](https://bsky.app/profile/sponce1
 
 # Walking Path of π
 
-## 1. Reading in the data
+## 0. Data
 
 ```{r}
+#| code-fold: false
 # Packages
 library(tidyverse)
 
@@ -31,13 +32,9 @@ tuesdata <- tidytuesdayR::tt_load('2026-03-24')
 
 # Extract data
 pi_digits <- tuesdata$pi_digits
-
-# Show the first few values
-head(pi_digits) %>% 
-  knitr::kable()
 ```
 
-## 2. Data Cleaning
+## 1. Data Cleaning
 
 A compass has 360 degrees, which can be divided into 10 increments of 36 degrees. Assigning digits to these increments provide directions, where 0 = 0°, 1 = 36°, ..., and 9 = 324°. 
 
@@ -114,6 +111,10 @@ animate(p_animate, nframes = 100, end_pause = 10, rewind = TRUE)
 
 Many visualization of pi tend to focus on the distributions of digits. While this gives an idea of how often a specific digit is represented, we can show how this changes over time with a bump chart for the ranking of counts. 
 
+The `ggbump` package works well here, but is no longer available on CRAN. Either the archive version of this package can be downloaded, or the development version from [GitHub](https://github.com/davidsjoberg/ggbump).
+
+A clear issue with 1 million positions is that the there will be 10 million data points. This is excessive, so I decided to only show ranks along the log base 10 scale. This seems to add clarity in the resulting chart, which is better than showing every value. 
+
 ## 1. Data Cleaning
 
 ```{r}
@@ -143,10 +144,6 @@ rm(pi_markers)
 ```
 
 ## 2. Visualization
-
-The `ggbump` package works well here, but is no longer available on CRAN. Either the archive version of this package can be downloaded, or the development version from [GitHub](https://github.com/davidsjoberg/ggbump).
-
-A clear issue with 1 million positions is that the there will be 10 million data points. This is excessive, so I decided to only show ranks along the log base 10 scale. This seems to add clarity in the resulting chart, which is better than showing every value. 
 
 ```{r}
 #| fig-dpi: 300

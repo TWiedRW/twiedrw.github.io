@@ -2,23 +2,18 @@
 title: "About"
 ---
 
-I am a recent Ph.D. graduate in Statistics from the University of Nebraska-Lincoln with experience in consulting, teaching, and applied analytics. 
-
-**ADD MORE HERE**
+I am a recent Ph.D. graduate in Statistics from the University of Nebraska-Lincoln with experience in consulting, teaching, and applied analytics. My main interests are in R programming and solving questions using data. 
 
 ## Education
 
 - **University of Nebraska-Lincoln** (Lincoln, NE)  
   Ph.D. in Statistics, 2026
-  
 - **University of Nebraska-Lincoln** (Lincoln, NE)  
   M.S. in Statistics, 2023
 - **Winona State University** (Winona, MN)  
   B.S. in Mathematics, B.S. in Statistics, Minor Data Science, 2021
 
 ## Experience
-
-
 
 ### University of Nebraska-Lincoln (Lincoln, NE)
 
@@ -86,8 +81,6 @@ I currently serve as a full-time Lecturer in the Department of Statistics, where
 
 - Co-instructor
 - Designed primarily to develop and equip middle-level teachers with the statistical knowledge they need for teaching. The course follows an inquiry/discovery design, dedicating much of class time to activities, discussion and group work. The course emphasizes topics in statistics that are part of the middle-school mathematics curriculum, as well as their application in other disciplines. The course also includes statistics that are used in education and school-based research.
-
-
 
 
 ## Workshops

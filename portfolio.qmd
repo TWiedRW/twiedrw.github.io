@@ -4,7 +4,6 @@ title: "Portfolio"
 
 My passion for working with data started during the summer break after my first year of my undergraduate degree. At the time, I was double majoring in mathematics and statistics, but I had just taken the introductory data science course. I instantly found a spark for working with data in R and read through R for Data Science by Hadley Wickham (<https://r4ds.hadley.nz>). Since then, I have worked on numerous projects for personal development and my own curiosity. 
 
-# Personal Projects
 
 ## Overlap of Majors and Minors at Winona State University
 

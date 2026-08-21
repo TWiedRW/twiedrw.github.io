@@ -12,11 +12,14 @@ format:
     code-fold: true
 ---
 
-Farmed salmon in Norway is the subject of this week's [TidyTuesday](https://github.com/rfordatascience/tidytuesday/tree/main/data/2026/2026-03-17). The data is accompanied by the following description: 
+Link to data: [TidyTuesday](https://github.com/rfordatascience/tidytuesday/tree/main/data/2026/2026-03-17).
 
 > The Fish Health Report is the Norwegian Veterinary Institute's annual status report on the health and welfare situation for Norwegian farmed fish and is based on official statistics, data from the Norwegian Veterinary Institute and private laboratories. The report also contains results from a survey among fish health personnel and inspectors from the Norwegian Food Safety Authority, as well as assessments of the situation, trends and risks.
 
+## 0. Data
+
 ```{r}
+#| code-fold: false
 # Packages
 library(tidyverse)
 
@@ -29,20 +32,7 @@ monthly_mortality_data <- tuesdata$monthly_mortality_data
 ```
 
 
-I wanted to explore a few different questions to help guide my visualizations:
-
-1. Which counties had the most salmon loss in the last five years?
-2. How have county-level mortality rates changed over time?
-3. In what ways are salmon lost?
-
 # County-Level Salmon Losses
-
-To answer my first question, it would be easy enough to calculate the sum of salmon losses for each county over the 2020 to 2025 time period. However, there are a couple of considerations that I want to note for this type of visualization:
-
-1. Sums across the time periods does not show year-to-year variation.
-2. Displaying yearly data may not show which counties had the highest total losses.
-
-My primary goal is to easily answer which counties had the most salmon losses over the five-year period. To do this, I decided to create a stacked bar chart, where each year is represented by a different shade of red. While this visualization is not great at showing year-to-year differences, it is easy to see that Vestland had a large number of losses during this time period. 
 
 ## 1. Visualization
 
@@ -99,8 +89,6 @@ monthly_losses_data %>%
 
 # Mortality Rates Over Time
 
-The morality data provides median mortality rates for multiple regional levels. Following the county totals for each year, it is reasonable to show the median mortality rate at the county level. Additionally, including the average of these rates provides some insight for the typical county. 
-
 ## 1. Data Cleaning
 
 ```{r}
@@ -113,8 +101,6 @@ monthly_mortality_data_avg <- monthly_mortality_data %>%
 
 
 ## 2. Visualization
-
-Line charts are typically used to show trends over time. My goal with this chart is to emphasize the typical county mortality rate, which I can accomplish by overlaying a darker dashed line of the average rate over individual opaque lines for each county. This allows for the chart to show individual county variation and a clear average mortality rate. 
 
 ```{r}
 #| fig-width: 6
@@ -174,29 +160,21 @@ monthly_mortality_data %>%
 
 # Composition of Losses
 
-For my final chart, I wanted to explore how salmon were lost. The categories for salmon loss are dead, discarded, escaped, and other. The "escaped" category has considerably fewer counts than the dead and discarded categories, so I decided to combine "escaped" with "other".
-
-```{r}
-monthly_losses_data %>% 
-  filter(geo_group == 'country' & species == 'salmon') %>% 
-  select(-losses) %>% 
-  pivot_longer(dead:other, names_to = 'category', values_to = 'losses')  %>% 
-  group_by(category) %>% 
-  summarize(prop = sum(losses))
-```
-
-
 ## 1. Data Cleaning
+
+Dince 
 
 ```{r}
 #| fig-width: 4
 #| fig-height: 4
 #| fig-dpi: 300
 
+# Custom colors
 my_cols <- c('dead'='#5e4c5f',
              'discarded'='#ffbb6f',
              'other'='#999999')
 
+# Combine 'other' and 'escaped'
 bg_df <- monthly_losses_data %>% 
   filter(geo_group == 'country' & species == 'salmon') %>% 
   mutate(other = other + escaped, .keep = 'unused') %>% 
@@ -221,7 +199,7 @@ bg_df %>%
            ymin = -Inf, ymax = Inf, 
            fill = 'grey', alpha = 0.2) +
   annotate('text',
-           x = 2024, y = 32, label = 'Shift in composition',
+           x = 2024, y = 32, label = 'Shift in composition?',
            size = 2.5) + 
   
   # Chart
