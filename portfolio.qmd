@@ -5,24 +5,6 @@ title: "Portfolio"
 My passion for working with data started during the summer break after my first year of my undergraduate degree. At the time, I was double majoring in mathematics and statistics, but I had just taken the introductory data science course. I instantly found a spark for working with data in R and read through R for Data Science by Hadley Wickham (<https://r4ds.hadley.nz>). Since then, I have worked on numerous projects for personal development and my own curiosity. 
 
 
-## Overlap of Majors and Minors at Winona State University
-
-One of my very first projects in R came up in a conversation with a friend about which minors at Winona State would be the easiest to complete depending on the major. He never intended for me to figure out an "answer", but I decided to use the opportunity to learn about web scraping and data cleaning. Unfortunately, this was before I was using GitHub for my projects, and I lost the project when migrating my campus-provided laptop (a lesson I have since learned). Below are the steps I used to complete the analysis.
-
-1. For all pages for majors and minors, extract all courses listed into a single data frame with columns for course and program.
-2. Separate the data frame into a majors data frame and a minors data frame.
-3. Full join majors and minors on a dummy variable to get all combinations of courses for each combination of majors and minors.
-4. For each combination, compute the number of overlapping courses.
-5. Divide the number of overlapping courses by the number of courses listed for the minor.
-
-At the time, there were 110 majors and 77 minors available at Winona State. Below is an early iteration of my graphic, which was designed to be printed on a poster.
-
-![Early figure](images/first-project.jpg){fig-align='center' fig-width='100%'}
-
-I recently decided to replicate this analysis and have the code available on [GitHub](https://github.com/TWiedRW/wsu-programs). The main improvement was limiting the number of majors to Bachelor of Science degrees and removing minors with low overlap. 
-
-![Final figure](https://github.com/TWiedRW/wsu-programs/blob/master/major-minor-overlap.png?raw=true)
-
 <!---
  
 ## March Madness Competition
@@ -93,3 +75,20 @@ This project was also my first time using a pdf template with Quarto documents, 
 
 [Paper](https://twiedrw.github.io/stat930_presentation/report.pdf) | [Presentation](https://twiedrw.github.io/stat930_presentation/stat930-presentation.html) | [GitHub](https://github.com/TWiedRW/stat930_presentation)
 
+## Overlap of Majors and Minors at Winona State University
+
+One of my very first projects in R came up in a conversation with a friend about which minors at Winona State would be the easiest to complete depending on the major. He never intended for me to figure out an "answer", but I decided to use the opportunity to learn about web scraping and data cleaning. Unfortunately, this was before I was using GitHub for my projects, and I lost the project when migrating my campus-provided laptop (a lesson I have since learned). Below are the steps I used to complete the analysis.
+
+1. For all pages for majors and minors, extract all courses listed into a single data frame with columns for course and program.
+2. Separate the data frame into a majors data frame and a minors data frame.
+3. Full join majors and minors on a dummy variable to get all combinations of courses for each combination of majors and minors.
+4. For each combination, compute the number of overlapping courses.
+5. Divide the number of overlapping courses by the number of courses listed for the minor.
+
+At the time, there were 110 majors and 77 minors available at Winona State. Below is an early iteration of my graphic, which was designed to be printed on a poster.
+
+![Early figure](images/first-project.jpg){fig-align='center' fig-width='100%'}
+
+I recently decided to replicate this analysis and have the code available on [GitHub](https://github.com/TWiedRW/wsu-programs). The main improvement was limiting the number of majors to Bachelor of Science degrees and removing minors with low overlap. 
+
+![Final figure](https://github.com/TWiedRW/wsu-programs/blob/master/major-minor-overlap.png?raw=true)

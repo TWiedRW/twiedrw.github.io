@@ -166,14 +166,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#personal-projects" id="toc-personal-projects" class="nav-link active" data-scroll-target="#personal-projects">Personal Projects</a>
-  <ul class="collapse">
-  <li><a href="#overlap-of-majors-and-minors-at-winona-state-university" id="toc-overlap-of-majors-and-minors-at-winona-state-university" class="nav-link" data-scroll-target="#overlap-of-majors-and-minors-at-winona-state-university">Overlap of Majors and Minors at Winona State University</a></li>
-  <li><a href="#color-palette-generation-from-images" id="toc-color-palette-generation-from-images" class="nav-link" data-scroll-target="#color-palette-generation-from-images">Color palette generation from images</a></li>
+  <li><a href="#color-palette-generation-from-images" id="toc-color-palette-generation-from-images" class="nav-link active" data-scroll-target="#color-palette-generation-from-images">Color palette generation from images</a></li>
   <li><a href="#this-website" id="toc-this-website" class="nav-link" data-scroll-target="#this-website">This website!</a></li>
   <li><a href="#frequentist-bayesian-and-visual-inference" id="toc-frequentist-bayesian-and-visual-inference" class="nav-link" data-scroll-target="#frequentist-bayesian-and-visual-inference">Frequentist, Bayesian, and Visual Inference</a></li>
   <li><a href="#advanced-consulting-report" id="toc-advanced-consulting-report" class="nav-link" data-scroll-target="#advanced-consulting-report">Advanced Consulting Report</a></li>
-  </ul></li>
+  <li><a href="#overlap-of-majors-and-minors-at-winona-state-university" id="toc-overlap-of-majors-and-minors-at-winona-state-university" class="nav-link" data-scroll-target="#overlap-of-majors-and-minors-at-winona-state-university">Overlap of Majors and Minors at Winona State University</a></li>
   </ul>
 </nav>
     </div>
@@ -200,32 +197,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>My passion for working with data started during the summer break after my first year of my undergraduate degree. At the time, I was double majoring in mathematics and statistics, but I had just taken the introductory data science course. I instantly found a spark for working with data in R and read through R for Data Science by Hadley Wickham (<a href="https://r4ds.hadley.nz" class="uri">https://r4ds.hadley.nz</a>). Since then, I have worked on numerous projects for personal development and my own curiosity.</p>
-<section id="personal-projects" class="level1">
-<h1>Personal Projects</h1>
-<section id="overlap-of-majors-and-minors-at-winona-state-university" class="level2">
-<h2 class="anchored" data-anchor-id="overlap-of-majors-and-minors-at-winona-state-university">Overlap of Majors and Minors at Winona State University</h2>
-<p>One of my very first projects in R came up in a conversation with a friend about which minors at Winona State would be the easiest to complete depending on the major. He never intended for me to figure out an “answer”, but I decided to use the opportunity to learn about web scraping and data cleaning. Unfortunately, this was before I was using GitHub for my projects, and I lost the project when migrating my campus-provided laptop (a lesson I have since learned). Below are the steps I used to complete the analysis.</p>
-<ol type="1">
-<li>For all pages for majors and minors, extract all courses listed into a single data frame with columns for course and program.</li>
-<li>Separate the data frame into a majors data frame and a minors data frame.</li>
-<li>Full join majors and minors on a dummy variable to get all combinations of courses for each combination of majors and minors.</li>
-<li>For each combination, compute the number of overlapping courses.</li>
-<li>Divide the number of overlapping courses by the number of courses listed for the minor.</li>
-</ol>
-<p>At the time, there were 110 majors and 77 minors available at Winona State. Below is an early iteration of my graphic, which was designed to be printed on a poster.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/first-project.jpg" class="img-fluid figure-img"></p>
-<figcaption>Early figure</figcaption>
-</figure>
-</div>
-<p>I recently decided to replicate this analysis and have the code available on <a href="https://github.com/TWiedRW/wsu-programs">GitHub</a>. The main improvement was limiting the number of majors to Bachelor of Science degrees and removing minors with low overlap.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://github.com/TWiedRW/wsu-programs/blob/master/major-minor-overlap.png?raw=true" class="img-fluid figure-img"></p>
-<figcaption>Final figure</figcaption>
-</figure>
-</div>
 <!---
  
 ## March Madness Competition
@@ -233,7 +204,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 My statistics department at UNL usually hosts an annual March Madness competition where we select teams in the bracket and compete based off the number of wins from their chosen teams. For fairness, we each have 100 points that can be used to purchase teams, where teams with higher seeds cost more points. In 2023, I got second place by selecting teams based off the distribution of points scored in regular season games. Rather than providing two web scraping projects in R here, I decided to replicate the analysis in Python. 
 
 --->
-</section>
 <section id="color-palette-generation-from-images" class="level2">
 <h2 class="anchored" data-anchor-id="color-palette-generation-from-images">Color palette generation from images</h2>
 <p>In collaboration with <a href="https://github.com/Hiiiua">Muxin Hua</a>, we developed an R package focused on creating color palettes from images. The overall theory was to identify the colors in the image and use clustering to generate distinct separated colors. We also included a color-blind mode that initially put images through color filters before clustering.</p>
@@ -260,7 +230,7 @@ My statistics department at UNL usually hosts an annual March Madness competitio
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">#ggsave('sample-plot.png', width = 806, height = 605, units = 'px')</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="quarto-layout-panel" data-out-width="90%" data-layout-ncol="2">
+<div class="quarto-layout-panel" data-layout-ncol="2" data-out-width="90%">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
@@ -298,9 +268,33 @@ My statistics department at UNL usually hosts an annual March Madness competitio
 <p>In my advanced consulting course, students functioned as a statistical consultant at the Statistical Cross-Disciplinary Collaboration &amp; Consulting Lab in the Department of Statistics at UNL. At the end of the course, we had to put together a portfolio of projects that we worked on over the semester. One of my clients was working on a project to determine if hilling, a process of covering crops, was effective or not in mitigating the damage of the soybean gall midge. My client had several responses that required fitting generalized linear mixed models using PROC GLIMMIX in SAS 9.4.</p>
 <p>This project was also my first time using a pdf template with Quarto documents, which I think ended up looking decent for a report.</p>
 <p><a href="https://twiedrw.github.io/stat930_presentation/report.pdf">Paper</a> | <a href="https://twiedrw.github.io/stat930_presentation/stat930-presentation.html">Presentation</a> | <a href="https://github.com/TWiedRW/stat930_presentation">GitHub</a></p>
-
-
 </section>
+<section id="overlap-of-majors-and-minors-at-winona-state-university" class="level2">
+<h2 class="anchored" data-anchor-id="overlap-of-majors-and-minors-at-winona-state-university">Overlap of Majors and Minors at Winona State University</h2>
+<p>One of my very first projects in R came up in a conversation with a friend about which minors at Winona State would be the easiest to complete depending on the major. He never intended for me to figure out an “answer”, but I decided to use the opportunity to learn about web scraping and data cleaning. Unfortunately, this was before I was using GitHub for my projects, and I lost the project when migrating my campus-provided laptop (a lesson I have since learned). Below are the steps I used to complete the analysis.</p>
+<ol type="1">
+<li>For all pages for majors and minors, extract all courses listed into a single data frame with columns for course and program.</li>
+<li>Separate the data frame into a majors data frame and a minors data frame.</li>
+<li>Full join majors and minors on a dummy variable to get all combinations of courses for each combination of majors and minors.</li>
+<li>For each combination, compute the number of overlapping courses.</li>
+<li>Divide the number of overlapping courses by the number of courses listed for the minor.</li>
+</ol>
+<p>At the time, there were 110 majors and 77 minors available at Winona State. Below is an early iteration of my graphic, which was designed to be printed on a poster.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/first-project.jpg" class="img-fluid figure-img"></p>
+<figcaption>Early figure</figcaption>
+</figure>
+</div>
+<p>I recently decided to replicate this analysis and have the code available on <a href="https://github.com/TWiedRW/wsu-programs">GitHub</a>. The main improvement was limiting the number of majors to Bachelor of Science degrees and removing minors with low overlap.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://github.com/TWiedRW/wsu-programs/blob/master/major-minor-overlap.png?raw=true" class="img-fluid figure-img"></p>
+<figcaption>Final figure</figcaption>
+</figure>
+</div>
+
+
 </section>
 
 </main> <!-- /main -->
