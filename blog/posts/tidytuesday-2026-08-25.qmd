@@ -1,0 +1,106 @@
+---
+title: "TITLE"
+categories:
+  - tidytuesday
+date: "2026-03-24"
+draft: true
+execute:
+  echo: true
+  message: false
+  warning: false
+format: 
+  html:
+    code-fold: true
+---
+
+Link to data: [TidyTuesday](https://github.com/rfordatascience/tidytuesday/blob/main/data/2026/2026-08-25/readme.md)
+
+> Today's video is a DEEP DIVE into the world of country music, and I'm determined to figure out if the stereotypes people have about modern country songwriting are actually true. Is it REALLY all about beer and trucks and girls and blue jeans? Are all the lyrics REALLY the same? To find out, I maintained a spreadsheet of every country song that has reached the Top 30 of Billboard's Country Airplay chart for the past six years (2014-2019) and then crunched a whole lot of data.
+
+
+## 0. Data
+
+```{r}
+#| code-fold: false
+# Packages
+library(tidyverse)
+
+# Load data
+tuesdata <- tidytuesdayR::tt_load('2026-08-25')
+
+country_lyrics <- tuesdata$country_lyrics
+top_all_writers <- tuesdata$top_all_writers
+top_primary_writers <- tuesdata$top_primary_writers
+top_producers <- tuesdata$top_producers
+```
+
+# Visualization 1
+
+## 1. Data Cleaning
+
+```{r}
+library(tidytext)
+library(stopwords)
+# Data set of weighted word proportions
+word_props <- country_lyrics |> 
+  group_by(song, artist) |> 
+  unnest_tokens(word, lyrics) |> # Gets word by song and artist 
+  filter(!(word %in% stop_words$word)) |> # Remove stop words
+  group_by(song, artist, word) |> 
+  count(sort = T) |> # Counts of words within songs
+  group_by(artist) |> 
+  complete(song, word, fill = list(n = 0)) |> # For each artist, fill in 0's for words not in their other songs
+  
+  group_by(song, artist) |> 
+  mutate(prop_in_song = n/sum(n)) |>  # Get the proportion within a song
+  group_by(artist, word) |> 
+  summarise(weighted_prop = mean(prop_in_song)) |> # Get the proportion across songs
+  arrange(-weighted_prop) 
+
+# Data set of songs by artist
+artist_counts <- country_lyrics %>% 
+  group_by(artist) %>% 
+  count(sort = T) %>% 
+  filter(n >= 10) # Filter artists with at least 10 sings in the top hits
+
+# Inner join to filter
+country <- word_props %>% 
+  inner_join(artist_counts, by = 'artist')
+
+```
+
+
+## 2. Data Visualization
+
+```{r}
+library(ggwordcloud)
+country %>% 
+  ungroup() %>% 
+  filter(weighted_prop > 0.001) %>% 
+  ggplot(mapping = aes(label = word, 
+                       size = weighted_prop,
+                       color = artist)) + 
+  geom_text_wordcloud(area_corr = TRUE) + 
+  scale_size_area(max_size=24, trans = power_trans())
+```
+
+
+```{r}
+
+```
+
+
+# Visualization 2
+
+## 1. Data Cleaning
+
+```{r}
+
+```
+
+
+## 2. Data Visualization
+
+```{r}
+
+```

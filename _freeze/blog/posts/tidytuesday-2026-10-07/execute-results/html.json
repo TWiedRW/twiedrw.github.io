@@ -1,0 +1,17 @@
+{
+  "hash": "eb87a3e81b2685e535c127798398a183",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Avocado Oil Authenticity\"\ncategories:\n  - tidytuesday\ndate: \"2026-10-07\"\ndraft: false\nexecute:\n  echo: true\n  message: false\n  warning: false\nformat: \n  html:\n    code-fold: true\n---\n\nLink to data: [TidyTuesday](https://github.com/rfordatascience/tidytuesday/tree/main/data/2026/2026-10-06)\n\n> Consumers are increasingly paying a premium for products made with avocado oil or olive oil. They deserve to get what they pay for and food manufacturers deserve confidence that the ingredients they purchase from suppliers are authentic.\n\n## 0. Data\n\n\n::: {.cell}\n\n```{.r .cell-code  code-fold=\"false\"}\n# Packages\nlibrary(tidyverse)\n\n# Load data\ntuesdata <- tidytuesdayR::tt_load('2026-10-06')\navocado_oil_bottles <- tuesdata$avocado_oil_bottles\navocado_oil_processed_foods <- tuesdata$avocado_oil_processed_foods\n```\n:::\n\n\n# Visualization 1\n\n## 1. Data Cleaning\n\n\n::: {.cell}\n\n```{.r .cell-code}\nmydf <- avocado_oil_processed_foods %>% \n  mutate(price_per_oz_usd = retail_price_usd/package_size_oz)\n```\n:::\n\n\n\n## 2. Data Visualization\n\n\n::: {.cell}\n\n```{.r .cell-code}\nmydf %>% \n  group_by(declared_oil) %>% \n  filter(n() > 3) %>% \n  mutate(declared_oil = fct_reorder(declared_oil, price_per_oz_usd, .fun='median')) %>% \n  ggplot(mapping = aes(x = price_per_oz_usd, y = reorder(declared_oil, price_per_oz_usd))) + \n  geom_violin(width = 0.8, fill = '#5f720f') + \n  geom_boxplot(width = 1/10, outliers = F, fill = NA, color = 'black', alpha = 0.8) +\n  geom_point(position = position_jitter(width = 0.01, height = 0.05, seed = 213),\n             alpha = 0.2, shape = 20) + \n  labs(title = 'Unit Price of Avocado and Olive Oil Products',\n       subtitle = str_wrap('Extra virgin olive oil had the highest median price per ounce in the sampled products. While most declared oils had symmetric distributions, avocado oil appears to have two classes separating higher and lower price products. Olive oil had the lowest price per ounce, despite its higher level of processing.',\n                           width = 120),\n       caption = 'Declared oils with fewer than three products were removed.\\nSource: #TidyTuesday 2026 (Week 40)',\n       x = 'Price per Ounce\\n(USD)', y = '') + \n  theme_bw() + \n  theme(\n    plot.title = element_text(size = 12, face = 'bold'),\n    plot.subtitle = element_text(size = 6),\n    plot.caption = element_text(size = 6),\n    plot.background = element_rect(),\n    axis.text.x = element_text(size = 6),\n    axis.title.x = element_text(size = 8),\n    axis.text.y = element_text(angle = 30, size = 6, hjust = 1, vjust = 1),\n    aspect.ratio = 1/2\n  )\n```\n\n::: {.cell-output-display}\n![](tidytuesday-2026-10-07_files/figure-html/unnamed-chunk-3-1.png){width=1800}\n:::\n:::\n\n\n",
+    "supporting": [
+      "tidytuesday-2026-10-07_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

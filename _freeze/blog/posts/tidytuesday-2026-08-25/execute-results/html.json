@@ -1,0 +1,17 @@
+{
+  "hash": "e606447c93fd9b21f2f80f14c809490c",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"TITLE\"\ncategories:\n  - tidytuesday\ndate: \"2026-03-24\"\ndraft: true\nexecute:\n  echo: true\n  message: false\n  warning: false\nformat: \n  html:\n    code-fold: true\n---\n\nLink to data: [TidyTuesday](https://github.com/rfordatascience/tidytuesday/blob/main/data/2026/2026-08-25/readme.md)\n\n> Today's video is a DEEP DIVE into the world of country music, and I'm determined to figure out if the stereotypes people have about modern country songwriting are actually true. Is it REALLY all about beer and trucks and girls and blue jeans? Are all the lyrics REALLY the same? To find out, I maintained a spreadsheet of every country song that has reached the Top 30 of Billboard's Country Airplay chart for the past six years (2014-2019) and then crunched a whole lot of data.\n\n\n## 0. Data\n\n\n::: {.cell}\n\n```{.r .cell-code  code-fold=\"false\"}\n# Packages\nlibrary(tidyverse)\n\n# Load data\ntuesdata <- tidytuesdayR::tt_load('2026-08-25')\n\ncountry_lyrics <- tuesdata$country_lyrics\ntop_all_writers <- tuesdata$top_all_writers\ntop_primary_writers <- tuesdata$top_primary_writers\ntop_producers <- tuesdata$top_producers\n```\n:::\n\n\n# Visualization 1\n\n## 1. Data Cleaning\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidytext)\nlibrary(stopwords)\n# Data set of weighted word proportions\nword_props <- country_lyrics |> \n  group_by(song, artist) |> \n  unnest_tokens(word, lyrics) |> # Gets word by song and artist \n  filter(!(word %in% stop_words$word)) |> # Remove stop words\n  group_by(song, artist, word) |> \n  count(sort = T) |> # Counts of words within songs\n  group_by(artist) |> \n  complete(song, word, fill = list(n = 0)) |> # For each artist, fill in 0's for words not in their other songs\n  \n  group_by(song, artist) |> \n  mutate(prop_in_song = n/sum(n)) |>  # Get the proportion within a song\n  group_by(artist, word) |> \n  summarise(weighted_prop = mean(prop_in_song)) |> # Get the proportion across songs\n  arrange(-weighted_prop) \n\n# Data set of songs by artist\nartist_counts <- country_lyrics %>% \n  group_by(artist) %>% \n  count(sort = T) %>% \n  filter(n >= 10) # Filter artists with at least 10 sings in the top hits\n\n# Inner join to filter\ncountry <- word_props %>% \n  inner_join(artist_counts, by = 'artist')\n```\n:::\n\n\n\n## 2. Data Visualization\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(ggwordcloud)\ncountry %>% \n  ungroup() %>% \n  filter(weighted_prop > 0.001) %>% \n  ggplot(mapping = aes(label = word, \n                       size = weighted_prop,\n                       color = artist)) + \n  geom_text_wordcloud(area_corr = TRUE) + \n  scale_size_area(max_size=24, trans = power_trans())\n```\n\n::: {.cell-output-display}\n![](tidytuesday-2026-08-25_files/figure-html/unnamed-chunk-3-1.png){width=672}\n:::\n:::\n\n\n\n\n::: {.cell}\n\n:::\n\n\n\n# Visualization 2\n\n## 1. Data Cleaning\n\n\n::: {.cell}\n\n:::\n\n\n\n## 2. Data Visualization\n\n\n::: {.cell}\n\n:::\n",
+    "supporting": [
+      "tidytuesday-2026-08-25_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

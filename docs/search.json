@@ -179,7 +179,7 @@
     "href": "blog/index.html",
     "title": "Blog",
     "section": "",
-    "text": "When I started getting involved in data science, the most captivating aspect was the ability to take data and tell a story. On this page, I am taking inspiration from TidyTuesday to keep my skills sharp.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOne Million Digits of Pi\n\n\n\ntidytuesday\n\n\n\n\n\n\n\n\n\nMar 24, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nSalmonid Mortality Data\n\n\n\ntidytuesday\n\n\n\n\n\n\n\n\n\nMar 20, 2026\n\n\n\n\n\nNo matching items"
+    "text": "When I started getting involved in data science, the most captivating aspect was the ability to take data and tell a story. On this page, I am taking inspiration from TidyTuesday to keep my skills sharp.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAvocado Oil Authenticity\n\n\n\ntidytuesday\n\n\n\n\n\n\n\n\n\nOct 7, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nOne Million Digits of Pi\n\n\n\ntidytuesday\n\n\n\n\n\n\n\n\n\nMar 24, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nSalmonid Mortality Data\n\n\n\ntidytuesday\n\n\n\n\n\n\n\n\n\nMar 20, 2026\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "portfolio.html",
@@ -222,5 +222,33 @@
     "title": "Portfolio",
     "section": "Advanced Consulting Report",
     "text": "Advanced Consulting Report\nIn my advanced consulting course, students functioned as a statistical consultant at the Statistical Cross-Disciplinary Collaboration & Consulting Lab in the Department of Statistics at UNL. At the end of the course, we had to put together a portfolio of projects that we worked on over the semester. One of my clients was working on a project to determine if hilling, a process of covering crops, was effective or not in mitigating the damage of the soybean gall midge. My client had several responses that required fitting generalized linear mixed models using PROC GLIMMIX in SAS 9.4.\nThis project was also my first time using a pdf template with Quarto documents, which I think ended up looking decent for a report.\nPaper | Presentation | GitHub"
+  },
+  {
+    "objectID": "blog/posts/tidytuesday-2026-10-07.html",
+    "href": "blog/posts/tidytuesday-2026-10-07.html",
+    "title": "Avocado Oil Authenticity",
+    "section": "",
+    "text": "Link to data: TidyTuesday"
+  },
+  {
+    "objectID": "blog/posts/tidytuesday-2026-10-07.html#data",
+    "href": "blog/posts/tidytuesday-2026-10-07.html#data",
+    "title": "Avocado Oil Authenticity",
+    "section": "0. Data",
+    "text": "0. Data\n\n# Packages\nlibrary(tidyverse)\n\n# Load data\ntuesdata &lt;- tidytuesdayR::tt_load('2026-10-06')\navocado_oil_bottles &lt;- tuesdata$avocado_oil_bottles\navocado_oil_processed_foods &lt;- tuesdata$avocado_oil_processed_foods"
+  },
+  {
+    "objectID": "blog/posts/tidytuesday-2026-10-07.html#data-cleaning",
+    "href": "blog/posts/tidytuesday-2026-10-07.html#data-cleaning",
+    "title": "Avocado Oil Authenticity",
+    "section": "1. Data Cleaning",
+    "text": "1. Data Cleaning\n\n\nCode\nmydf &lt;- avocado_oil_processed_foods %&gt;% \n  mutate(price_per_oz_usd = retail_price_usd/package_size_oz)"
+  },
+  {
+    "objectID": "blog/posts/tidytuesday-2026-10-07.html#data-visualization",
+    "href": "blog/posts/tidytuesday-2026-10-07.html#data-visualization",
+    "title": "Avocado Oil Authenticity",
+    "section": "2. Data Visualization",
+    "text": "2. Data Visualization\n\n\nCode\nmydf %&gt;% \n  group_by(declared_oil) %&gt;% \n  filter(n() &gt; 3) %&gt;% \n  mutate(declared_oil = fct_reorder(declared_oil, price_per_oz_usd, .fun='median')) %&gt;% \n  ggplot(mapping = aes(x = price_per_oz_usd, y = reorder(declared_oil, price_per_oz_usd))) + \n  geom_violin(width = 0.8, fill = '#5f720f') + \n  geom_boxplot(width = 1/10, outliers = F, fill = NA, color = 'black', alpha = 0.8) +\n  geom_point(position = position_jitter(width = 0.01, height = 0.05, seed = 213),\n             alpha = 0.2, shape = 20) + \n  labs(title = 'Unit Price of Avocado and Olive Oil Products',\n       subtitle = str_wrap('Extra virgin olive oil had the highest median price per ounce in the sampled products. While most declared oils had symmetric distributions, avocado oil appears to have two classes separating higher and lower price products. Olive oil had the lowest price per ounce, despite its higher level of processing.',\n                           width = 120),\n       caption = 'Declared oils with fewer than three products were removed.\\nSource: #TidyTuesday 2026 (Week 40)',\n       x = 'Price per Ounce\\n(USD)', y = '') + \n  theme_bw() + \n  theme(\n    plot.title = element_text(size = 12, face = 'bold'),\n    plot.subtitle = element_text(size = 6),\n    plot.caption = element_text(size = 6),\n    plot.background = element_rect(),\n    axis.text.x = element_text(size = 6),\n    axis.title.x = element_text(size = 8),\n    axis.text.y = element_text(angle = 30, size = 6, hjust = 1, vjust = 1),\n    aspect.ratio = 1/2\n  )"
   }
 ]
