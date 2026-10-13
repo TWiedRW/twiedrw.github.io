@@ -70,53 +70,32 @@
     "text": "Publications\n\nVanderplas, S., Blankenship, E., and Wiederich, T. (2024). Escaping Flatland: Graphics, Dimensionality, and Human Perception. Lecture Notes in Computer Science, 140-156. Springer Nature Switzerland.\nWiederich, T., and VanderPlas, S. (2024). Evaluating Perceptual Judgements on 3D Printed Bar Charts. Journal of Data Science, 22(2), 176-190. doi:10.6339/24-JDS1131"
   },
   {
-    "objectID": "blog/posts/tidytuesday-2026-03-17.html",
-    "href": "blog/posts/tidytuesday-2026-03-17.html",
-    "title": "Salmonid Mortality Data",
+    "objectID": "blog/posts/tidytuesday-2026-10-07.html",
+    "href": "blog/posts/tidytuesday-2026-10-07.html",
+    "title": "Avocado Oil Authenticity",
     "section": "",
-    "text": "Link to data: TidyTuesday."
+    "text": "Link to data: TidyTuesday"
   },
   {
-    "objectID": "blog/posts/tidytuesday-2026-03-17.html#data",
-    "href": "blog/posts/tidytuesday-2026-03-17.html#data",
-    "title": "Salmonid Mortality Data",
+    "objectID": "blog/posts/tidytuesday-2026-10-07.html#data",
+    "href": "blog/posts/tidytuesday-2026-10-07.html#data",
+    "title": "Avocado Oil Authenticity",
     "section": "0. Data",
-    "text": "0. Data\n\n# Packages\nlibrary(tidyverse)\n\n# Load data\ntuesdata &lt;- tidytuesdayR::tt_load('2026-03-17')\n\n# Extract data\nmonthly_losses_data &lt;- tuesdata$monthly_losses_data\nmonthly_mortality_data &lt;- tuesdata$monthly_mortality_data"
+    "text": "0. Data\n\n# Packages\nlibrary(tidyverse)\n\n# Load data\ntuesdata &lt;- tidytuesdayR::tt_load('2026-10-06')\navocado_oil_bottles &lt;- tuesdata$avocado_oil_bottles\navocado_oil_processed_foods &lt;- tuesdata$avocado_oil_processed_foods"
   },
   {
-    "objectID": "blog/posts/tidytuesday-2026-03-17.html#visualization",
-    "href": "blog/posts/tidytuesday-2026-03-17.html#visualization",
-    "title": "Salmonid Mortality Data",
-    "section": "1. Visualization",
-    "text": "1. Visualization\n\n\nCode\n# Pre-process\nmonthly_losses_data %&gt;% \n  filter(geo_group == 'county' & species == 'salmon') %&gt;% \n  group_by(region, year = factor(year(date))) %&gt;% \n  summarise(losses = sum(losses)) %&gt;% \n  \n# Plot\n  ggplot(mapping = aes(y = reorder(region, losses, sum), \n                       x = losses/1e6, fill = year)) + \n  # Stacked bar chart\n  geom_col(width = 1/2) + \n  \n  # Black outline\n  geom_col(aes(x = total_losses/1e6, y = reorder(region, total_losses), fill = NULL),\n           data = monthly_losses_data %&gt;% \n            filter(geo_group == 'county' & species == 'salmon') %&gt;% \n             group_by(region) %&gt;% \n            summarise(total_losses = sum(losses)),\n           fill = NA, color = 'black', width = 1/2) + \n  \n  # Text labels\n  geom_text(aes(x = total_losses/1e6, y = reorder(region, total_losses), fill = NULL, label = round(total_losses/1e6, 2)),\n            size = 2,\n           data = monthly_losses_data %&gt;% \n            filter(geo_group == 'county' & species == 'salmon') %&gt;% \n             group_by(region) %&gt;% \n            summarise(total_losses = sum(losses)),\n           hjust = -0.2) + \n  \n  # Aesthetics\n  scale_fill_brewer(palette = 'Reds') +\n  labs(x = 'Total losses\\n(in millions)', fill = 'Year', y = '',\n       title = 'Salmon Losses in Norwegian Counties',\n       subtitle = '2020 - 2025',\n       caption = 'Source: #TidyTuesday Week 13, 2026') + \n  scale_x_continuous(limits = c(0, 100)) + \n  theme_minimal() + \n  theme(aspect.ratio = 1/2, panel.grid.major.y = element_blank(),\n        legend.title = element_text(hjust = 0.5, size = 10, face = 'bold'),\n        legend.text = element_text(size = 7, hjust = 0),\n        plot.title = element_text(face = 'bold', hjust = 0.5, size = 14),\n        plot.subtitle = element_text(hjust = 0.5, size = 10),\n        plot.caption = element_text(size = 8),\n        axis.text.y = element_text(hjust = 1, size = 7))"
-  },
-  {
-    "objectID": "blog/posts/tidytuesday-2026-03-17.html#data-cleaning",
-    "href": "blog/posts/tidytuesday-2026-03-17.html#data-cleaning",
-    "title": "Salmonid Mortality Data",
+    "objectID": "blog/posts/tidytuesday-2026-10-07.html#data-cleaning",
+    "href": "blog/posts/tidytuesday-2026-10-07.html#data-cleaning",
+    "title": "Avocado Oil Authenticity",
     "section": "1. Data Cleaning",
-    "text": "1. Data Cleaning\n\n\nCode\n# Average median mortality\nmonthly_mortality_data_avg &lt;- monthly_mortality_data %&gt;% \n  filter(geo_group == 'county') %&gt;% \n  group_by(date) %&gt;% \n  summarize(mean_mortality = mean(median))"
+    "text": "1. Data Cleaning\n\n\nCode\nmydf &lt;- avocado_oil_processed_foods %&gt;% \n  mutate(price_per_oz_usd = retail_price_usd/package_size_oz)"
   },
   {
-    "objectID": "blog/posts/tidytuesday-2026-03-17.html#visualization-1",
-    "href": "blog/posts/tidytuesday-2026-03-17.html#visualization-1",
-    "title": "Salmonid Mortality Data",
-    "section": "2. Visualization",
-    "text": "2. Visualization\n\n\nCode\n# Figure\nmonthly_mortality_data %&gt;% \n  \n  # Filter to county-level\n  filter(geo_group == 'county') %&gt;%\n  \n  # Create plot\n  ggplot(mapping = aes(x = date, y = median, group = region)) + \n  \n  # Median mortality per county\n  geom_line(aes(linetype = 'County\\nMedian'), \n            alpha = 0.2, color = '#97a6c4') + \n  \n  # Mean of median mortality\n  geom_line(data = monthly_mortality_data_avg, \n            mapping = aes(y = mean_mortality, group = NULL,\n                          linetype = 'Average County\\nMedian'),\n            color = '#384860') + \n  \n  # Aesthetics\n  labs(y = 'Mortality Rate', title = 'Mortality Rate of Salmon',\n       subtitle = \"Norway (2020-2025)\",\n       x = '', linetype = '') + \n  scale_linetype_manual(\n    values = c(\n      \"County\\nMedian\" = \"solid\",\n      \"Average County\\nMedian\" = \"dashed\"\n    )\n  ) +\n  scale_x_date(date_breaks = 'year', date_labels = '%Y') +\n  guides(\n    linetype = guide_legend(\n      label.position = \"top\"\n    )\n  ) +\n  theme_bw() + \n  theme(aspect.ratio = 0.6, \n        plot.title = element_text(hjust = 0.5, face = 'bold', size = 14),\n        plot.subtitle = element_text(hjust = 0.5, size = 10),\n        strip.text = element_text(size = 8),\n        legend.position = 'right',\n        legend.text = element_text(size = 8),\n        legend.spacing.y = unit(5, 'in'),\n        panel.spacing = unit(1.5, \"lines\"),\n        panel.grid.minor = element_blank(),\n        panel.grid.major.x = element_blank(),\n        axis.text = element_text(size = 10),\n        axis.title = element_text(size = 12),\n        axis.text.x = element_text(hjust = 0.5, size = 10))"
-  },
-  {
-    "objectID": "blog/posts/tidytuesday-2026-03-17.html#data-cleaning-1",
-    "href": "blog/posts/tidytuesday-2026-03-17.html#data-cleaning-1",
-    "title": "Salmonid Mortality Data",
-    "section": "1. Data Cleaning",
-    "text": "1. Data Cleaning\nDince\n\n\nCode\n# Custom colors\nmy_cols &lt;- c('dead'='#5e4c5f',\n             'discarded'='#ffbb6f',\n             'other'='#999999')\n\n# Combine 'other' and 'escaped'\nbg_df &lt;- monthly_losses_data %&gt;% \n  filter(geo_group == 'country' & species == 'salmon') %&gt;% \n  mutate(other = other + escaped, .keep = 'unused') %&gt;% \n  pivot_longer(dead:other, values_to = 'count', names_to = 'type_of_loss') %&gt;% \n  group_by(year = year(date), type_of_loss) %&gt;% \n  summarise(count = sum(count)/1e6)"
-  },
-  {
-    "objectID": "blog/posts/tidytuesday-2026-03-17.html#visualization-2",
-    "href": "blog/posts/tidytuesday-2026-03-17.html#visualization-2",
-    "title": "Salmonid Mortality Data",
-    "section": "2. Visualization",
-    "text": "2. Visualization\n\n\nCode\nbg_df %&gt;% \n  \n  # Base chart\n  ggplot(mapping = aes(x = year, y = count, color = type_of_loss)) + \n  \n  # Annotations behind chart features\n  annotate('rect', xmin = 2023, xmax = 2025,\n           ymin = -Inf, ymax = Inf, \n           fill = 'grey', alpha = 0.2) +\n  annotate('text',\n           x = 2024, y = 32, label = 'Shift in composition?',\n           size = 2.5) + \n  \n  # Chart\n  geom_line(linewidth = 1) + \n  geom_point() + \n  \n  # Aesthetics\n  scale_x_continuous(breaks = 2020:2025) +\n  scale_color_manual(values = my_cols) + \n  labs(x = 'Year', y = 'Count\\n(in millions)', \n       title = 'Composition of Farmed Salmon Loss in Norway',\n       subtitle = 'The majority of salmon loss is attributed to death, which peaked in 2023.\\nIn the following years, salmon death decreased while other types of loss\\nincreased.',\n       color = 'Type of Loss') + \n  theme_bw() + \n  theme(plot.title = element_text(size = 12, face = 'bold', hjust = 0.0),\n        plot.subtitle = element_text(size = 8, color = 'grey30'),\n        axis.text = element_text(size = 8),\n        axis.title = element_text(size = 10),\n        strip.text = element_text(size = 8),\n        panel.grid = element_blank(),\n        aspect.ratio = 1/2,\n        legend.position = 'bottom',\n        legend.title = element_text(size = 10),\n        legend.text = element_text(size = 8))"
+    "objectID": "blog/posts/tidytuesday-2026-10-07.html#data-visualization",
+    "href": "blog/posts/tidytuesday-2026-10-07.html#data-visualization",
+    "title": "Avocado Oil Authenticity",
+    "section": "2. Data Visualization",
+    "text": "2. Data Visualization\n\n\nCode\nmydf %&gt;% \n  group_by(declared_oil) %&gt;% \n  filter(n() &gt; 3) %&gt;% \n  mutate(declared_oil = fct_reorder(declared_oil, price_per_oz_usd, .fun='median')) %&gt;% \n  ggplot(mapping = aes(x = price_per_oz_usd, y = reorder(declared_oil, price_per_oz_usd))) + \n  geom_violin(width = 0.8, fill = '#5f720f') + \n  geom_boxplot(width = 1/10, outliers = F, fill = NA, color = 'black', alpha = 0.8) +\n  geom_point(position = position_jitter(width = 0.01, height = 0.05, seed = 213),\n             alpha = 0.2, shape = 20) + \n  labs(title = 'Unit Price of Avocado and Olive Oil Products',\n       subtitle = str_wrap('Extra virgin olive oil had the highest median price per ounce in the sampled products. While most declared oils had symmetric distributions, avocado oil appears to have two classes separating higher and lower price products. Olive oil had the lowest price per ounce, despite its higher level of processing.',\n                           width = 120),\n       caption = 'Declared oils with fewer than three products were removed.\\nSource: #TidyTuesday 2026 (Week 40)',\n       x = 'Price per Ounce\\n(USD)', y = '') + \n  theme_bw() + \n  theme(\n    plot.title = element_text(size = 12, face = 'bold'),\n    plot.subtitle = element_text(size = 6),\n    plot.caption = element_text(size = 6),\n    plot.background = element_rect(),\n    axis.text.x = element_text(size = 6),\n    axis.title.x = element_text(size = 8),\n    axis.text.y = element_text(angle = 30, size = 6, hjust = 1, vjust = 1),\n    aspect.ratio = 1/2\n  )"
   },
   {
     "objectID": "index.html",
@@ -175,6 +154,55 @@
     "text": "2. Visualization\n\n\nCode\n#devtools::install_github(\"davidsjoberg/ggbump\")\nlibrary(ggbump)\nlibrary(scales)\n\nbreaks &lt;- 10*10^c(0:10)\n\np_bump &lt;- pi_ranks %&gt;% \n  filter(digit_position %in% breaks) %&gt;%\n  \n  # Base chart\n  ggplot(mapping = aes(x = digit_position, y = rank, \n                       group = digit2, color = factor(digit2))) + \n  geom_bump() + \n  geom_point(size = 3) + \n  geom_text(aes(label = digit2), color = 'black', size = 2) + \n  \n  # Aesthetics\n  scale_y_reverse(breaks = 1:10) + \n  scale_x_log10(breaks = breaks, labels = comma) + \n  labs(\n    x = 'Digit Position',\n    y = 'Rank',\n    title = 'Digit Frequency Rankings For Pi',\n    subtitle = 'Ranks are computed as the cumulative count of digits\\nat equally spaced intervals of the log 10 scale.'\n  ) + \n  theme_minimal() + \n  theme(\n    aspect.ratio = 1/2,\n    legend.position = 'none',\n    panel.grid.minor = element_blank(),\n    panel.grid.major.x = element_blank(),\n    panel.grid.major.y = element_line(color = 'grey70'),\n    plot.title = element_text(face = 'bold', size = 16),\n    plot.subtitle = element_text(size = 10, color = 'grey20'),\n    axis.title = element_text(size = 12, color = 'black'),\n    plot.background = element_rect(color = 'black', fill = 'grey90')\n  )\n\np_bump"
   },
   {
+    "objectID": "blog/posts/tidytuesday-2026-03-17.html",
+    "href": "blog/posts/tidytuesday-2026-03-17.html",
+    "title": "Salmonid Mortality Data",
+    "section": "",
+    "text": "Link to data: TidyTuesday."
+  },
+  {
+    "objectID": "blog/posts/tidytuesday-2026-03-17.html#data",
+    "href": "blog/posts/tidytuesday-2026-03-17.html#data",
+    "title": "Salmonid Mortality Data",
+    "section": "0. Data",
+    "text": "0. Data\n\n# Packages\nlibrary(tidyverse)\n\n# Load data\ntuesdata &lt;- tidytuesdayR::tt_load('2026-03-17')\n\n# Extract data\nmonthly_losses_data &lt;- tuesdata$monthly_losses_data\nmonthly_mortality_data &lt;- tuesdata$monthly_mortality_data"
+  },
+  {
+    "objectID": "blog/posts/tidytuesday-2026-03-17.html#visualization",
+    "href": "blog/posts/tidytuesday-2026-03-17.html#visualization",
+    "title": "Salmonid Mortality Data",
+    "section": "1. Visualization",
+    "text": "1. Visualization\n\n\nCode\n# Pre-process\nmonthly_losses_data %&gt;% \n  filter(geo_group == 'county' & species == 'salmon') %&gt;% \n  group_by(region, year = factor(year(date))) %&gt;% \n  summarise(losses = sum(losses)) %&gt;% \n  \n# Plot\n  ggplot(mapping = aes(y = reorder(region, losses, sum), \n                       x = losses/1e6, fill = year)) + \n  # Stacked bar chart\n  geom_col(width = 1/2) + \n  \n  # Black outline\n  geom_col(aes(x = total_losses/1e6, y = reorder(region, total_losses), fill = NULL),\n           data = monthly_losses_data %&gt;% \n            filter(geo_group == 'county' & species == 'salmon') %&gt;% \n             group_by(region) %&gt;% \n            summarise(total_losses = sum(losses)),\n           fill = NA, color = 'black', width = 1/2) + \n  \n  # Text labels\n  geom_text(aes(x = total_losses/1e6, y = reorder(region, total_losses), fill = NULL, label = round(total_losses/1e6, 2)),\n            size = 2,\n           data = monthly_losses_data %&gt;% \n            filter(geo_group == 'county' & species == 'salmon') %&gt;% \n             group_by(region) %&gt;% \n            summarise(total_losses = sum(losses)),\n           hjust = -0.2) + \n  \n  # Aesthetics\n  scale_fill_brewer(palette = 'Reds') +\n  labs(x = 'Total losses\\n(in millions)', fill = 'Year', y = '',\n       title = 'Salmon Losses in Norwegian Counties',\n       subtitle = '2020 - 2025',\n       caption = 'Source: #TidyTuesday Week 13, 2026') + \n  scale_x_continuous(limits = c(0, 100)) + \n  theme_minimal() + \n  theme(aspect.ratio = 1/2, panel.grid.major.y = element_blank(),\n        legend.title = element_text(hjust = 0.5, size = 10, face = 'bold'),\n        legend.text = element_text(size = 7, hjust = 0),\n        plot.title = element_text(face = 'bold', hjust = 0.5, size = 14),\n        plot.subtitle = element_text(hjust = 0.5, size = 10),\n        plot.caption = element_text(size = 8),\n        axis.text.y = element_text(hjust = 1, size = 7))"
+  },
+  {
+    "objectID": "blog/posts/tidytuesday-2026-03-17.html#data-cleaning",
+    "href": "blog/posts/tidytuesday-2026-03-17.html#data-cleaning",
+    "title": "Salmonid Mortality Data",
+    "section": "1. Data Cleaning",
+    "text": "1. Data Cleaning\n\n\nCode\n# Average median mortality\nmonthly_mortality_data_avg &lt;- monthly_mortality_data %&gt;% \n  filter(geo_group == 'county') %&gt;% \n  group_by(date) %&gt;% \n  summarize(mean_mortality = mean(median))"
+  },
+  {
+    "objectID": "blog/posts/tidytuesday-2026-03-17.html#visualization-1",
+    "href": "blog/posts/tidytuesday-2026-03-17.html#visualization-1",
+    "title": "Salmonid Mortality Data",
+    "section": "2. Visualization",
+    "text": "2. Visualization\n\n\nCode\n# Figure\nmonthly_mortality_data %&gt;% \n  \n  # Filter to county-level\n  filter(geo_group == 'county') %&gt;%\n  \n  # Create plot\n  ggplot(mapping = aes(x = date, y = median, group = region)) + \n  \n  # Median mortality per county\n  geom_line(aes(linetype = 'County\\nMedian'), \n            alpha = 0.2, color = '#97a6c4') + \n  \n  # Mean of median mortality\n  geom_line(data = monthly_mortality_data_avg, \n            mapping = aes(y = mean_mortality, group = NULL,\n                          linetype = 'Average County\\nMedian'),\n            color = '#384860') + \n  \n  # Aesthetics\n  labs(y = 'Mortality Rate', title = 'Mortality Rate of Salmon',\n       subtitle = \"Norway (2020-2025)\",\n       x = '', linetype = '') + \n  scale_linetype_manual(\n    values = c(\n      \"County\\nMedian\" = \"solid\",\n      \"Average County\\nMedian\" = \"dashed\"\n    )\n  ) +\n  scale_x_date(date_breaks = 'year', date_labels = '%Y') +\n  guides(\n    linetype = guide_legend(\n      label.position = \"top\"\n    )\n  ) +\n  theme_bw() + \n  theme(aspect.ratio = 0.6, \n        plot.title = element_text(hjust = 0.5, face = 'bold', size = 14),\n        plot.subtitle = element_text(hjust = 0.5, size = 10),\n        strip.text = element_text(size = 8),\n        legend.position = 'right',\n        legend.text = element_text(size = 8),\n        legend.spacing.y = unit(5, 'in'),\n        panel.spacing = unit(1.5, \"lines\"),\n        panel.grid.minor = element_blank(),\n        panel.grid.major.x = element_blank(),\n        axis.text = element_text(size = 10),\n        axis.title = element_text(size = 12),\n        axis.text.x = element_text(hjust = 0.5, size = 10))"
+  },
+  {
+    "objectID": "blog/posts/tidytuesday-2026-03-17.html#data-cleaning-1",
+    "href": "blog/posts/tidytuesday-2026-03-17.html#data-cleaning-1",
+    "title": "Salmonid Mortality Data",
+    "section": "1. Data Cleaning",
+    "text": "1. Data Cleaning\nDince\n\n\nCode\n# Custom colors\nmy_cols &lt;- c('dead'='#5e4c5f',\n             'discarded'='#ffbb6f',\n             'other'='#999999')\n\n# Combine 'other' and 'escaped'\nbg_df &lt;- monthly_losses_data %&gt;% \n  filter(geo_group == 'country' & species == 'salmon') %&gt;% \n  mutate(other = other + escaped, .keep = 'unused') %&gt;% \n  pivot_longer(dead:other, values_to = 'count', names_to = 'type_of_loss') %&gt;% \n  group_by(year = year(date), type_of_loss) %&gt;% \n  summarise(count = sum(count)/1e6)"
+  },
+  {
+    "objectID": "blog/posts/tidytuesday-2026-03-17.html#visualization-2",
+    "href": "blog/posts/tidytuesday-2026-03-17.html#visualization-2",
+    "title": "Salmonid Mortality Data",
+    "section": "2. Visualization",
+    "text": "2. Visualization\n\n\nCode\nbg_df %&gt;% \n  \n  # Base chart\n  ggplot(mapping = aes(x = year, y = count, color = type_of_loss)) + \n  \n  # Annotations behind chart features\n  annotate('rect', xmin = 2023, xmax = 2025,\n           ymin = -Inf, ymax = Inf, \n           fill = 'grey', alpha = 0.2) +\n  annotate('text',\n           x = 2024, y = 32, label = 'Shift in composition?',\n           size = 2.5) + \n  \n  # Chart\n  geom_line(linewidth = 1) + \n  geom_point() + \n  \n  # Aesthetics\n  scale_x_continuous(breaks = 2020:2025) +\n  scale_color_manual(values = my_cols) + \n  labs(x = 'Year', y = 'Count\\n(in millions)', \n       title = 'Composition of Farmed Salmon Loss in Norway',\n       subtitle = 'The majority of salmon loss is attributed to death, which peaked in 2023.\\nIn the following years, salmon death decreased while other types of loss\\nincreased.',\n       color = 'Type of Loss') + \n  theme_bw() + \n  theme(plot.title = element_text(size = 12, face = 'bold', hjust = 0.0),\n        plot.subtitle = element_text(size = 8, color = 'grey30'),\n        axis.text = element_text(size = 8),\n        axis.title = element_text(size = 10),\n        strip.text = element_text(size = 8),\n        panel.grid = element_blank(),\n        aspect.ratio = 1/2,\n        legend.position = 'bottom',\n        legend.title = element_text(size = 10),\n        legend.text = element_text(size = 8))"
+  },
+  {
     "objectID": "blog/index.html",
     "href": "blog/index.html",
     "title": "Blog",
@@ -189,11 +217,11 @@
     "text": "My passion for working with data started during the summer break after my first year of my undergraduate degree. At the time, I was double majoring in mathematics and statistics, but I had just taken the introductory data science course. I instantly found a spark for working with data in R and read through R for Data Science by Hadley Wickham (https://r4ds.hadley.nz). Since then, I have worked on numerous projects for personal development and my own curiosity."
   },
   {
-    "objectID": "portfolio.html#overlap-of-majors-and-minors-at-winona-state-university",
-    "href": "portfolio.html#overlap-of-majors-and-minors-at-winona-state-university",
+    "objectID": "portfolio.html#dissertation",
+    "href": "portfolio.html#dissertation",
     "title": "Portfolio",
-    "section": "Overlap of Majors and Minors at Winona State University",
-    "text": "Overlap of Majors and Minors at Winona State University\nOne of my very first projects in R came up in a conversation with a friend about which minors at Winona State would be the easiest to complete depending on the major. He never intended for me to figure out an “answer”, but I decided to use the opportunity to learn about web scraping and data cleaning. Unfortunately, this was before I was using GitHub for my projects, and I lost the project when migrating my campus-provided laptop (a lesson I have since learned). Below are the steps I used to complete the analysis.\n\nFor all pages for majors and minors, extract all courses listed into a single data frame with columns for course and program.\nSeparate the data frame into a majors data frame and a minors data frame.\nFull join majors and minors on a dummy variable to get all combinations of courses for each combination of majors and minors.\nFor each combination, compute the number of overlapping courses.\nDivide the number of overlapping courses by the number of courses listed for the minor.\n\nAt the time, there were 110 majors and 77 minors available at Winona State. Below is an early iteration of my graphic, which was designed to be printed on a poster.\n\n\n\nEarly figure\n\n\nI recently decided to replicate this analysis and have the code available on GitHub. The main improvement was limiting the number of majors to Bachelor of Science degrees and removing minors with low overlap.\n\n\n\nFinal figure"
+    "section": "Dissertation",
+    "text": "Dissertation\nThe crux of my knowledge and skills come from assembling my dissertation."
   },
   {
     "objectID": "portfolio.html#color-palette-generation-from-images",
@@ -201,13 +229,6 @@
     "title": "Portfolio",
     "section": "Color palette generation from images",
     "text": "Color palette generation from images\nIn collaboration with Muxin Hua, we developed an R package focused on creating color palettes from images. The overall theory was to identify the colors in the image and use clustering to generate distinct separated colors. We also included a color-blind mode that initially put images through color filters before clustering.\nYou can check out the GitHub page here, or try it for yourself!\n\n# install.packages(\"devtools\")\ndevtools::install_github(\"Hiiiua/Photopal\")\n\nlibrary(Photopal)\nlibrary(ggplot2)\n\n# Use demo image template\nmy_cols &lt;- Photopal::palette_create(num.col = 3, df.rgb = image2rgb(), plot = F)\n\n# Create plot using penguins dataset\npenguins |&gt;\n  ggplot(mapping = aes(x = bill_len, y = bill_dep, color = species)) + \n  geom_point(size = 1/2) + \n  scale_color_manual(values = c(\n    'Adelie'= my_cols[1,4],\n    'Chinstrap' = my_cols[2,4],\n    'Gentoo' = my_cols[3,4]\n  )) + \n  theme_bw()\n#ggsave('sample-plot.png', width = 806, height = 605, units = 'px')\n\n\n\n\n\n\n\nSample image\n\n\n\n\n\n\n\nPlot with palette"
-  },
-  {
-    "objectID": "portfolio.html#this-website",
-    "href": "portfolio.html#this-website",
-    "title": "Portfolio",
-    "section": "This website!",
-    "text": "This website!\nQuarto offers many incredible features and I decided to use it to make this website. The code for this site can be found on GitHub."
   },
   {
     "objectID": "portfolio.html#frequentist-bayesian-and-visual-inference",
@@ -224,31 +245,10 @@
     "text": "Advanced Consulting Report\nIn my advanced consulting course, students functioned as a statistical consultant at the Statistical Cross-Disciplinary Collaboration & Consulting Lab in the Department of Statistics at UNL. At the end of the course, we had to put together a portfolio of projects that we worked on over the semester. One of my clients was working on a project to determine if hilling, a process of covering crops, was effective or not in mitigating the damage of the soybean gall midge. My client had several responses that required fitting generalized linear mixed models using PROC GLIMMIX in SAS 9.4.\nThis project was also my first time using a pdf template with Quarto documents, which I think ended up looking decent for a report.\nPaper | Presentation | GitHub"
   },
   {
-    "objectID": "blog/posts/tidytuesday-2026-10-07.html",
-    "href": "blog/posts/tidytuesday-2026-10-07.html",
-    "title": "Avocado Oil Authenticity",
-    "section": "",
-    "text": "Link to data: TidyTuesday"
-  },
-  {
-    "objectID": "blog/posts/tidytuesday-2026-10-07.html#data",
-    "href": "blog/posts/tidytuesday-2026-10-07.html#data",
-    "title": "Avocado Oil Authenticity",
-    "section": "0. Data",
-    "text": "0. Data\n\n# Packages\nlibrary(tidyverse)\n\n# Load data\ntuesdata &lt;- tidytuesdayR::tt_load('2026-10-06')\navocado_oil_bottles &lt;- tuesdata$avocado_oil_bottles\navocado_oil_processed_foods &lt;- tuesdata$avocado_oil_processed_foods"
-  },
-  {
-    "objectID": "blog/posts/tidytuesday-2026-10-07.html#data-cleaning",
-    "href": "blog/posts/tidytuesday-2026-10-07.html#data-cleaning",
-    "title": "Avocado Oil Authenticity",
-    "section": "1. Data Cleaning",
-    "text": "1. Data Cleaning\n\n\nCode\nmydf &lt;- avocado_oil_processed_foods %&gt;% \n  mutate(price_per_oz_usd = retail_price_usd/package_size_oz)"
-  },
-  {
-    "objectID": "blog/posts/tidytuesday-2026-10-07.html#data-visualization",
-    "href": "blog/posts/tidytuesday-2026-10-07.html#data-visualization",
-    "title": "Avocado Oil Authenticity",
-    "section": "2. Data Visualization",
-    "text": "2. Data Visualization\n\n\nCode\nmydf %&gt;% \n  group_by(declared_oil) %&gt;% \n  filter(n() &gt; 3) %&gt;% \n  mutate(declared_oil = fct_reorder(declared_oil, price_per_oz_usd, .fun='median')) %&gt;% \n  ggplot(mapping = aes(x = price_per_oz_usd, y = reorder(declared_oil, price_per_oz_usd))) + \n  geom_violin(width = 0.8, fill = '#5f720f') + \n  geom_boxplot(width = 1/10, outliers = F, fill = NA, color = 'black', alpha = 0.8) +\n  geom_point(position = position_jitter(width = 0.01, height = 0.05, seed = 213),\n             alpha = 0.2, shape = 20) + \n  labs(title = 'Unit Price of Avocado and Olive Oil Products',\n       subtitle = str_wrap('Extra virgin olive oil had the highest median price per ounce in the sampled products. While most declared oils had symmetric distributions, avocado oil appears to have two classes separating higher and lower price products. Olive oil had the lowest price per ounce, despite its higher level of processing.',\n                           width = 120),\n       caption = 'Declared oils with fewer than three products were removed.\\nSource: #TidyTuesday 2026 (Week 40)',\n       x = 'Price per Ounce\\n(USD)', y = '') + \n  theme_bw() + \n  theme(\n    plot.title = element_text(size = 12, face = 'bold'),\n    plot.subtitle = element_text(size = 6),\n    plot.caption = element_text(size = 6),\n    plot.background = element_rect(),\n    axis.text.x = element_text(size = 6),\n    axis.title.x = element_text(size = 8),\n    axis.text.y = element_text(angle = 30, size = 6, hjust = 1, vjust = 1),\n    aspect.ratio = 1/2\n  )"
+    "objectID": "portfolio.html#this-website",
+    "href": "portfolio.html#this-website",
+    "title": "Portfolio",
+    "section": "This website!",
+    "text": "This website!\nQuarto offers many incredible features and I decided to use it to make this website. The code for this site can be found on GitHub."
   }
 ]

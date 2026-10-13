@@ -12,7 +12,6 @@ website:
       - href: index.qmd
         text: Home
       - about.qmd
-      - portfolio.qmd
       - presentations.qmd
       - href: blog/index.qmd
         text: "#TidyTuesday"
